@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAS SMABHY - Agenda Surat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar-floating">
+        <div class="nav-brand">📑 SMABHY TAS</div>
+        
+        <ul class="nav-menu">
+            <li onclick="loadPage('masuk')">Eksplorasi</li>
+            <li onclick="loadPage('audit-log')">Riwayat Aktivitas</li>
+
+            <li class="dropdown">
+                <span>Surat Menyurat</span>
+                <ul class="dropdown-menu">
+                    <li onclick="loadPage('input-masuk')">Surat Masuk</li>
+
+                    <li class="dropdown-sub">
+                        <span>Surat Keluar ▾</span>
+                        <ul class="dropdown-sub-menu">
+                            <li onclick="loadPage('input', 'rekomendasi')">Surat Rekomendasi</li>
+                            <li onclick="loadPage('input', 'keterangan')">Surat Keterangan</li>
+                            <li onclick="loadPage('input', 'tugas')">Surat Tugas</li>
+                            <li onclick="loadPage('input', 'undangan')">Surat Undangan</li>
+                            <li onclick="loadPage('input', 'keputusan')">Surat Keputusan</li>
+                            <li onclick="loadPage('input', 'custom')">Custom Surat</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li onclick="loadPage('stats')">Statistik & Rekap Arsip</li>
+            <!-- 👤 DROPDOWN AKUN SAYA MELAYANG -->
+            <li class="dropdown">
+                <span>💀 Akun Saya ▾</span>
+                <ul class="dropdown-menu">
+                    <li onclick="loadPage('profile-view')">📄 Profil Saya</li>
+                    <li onclick="loadPage('profile-edit')">✏️ Edit Profil</li>
+                    <li onclick="loadPage('profile-password')">🔒 Ubah Password</li>
+                    {% if role == 'Admin' %}
+                    <li onclick="loadPage('admin-users')">👑 Kelola & Tambah Member</li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li onclick="alert('Butuh bantuan? Hubungi Admin Kantor nyot!')">Bantuan</li>
+        </ul>
+
+        <div class="nav-user">
+            <a href="/logout"><button class="btn-logout">Logout</button></a>
+        </div>
+    </nav>
+
+    <!-- 📦 AREA KONTEN UTAMA DENGAN OVERLAY MURAL -->
+    <div class="main-container">
+        <div id="contentArea" class="glass-card">
+            <h1 style="color: #ec4d7a; margin-bottom: 10px;">Selamat Datang di Workspace Modern! 🚀</h1>
+            <p style="color: #ccc; font-size: 1.1rem;">
+                Pilih menu di navigasi melayang atas untuk mulai menjelajahi dan mengelola arsip surat kantor.
+            </p>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
+
+    <script>
+        const CURRENT_USER = "{{ username }}";
+    </script>
+
+    <!-- Panggil main_2.js (atau main.js) sebagai MODULE -->
+    <script type="module" src="{{ url_for('static', filename='js/main_2.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+</body>
+</html>
