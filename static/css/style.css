@@ -1,0 +1,340 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    /* Background mural + Lapisan Gelap Transparan (Dark Overlay 0.75) */
+    background: linear-gradient(rgba(18, 18, 18, 0.78), rgba(18, 18, 18, 0.88)), 
+                url('bg-mural.webp') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px; /* Jarak biar kagak ketutup navbar melayang */
+}
+
+/* 🌟 CANVA STYLE FLOATING NAVBAR (MELAYANG DI ATAS) */
+.navbar-floating {
+    position: fixed;
+    top: 20px;
+    width: 90%;
+    max-width: 1200px;
+    background: rgba(30, 30, 30, 0.65); /* Glassmorphism transparan */
+    backdrop-filter: blur(16px); /* Effect blur estetik */
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    border-radius: 50px; /* Capsule pill shape khas Canva */
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.nav-brand {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #ed4071;
+    letter-spacing: 1px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+.nav-menu li {
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #e0e0e0;
+}
+
+.nav-menu li:hover {
+    background: rgba(248, 75, 121, 0.765);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-logout {
+    background: #ff4757;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    background: #ff6b81;
+    box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
+}
+
+/* 📦 KONTEN UTAMA (GLASS CARD CONTAINER) */
+.main-container {
+    width: 90%;
+    max-width: 1100px;
+    margin-bottom: 50px;
+}
+
+.glass-card {
+    background: rgba(24, 24, 27, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* INPUT & BUTTON FORM STYLING */
+input, select {
+    width: 100%;
+    padding: 12px 16px;
+    margin: 10px 0 20px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-size: 1rem;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #ff97bc;
+    box-shadow: 0 0 8px rgba(253, 42, 112, 0.679);
+}
+
+button.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #ff6b81, #ec4d7a);
+    color: #000;
+    font-weight: 800;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button.btn-primary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(231, 69, 126, 0.6);
+}
+
+/* TABLES STYLING */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+th, td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+    background-color: rgba(244, 47, 113, 0.719);
+    color: #fafafa;
+    font-weight: 700;
+}
+
+tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* 🔐 STYLING KHUSUS HALAMAN LOGIN (CANVA GLASSMORPHISM) */
+.login-body {
+    background: linear-gradient(rgba(18, 18, 18, 0.75), rgba(18, 18, 18, 0.88)), 
+                url('bg-mural.webp') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0; /* Override padding-top bawaan body */
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(24, 24, 27, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.login-card h2 {
+    color: #f6508d;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.login-card p.subtitle {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.error-msg {
+    color: #ff4757;
+    background: rgba(255, 71, 87, 0.15);
+    border: 1px solid rgba(255, 71, 87, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    display: none; /* Sembunyi kalo kagak ada error */
+}
+
+/* 🛸 DROPDOWN STYLING KELAS CANVA */
+.nav-menu li.dropdown, .nav-menu li.dropdown-sub {
+    position: relative;
+}
+
+/* Menu Dropdown Utama (Tingkat 1) */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(24, 24, 27, 0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 10px 0;
+    list-style: none;
+    min-width: 200px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.nav-menu li.dropdown:hover > .dropdown-menu {
+    display: block; /* Muncul pas di-hover */
+}
+
+.dropdown-menu li {
+    padding: 10px 20px !important;
+    border-radius: 0 !important;
+    font-size: 0.9rem !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown-menu li:hover {
+    background: rgba(255, 0, 30, 0.2) !important;
+    color: #fc96b7 !important;
+}
+
+/* Sub-Menu Dropdown Ke Samping (Tingkat 2) */
+.dropdown-sub-menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: rgba(24, 24, 27, 0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 10px 0;
+    list-style: none;
+    min-width: 220px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.dropdown-sub:hover > .dropdown-sub-menu {
+    display: block; /* Muncul ke samping pas di-hover */
+}
+
+/* 📱 RESPONSIVE DESIGN UNTUK HP (SAMSUNG A06 & HP LAINNYA) */
+@media screen and (max-width: 768px) {
+    /* 1. Navbar Melayang Menyesuaikan Layar HP */
+    .navbar-floating {
+        flex-direction: column;
+        padding: 10px 15px;
+        position: relative;
+        top: 0;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 0 0 15px 15px;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px 0;
+    }
+
+    .nav-menu li {
+        font-size: 0.85rem;
+    }
+
+    /* 2. Container Utama & Glass Card */
+    .main-container {
+        padding: 10px;
+    }
+
+    .glass-card {
+        padding: 15px;
+    }
+
+    /* 3. Form Grid dari 2 Kolom Jadi 1 Kolom Tegak Lurus di HP */
+    div[style*="display: grid"],
+    div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    /* 4. Input & Textarea Membesar Pas Ditekan Jari HP */
+    input[type="text"], 
+    input[type="password"], 
+    input[type="date"], 
+    select, 
+    textarea {
+        font-size: 1rem !important;
+        padding: 12px !important;
+        box-sizing: border-box;
+    }
+
+    /* 5. Tabel Eksplorasi Bisa Di-scroll Kesamping di Layar HP */
+    #tabelEksplorasi, #tabelAdminUsers, #hasilSearch {
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+
+    /* 6. Tombol-Tombol Lebih Empuk Diklik Pake Jempol */
+    .btn-primary, .btn-logout {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+}
