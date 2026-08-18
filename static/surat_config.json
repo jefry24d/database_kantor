@@ -1,32 +1,91 @@
 {
   "rekomendasi": {
     "judul": "📄 INPUT SURAT REKOMENDASI",
-    "jenis": "KELUAR",
+    "jenis": "REKOMENDASI",
     "kiri": [
-      { "id": "noSurat", "label": "Nomor Surat", "placeholder": "Contoh: 421.7/388.SX.P/402.4.9.24/2026" },
-      { "id": "perihal", "label": "Perihal / Judul Kegiatan", "placeholder": "Contoh: Meet and Greet Divisi Administrasi" },
-      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat (Calendar View)", "type": "date", "isToday": true },
-      { "id": "namaPenerima", "label": "Nama Penerima Rekomendasi", "placeholder": "Nama lengkap" }
+      {
+        "id": "kodeKlasifikasi",
+        "label": "Kode Klasifikasi Surat",
+        "type": "select",
+        "options": [
+          { "value": "421.7", "text": "421.7 - Kegiatan Pelajar / Siswa" },
+          { "value": "421.3", "text": "421.3 - Kurikulum & Pembelajaran" },
+          { "value": "424.1", "text": "424.1 - Kepegawaian / Guru & Staf" }
+        ]
+      },
+      { "id": "noUrutSurat", "label": "Nomor Urut Surat", "placeholder": "Contoh: 001" },
+      {
+        "id": "tipeSubjek",
+        "label": "Tipe Penerima (S / P)",
+        "type": "select",
+        "options": [
+          { "value": "S", "text": "S - Siswa" },
+          { "value": "P", "text": "P - Pegawai / Guru" }
+        ]
+      },
+      { "id": "perihal", "label": "Perihal / Nama Kegiatan", "placeholder": "Contoh: Lomba Debat Bahasa Indonesia" },
+      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
+      { "id": "waktu", "label": "Waktu Pelaksanaan", "placeholder": "Pukul 08.00 WIB s.d selesai" }
     ],
     "kanan": [
-      { "id": "unit", "label": "Unit / Divisi", "placeholder": "Divisi Administrasi" },
-      { "id": "noPegawai", "label": "Nomor Pegawai (NIP)", "placeholder": "199xxxxxx" },
-      { "id": "hariTanggal", "label": "Hari / Tanggal Event", "placeholder": "Senin, 10 Agustus 2026" },
-      { "id": "tempat", "label": "Tempat Kegiatan", "placeholder": "Aula Utama" }
+      { "id": "namaPenerima", "label": "Nama Siswa / Penerima", "placeholder": "Nama lengkap" },
+      { "id": "kelas", "label": "Kelas Siswa", "placeholder": "Contoh: XII IPA 1" },
+      { "id": "noIndukSiswa", "label": "NIS / NISN", "placeholder": "Contoh: 12345 / 005xxxxxx" },
+      { "id": "hariTanggal", "label": "Hari / Tanggal Kegiatan", "placeholder": "Senin, 10 Agustus 2026" },
+      { "id": "tempat", "label": "Tempat / Lokasi Kegiatan", "placeholder": "Aula Utama" }
     ]
+  },
+  "rekomendasi_kolektif": {
+    "judul": "📄 INPUT SURAT REKOMENDASI KOLEKTIF",
+    "jenis": "REKOMENDASI_KOLEKTIF",
+    "kiri": [
+      {
+        "id": "kodeKlasifikasi",
+        "label": "Kode Klasifikasi Surat",
+        "type": "select",
+        "options": [
+          { "value": "421.7", "text": "421.7 - Kegiatan Pelajar / Siswa" },
+          { "value": "421.3", "text": "421.3 - Kurikulum & Pembelajaran" },
+          { "value": "424.1", "text": "424.1 - Kepegawaian / Guru & Staf" }
+        ]
+      },
+      { "id": "noUrutSurat", "label": "Nomor Urut Surat", "placeholder": "Contoh: 001" },
+      {
+        "id": "tipeSubjek",
+        "label": "Tipe Penerima",
+        "type": "select",
+        "options": [
+          { "value": "S", "text": "S - Siswa" },
+          { "value": "P", "text": "P - Pegawai / Guru" }
+        ]
+      },
+      { "id": "perihal", "label": "Perihal / Nama Kegiatan", "placeholder": "Contoh: POSMA 26" },
+      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true }
+    ],
+    "kanan": [
+      { "id": "hariTanggal", "label": "Hari / Tanggal Kegiatan", "placeholder": "Sabtu, 22 Agustus 2026" },
+      { "id": "waktu", "label": "Waktu", "placeholder": "Pukul 08.00 WIB s.d selesai" },
+      { "id": "tempat", "label": "Tempat / Lokasi Kegiatan", "placeholder": "GRAHA UNESA, Surabaya" }
+    ],
+    "textarea": {
+      "id": "isiKeterangan",
+      "label": "Daftar Siswa (Format: Nama, Kelas, NISN - Pisahkan dengan enter):",
+      "rows": 6,
+      "default": "Ahmad Subagjo, XII MIPA 1, 12345\nBudi Santoso, XII MIPA 2, 12346"
+    }
   },
   "tugas": {
     "judul": "📋 INPUT SURAT TUGAS",
     "jenis": "TUGAS",
     "kiri": [
-      { "id": "noSurat", "label": "Nomor Surat", "placeholder": "Contoh: 421.7/388.SX.P/402.4.9.24/2026" },
-      { "id": "perihal", "label": "Perihal / Judul Kegiatan", "placeholder": "Contoh: Penugasan Diklat" },
-      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat (Calendar View)", "type": "date", "isToday": true },
-      { "id": "namaPenerima", "label": "Nama Petugas / Pelaksana Tugas", "placeholder": "Nama pelaksana tugas" }
+      { "id": "noSurat", "label": "Nomor Surat", "placeholder": "Contoh: 421.7/001.SMABHY.S/402.4.9.24/2026" },
+      { "id": "perihal", "label": "Perihal / Judul Kegiatan", "placeholder": "Contoh: Penugasan Diklat Guru" },
+      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
+      { "id": "namaPenerima", "label": "Nama Guru / Petugas", "placeholder": "Nama pelaksana tugas" }
     ],
     "kanan": [
-      { "id": "unit", "label": "Unit / Divisi", "placeholder": "Divisi IT / Umum" },
-      { "id": "noPegawai", "label": "Nomor Pegawai (NIP)", "placeholder": "199xxxxxx" },
+      { "id": "unit", "label": "Unit / Mata Pelajaran", "placeholder": "Guru Matematika / Staf TU" },
+      { "id": "noPegawai", "label": "NIP / NTY", "placeholder": "199xxxxxx" },
       { "id": "hariTanggal", "label": "Hari / Tanggal Pelaksanaan", "placeholder": "Selasa, 11 Agustus 2026" },
       { "id": "tempat", "label": "Tempat / Lokasi Tugas", "placeholder": "Gedung Serbaguna" }
     ]
@@ -36,15 +95,15 @@
     "jenis": "KETERANGAN",
     "kiri": [
       { "id": "noSurat", "label": "Nomor Surat", "placeholder": "Contoh: 421.7/388.SX.P/402.4.9.24/2026" },
-      { "id": "perihal", "label": "Judul Surat", "placeholder": "Contoh: Surat Keterangan Aktif" },
-      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat (Calendar View)", "type": "date", "isToday": true },
-      { "id": "namaPenerima", "label": "Nama Yang Diterangkan", "placeholder": "Nama lengkap" }
+      { "id": "perihal", "label": "Judul Surat", "placeholder": "Contoh: Surat Keterangan Siswa Aktif" },
+      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
+      { "id": "namaPenerima", "label": "Nama Yang Diterangkan", "placeholder": "Nama siswa / pegawai" }
     ],
     "kanan": [
-      { "id": "unit", "label": "Unit / Divisi", "placeholder": "Bagian Operasional" },
-      { "id": "noPegawai", "label": "Nomor Pegawai (NIP)", "placeholder": "199xxxxxx" },
-      { "id": "ttl", "label": "Tempat, Tanggal Lahir (TTL)", "placeholder": "Surabaya, 17 Agustus 1995" },
-      { "id": "alamat", "label": "Alamat Lengkap", "placeholder": "Jl. Raya No. 123" }
+      { "id": "kelas", "label": "Kelas / Jabatan", "placeholder": "XI IPS 2 / Staf" },
+      { "id": "noIndukSiswa", "label": "NIS / NIP", "placeholder": "199xxxxxx" },
+      { "id": "ttl", "label": "Tempat, Tanggal Lahir (TTL)", "placeholder": "Surabaya, 17 Agustus 2008" },
+      { "id": "alamat", "label": "Alamat Lengkap", "placeholder": "Jl. Raya Surabaya No. 123" }
     ],
     "textarea": {
       "id": "isiKeterangan",
@@ -59,16 +118,16 @@
     "kiri": [
       { "id": "noSurat", "label": "Nomor Surat", "placeholder": "Contoh: 424.1/001.SMABHY.P/402.4.9.24/2026" },
       { "id": "lampiran", "label": "Lampiran", "placeholder": "Contoh: - atau 1 Lembar", "defaultValue": "-" },
-      { "id": "perihal", "label": "Perihal / Acara Rapat", "placeholder": "Contoh: Undangan Rapat Dinas 2026-2027" },
-      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat (Calendar View)", "type": "date", "isToday": true },
-      { "id": "namaPenerima", "label": "Yth. / Penerima Undangan", "placeholder": "Bapak/Ibu Staf Kepegawaian" }
+      { "id": "perihal", "label": "Perihal / Acara Rapat", "placeholder": "Contoh: Undangan Rapat Wali Murid" },
+      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
+      { "id": "namaPenerima", "label": "Yth. / Penerima Undangan", "placeholder": "Bapak/Ibu Orang Tua / Wali Murid" }
     ],
     "kanan": [
       { "id": "alamat", "label": "Alamat / Kota Tujuan", "placeholder": "Surabaya" },
       { "id": "hariTanggal", "label": "Hari / Tanggal Acara", "placeholder": "Rabu, 8 Juli 2026" },
       { "id": "waktu", "label": "Waktu Acara", "placeholder": "Pukul 08.00 WIB s.d selesai" },
-      { "id": "tempat", "label": "Tempat Acara", "placeholder": "Nama Tempat" },
-      { "id": "alamatTempat", "label": "Alamat Detail Tempat", "placeholder": "Alamat Detail" }
+      { "id": "tempat", "label": "Tempat Acara", "placeholder": "Aula SMA Kemala Bhayangkari 1" },
+      { "id": "alamatTempat", "label": "Alamat Detail Tempat", "placeholder": "Jl. A. Yani No. 30-32 Surabaya" }
     ],
     "textarea": {
       "id": "isiKeterangan",

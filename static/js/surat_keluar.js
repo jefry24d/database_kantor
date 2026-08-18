@@ -1,5 +1,23 @@
 import { hapusSurat } from './common.js';
 
+// Helper Ambil Value Input
+const getValue = (id) => {
+    const el = document.getElementById(id);
+    return el ? el.value : '';
+};
+
+// Fungsi Generator Nomor Surat Otomatis
+function generateNomorSurat() {
+    const kode = getValue('kodeKlasifikasi') || '421.7';
+    const noUrut = getValue('noUrutSurat').trim() || '001';
+    const tipe = getValue('tipeSubjek') || 'S';
+    
+    const tglInput = getValue('tglSurat');
+    const tahun = tglInput ? new Date(tglInput).getFullYear() : new Date().getFullYear();
+
+    return `${kode}/${noUrut}.SMABHY.${tipe}/402.4.9.24/${tahun}`;
+}
+
 export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
     try {
         const res = await fetch('/static/surat_config.json');
@@ -9,7 +27,20 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
         const config = schema[subType] || schema['rekomendasi'];
         const todayStr = new Date().toISOString().split('T')[0];
 
+        // RENDER INPUT ATAU SELECT DROPDOWN
         const makeInputs = (fields) => fields.map(f => {
+            if (f.type === 'select') {
+                const optionsHtml = f.options.map(opt => `<option value="${opt.value}" style="color:#000;">${opt.text}</option>`).join('');
+                return `
+                    <div style="margin-bottom: 10px;">
+                        <label style="display:block; margin-bottom: 4px; font-weight:bold;">${f.label}</label>
+                        <select id="${f.id}" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px; width: 100%;">
+                            ${optionsHtml}
+                        </select>
+                    </div>
+                `;
+            }
+
             const type = f.type || 'text';
             let val = '';
             
@@ -53,6 +84,38 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
 
         document.getElementById('btnSimpanCetak').addEventListener('click', simpanDanCetak);
 
+        // --- TAMBAHKAN EVENT LISTENER DI DALAM SINI (SETELAH INNERHTML DIPASANG) ---
+        const selectTipe = document.getElementById('tipeSubjek');
+        if (selectTipe) {
+            selectTipe.addEventListener('change', (e) => {
+                const val = e.target.value; // 'S' atau 'P'
+                const inputKelas = document.getElementById('kelas');
+                const inputNIS = document.getElementById('noIndukSiswa');
+
+                if (val === 'P') {
+                    // JIKA DIPILIH 'P' (PEGAWAI / GURU)
+                    if (inputKelas) {
+                        inputKelas.previousElementSibling.innerText = "Jabatan / Unit Kerja";
+                        inputKelas.placeholder = "Contoh: Guru Matematika / Staf TU";
+                    }
+                    if (inputNIS) {
+                        inputNIS.previousElementSibling.innerText = "NIP / NTY";
+                        inputNIS.placeholder = "Contoh: 199001012026011001";
+                    }
+                } else {
+                    // JIKA DIPILIH 'S' (SISWA)
+                    if (inputKelas) {
+                        inputKelas.previousElementSibling.innerText = "Kelas Siswa";
+                        inputKelas.placeholder = "Contoh: XII IPA 1";
+                    }
+                    if (inputNIS) {
+                        inputNIS.previousElementSibling.innerText = "NIS / NISN";
+                        inputNIS.placeholder = "Contoh: 12345 / 005xxxxxx";
+                    }
+                }
+            });
+        }
+
     } catch (err) {
         console.error("Error Form Render:", err);
         content.innerHTML = `<p style="color: #ff4757;">❌ Gagal memuat form dari JSON schema!</p>`;
@@ -64,24 +127,27 @@ export async function simpanDanCetak() {
     msg.innerText = "Sedang menyimpan surat...";
     msg.style.color = "#00fff0";
 
-    const getValue = (id) => {
-        const el = document.getElementById(id);
-        return el ? el.value : '';
-    };
+    const nomorSuratLengkap = getValue('noSurat') || generateNomorSurat();
+    const tipe = getValue('tipeSubjek') || 'S'; // AMBIL KODE TIPE (S ATAU P)
 
     const payload = {
-        jenis: getValue('jenisSurat'),
-        nomor_surat: getValue('noSurat'),
+        jenis: getValue('jenisSurat') || 'rekomendasi',
+        nomor_surat: nomorSuratLengkap,
         perihal: getValue('perihal'),
         bulan: getValue('bulan') || 'Januari',
         tgl_surat: getValue('tglSurat'),
         nama_penerima: getValue('namaPenerima'),
-        unit: getValue('unit'),
-        no_pegawai: getValue('noPegawai'),
+
+        // DIBAGI SESUAI TIPE (SISWA ATAU PEGAWAI)
+        kelas: tipe === 'S' ? getValue('kelas') : '-',
+        no_induk_siswa: tipe === 'S' ? getValue('noIndukSiswa') : '-',
+        unit: tipe === 'P' ? getValue('kelas') : '-',
+        no_pegawai: tipe === 'P' ? getValue('noIndukSiswa') : '-',
+
         ttl: getValue('ttl'),
         alamat: getValue('alamat'),
         isi_keterangan: getValue('isiKeterangan'),
-        nama_event: getValue('namaEvent'),
+        nama_event: getValue('perihal'),
         hari_tanggal: getValue('hariTanggal'),
         tempat: getValue('tempat'),
         waktu: getValue('waktu'),
@@ -90,7 +156,7 @@ export async function simpanDanCetak() {
     };
 
     try {
-        const res = await fetch('/api/surat', {
+        const res = await fetch('/surat/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -101,8 +167,8 @@ export async function simpanDanCetak() {
             msg.innerText = "✅ " + data.message;
             msg.style.color = "#00ff88";
             setTimeout(() => {
-                window.open(`/cetak/${data.surat_id}`, '_blank');
-            }, 1000);
+                window.open(`/surat/cetak/${data.surat_id}`, '_blank');
+            }, 800);
         } else {
             msg.innerText = "❌ " + data.message;
             msg.style.color = "#ff4757";
@@ -141,14 +207,13 @@ export function renderCustomSuratHybrid(content) {
             formData.append('file_surat', fileInput.files[0]);
         }
 
-        const res = await fetch('/api/surat', { method: 'POST', body: formData });
+        const res = await fetch('/surat/add', { method: 'POST', body: formData });
         const data = await res.json();
         msg.innerText = data.message;
         msg.style.color = data.success ? '#00ff88' : '#ff4757';
     });
 }
 
-// 📤 LOAD TABEL SURAT KELUAR (SUDAH DIPASANG TOMBOL DELETE)
 export async function loadTabelSuratKeluar() {
     const container = document.getElementById('areaTabelEksplorasi');
     if (!container) return;
@@ -201,9 +266,8 @@ export async function loadTabelSuratKeluar() {
         html += `</tbody></table>`;
         container.innerHTML = html;
 
-        // Listener Aksi Surat Keluar
         document.querySelectorAll('.btn-cetak-sk').forEach(btn => {
-            btn.addEventListener('click', (e) => window.open(`/cetak/${e.target.dataset.id}`, '_blank'));
+            btn.addEventListener('click', (e) => window.open(`/surat/cetak/${e.target.dataset.id}`, '_blank'));
         });
         document.querySelectorAll('.btn-hapus-sk').forEach(btn => {
             btn.addEventListener('click', (e) => hapusSurat(e.target.dataset.id, 'keluar', loadTabelSuratKeluar));

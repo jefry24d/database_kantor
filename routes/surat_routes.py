@@ -3,11 +3,33 @@ import sqlite3
 import os
 import time
 from werkzeug.utils import secure_filename
+from datetime import datetime
 
 surat_bp = Blueprint('surat_bp', __name__)
 
 # Opsi format file yang dibolehkan untuk upload
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg'}
+
+def format_tanggal_indo(tgl_str):
+    if not tgl_str or tgl_str == '-':
+        return '18 Agustus 2026'
+    
+    bulan_indo = {
+        '01': 'Januari', '02': 'Februari', '03': 'Maret', '04': 'April',
+        '05': 'Mei', '06': 'Juni', '07': 'Juli', '08': 'Agustus',
+        '09': 'September', '10': 'Oktober', '11': 'November', '12': 'Desember'
+    }
+    
+    try:
+        # Jika input bawaan HTML date "YYYY-MM-DD"
+        parts = tgl_str.split('-')
+        if len(parts) == 3:
+            thn, bln, tgl = parts
+            return f"{int(tgl)} {bulan_indo.get(bln, bln)} {thn}"
+    except Exception:
+        pass
+        
+    return tgl_str
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -21,7 +43,7 @@ def get_db():
 # ==========================================
 # 1. ROUTE CETAK / VIEW SURAT DINAMIS
 # ==========================================
-@surat_bp.route('/cetak/<int:surat_id>')
+@surat_bp.route('/surat/cetak/<int:surat_id>')
 def cetak_surat(surat_id):
     if 'username' not in session:
         return redirect(url_for('auth_bp.login_page'))
@@ -35,21 +57,39 @@ def cetak_surat(surat_id):
     if not surat:
         return "Surat tidak ditemukan nyot!", 404
 
-    if surat['jenis_surat'] == 'KETERANGAN':
-        return render_template('cetak_keterangan.html', surat=surat)
+    surat_dict = dict(surat)
+    surat_dict['tgl_surat_indo'] = format_tanggal_indo(surat_dict.get('tgl_surat'))
+
+    if surat_dict['jenis_surat'] == 'REKOMENDASI_KOLEKTIF':
+        raw_siswa = surat_dict.get('isi_keterangan', '') or ''
+        siswa_list = []
+        for line in raw_siswa.strip().split('\n'):
+            if line.strip():
+                parts = [p.strip() for p in line.split(',')]
+                siswa_list.append({
+                    'nama': parts[0] if len(parts) > 0 else '-',
+                    'kelas': parts[1] if len(parts) > 1 else '-',
+                    'nis': parts[2] if len(parts) > 2 else '-'
+                })
+        surat_dict['siswa_list'] = siswa_list
+
+        return render_template('cetak_rekomendasi_kolektif.html', surat=surat_dict)
+
+    elif surat['jenis_surat'] == 'KETERANGAN':
+        return render_template('cetak_keterangan.html', surat=surat_dict)
     elif surat['jenis_surat'] == 'TUGAS':
-        return render_template('cetak_tugas.html', surat=surat)
+        return render_template('cetak_tugas.html', surat=surat_dict)
     elif surat['jenis_surat'] == 'UNDANGAN':
-        return render_template('cetak_undangan.html', surat=surat)
+        return render_template('cetak_undangan.html', surat=surat_dict)
     elif surat['jenis_surat'] == 'CUSTOM_EDITOR':
-        return render_template('cetak_custom.html', surat=surat)
+        return render_template('cetak_custom.html', surat=surat_dict)
     
-    return render_template('cetak_surat.html', surat=surat)
+    return render_template('cetak_surat.html', surat=surat_dict)
 
 # ==========================================
 # 2. API SURAT KELUAR & CUSTOM (ADD & GET)
 # ==========================================
-@surat_bp.route('/api/surat', methods=['POST'])
+@surat_bp.route('/surat/add', methods=['POST'])
 def add_surat():
     if request.content_type and 'multipart/form-data' in request.content_type:
         jenis = request.form.get('jenis', 'CUSTOM_FILE')
@@ -99,6 +139,9 @@ def add_surat():
         nama_penerima = data.get('nama_penerima', '')
         unit = data.get('unit', '')
         no_pegawai = data.get('no_pegawai', '')
+        kelas = data.get('kelas', '')
+        no_induk_siswa = data.get('no_induk_siswa', '')
+        
         ttl = data.get('ttl', '')
         alamat = data.get('alamat', '')
         isi_keterangan = data.get('isi_keterangan', '')
@@ -119,9 +162,9 @@ def add_surat():
         conn = get_db()
         cursor = conn.cursor()
         cursor.execute("""
-            INSERT INTO surat (jenis_surat, nomor_surat, perihal, bulan, uploaded_by, nama_penerima, unit, no_pegawai, ttl, alamat, isi_keterangan, nama_event, hari_tanggal, tempat, tgl_surat, lampiran, waktu, alamat_tempat, isi_custom_html)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (jenis, no_surat, perihal, bulan, session.get('username', 'Admin'), nama_penerima, unit, no_pegawai, ttl, alamat, isi_keterangan, nama_event, hari_tanggal, tempat, tgl_surat, lampiran, waktu, alamat_tempat, isi_custom_html))
+            INSERT INTO surat (jenis_surat, nomor_surat, perihal, bulan, uploaded_by, nama_penerima, unit, no_pegawai, kelas, no_induk_siswa, ttl, alamat, isi_keterangan, nama_event, hari_tanggal, tempat, tgl_surat, lampiran, waktu, alamat_tempat, isi_custom_html)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (jenis, no_surat, perihal, bulan, session.get('username', 'Admin'), nama_penerima, unit, no_pegawai, kelas, no_induk_siswa, ttl, alamat, isi_keterangan, nama_event, hari_tanggal, tempat, tgl_surat, lampiran, waktu, alamat_tempat, isi_custom_html))
 
         new_id = cursor.lastrowid
         conn.commit()
