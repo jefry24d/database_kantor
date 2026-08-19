@@ -6,12 +6,11 @@
     <style>
         /* CSS STANDAR PRINT DOKUMEN ARSIP RESMI */
         @page {
-            size: 210mm 330mm; /* Formatter Folio / F4 */
-            margin: 0;
-        }
-
-        * {
-            box-sizing: border-box;
+        /* Ukuran Kertas F4 / Folio Standar Indonesia */
+        size: 215.9mm 330mm; 
+        
+        /* Margin presisi surat Chikita */
+        margin: 20mm 20mm 15mm 20mm; 
         }
 
         body {
@@ -47,6 +46,11 @@
             max-width: 100%;
             height: auto;
             display: block;
+        }
+
+        .judul-container {
+            text-align: center;
+            margin-bottom: 35px; /* Makin kebawah & lega! */
         }
 
         .judul-surat {
@@ -141,12 +145,12 @@
         <p>Memberikan rekomendasi kepada :</p>
         <!-- DATA DINAMIS SISWA -->
         <table class="form-table">
-            <tr><td width="150">Nama</td><td width="15">:</td><td><b>{{ surat['nama_penerima'] if surat['nama_penerima'] else '-' }}</b></td></tr>
+            <tr><td width="150">nama</td><td width="15">:</td><td><b>{{ surat['nama_penerima'] if surat['nama_penerima'] else '-' }}</b></td></tr>
             {% if surat['kelas'] and surat['kelas'] != '-' %}
-                <tr><td>Kelas</td><td>:</td><td>{{ surat['kelas'] }}</td></tr>
+                <tr><td>kelas</td><td>:</td><td>{{ surat['kelas'] }}</td></tr>
                 <tr><td>NIS / NISN</td><td>:</td><td>{{ surat['no_induk_siswa'] if surat['no_induk_siswa'] else '-' }}</td></tr>
             {% else %}
-                <tr><td>Jabatan / Unit</td><td>:</td><td>{{ surat['unit'] if surat['unit'] else '-' }}</td></tr>
+                <tr><td>jabatan / Unit</td><td>:</td><td>{{ surat['unit'] if surat['unit'] else '-' }}</td></tr>
                 <tr><td>NIP / NTY</td><td>:</td><td>{{ surat['no_pegawai'] if surat['no_pegawai'] else '-' }}</td></tr>
             {% endif %}
         </table>
@@ -163,7 +167,7 @@
         <div class="ttd-container">
             <p>Surabaya, {{ surat['tgl_surat_indo'] }}<br>Kepala Sekolah,</p>
             <br><br><br>
-            <p><b><u>Dwi Adhika Mintardi, S.Pd</u></b></p>
+            <p><b>Dwi Adhika Mintardi, S.Pd</b></p>
         </div>
     </div>
 

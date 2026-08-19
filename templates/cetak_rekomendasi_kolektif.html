@@ -80,9 +80,25 @@
         {% endif %}
 
         <p>Untuk mengikuti kegiatan “<b>{{ surat['nama_event'] if surat['nama_event'] else surat['perihal'] }}</b>”, pada :</p>
-        <table style="width:100%; margin-left: 20px;">
-            <tr><td width="150">Hari / Tanggal</td><td width="15">:</td><td>{{ surat['hari_tanggal'] if surat['hari_tanggal'] else '-' }}</td></tr>
-            <tr><td>Tempat</td><td>:</td><td>{{ surat['tempat'] if surat['tempat'] else '-' }}</td></tr>
+        <table class="data-table">
+        <tr>
+            <td class="label">Hari / Tanggal</td>
+            <td class="colon">:</td>
+            <td>{{ surat.hari_tanggal }}</td>
+        </tr>
+        <!-- 💥 TAMBAHKAN BARIS WAKTU DI SINI NYOT! -->
+        {% if surat.waktu and surat.waktu != '-' %}
+        <tr>
+            <td class="label">Waktu</td>
+            <td class="colon">:</td>
+            <td>{{ surat.waktu }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td class="label">Tempat</td>
+            <td class="colon">:</td>
+            <td>{{ surat.tempat }}</td>
+        </tr>
         </table>
 
         <p style="margin-top: 20px;">Demikian surat rekomendasi ini dibuat untuk dipergunakan sebagaimana mestinya.</p>
@@ -124,7 +140,7 @@
         <div class="ttd-container">
             <p>Surabaya, {{ surat['tgl_surat_indo'] }}<br>Kepala Sekolah,</p>
             <br><br><br>
-            <p><b><u>Dwi Adhika Mintardi, S.Pd</u></b></p>
+            <p><b>Dwi Adhika Mintardi, S.Pd</b></p>
         </div>
     </div>
     {% endif %}

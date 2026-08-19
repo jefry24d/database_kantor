@@ -1,0 +1,1 @@
+sedang mengupdate surat keterangan dan mencoba membuatnya seperti surat rekomendasi, namun tetap berdasarkan form surat keterangan asli, hanya saja dapat digunakan untuk 3 penerima "Guru/Siswa/Mahasiswa". dan menyediakan dropdown pilihan berisi template teks default namun tetap menyediakan ruang kosong untuk diisi sesuai keinginan USER

@@ -9,8 +9,11 @@
         "type": "select",
         "options": [
           { "value": "421.7", "text": "421.7 - Kegiatan Pelajar / Siswa" },
-          { "value": "421.3", "text": "421.3 - Kurikulum & Pembelajaran" },
-          { "value": "424.1", "text": "424.1 - Kepegawaian / Guru & Staf" }
+          { "value": "425", "text": "425 - Sarana Pendidikan" },
+          { "value": "451.1", "text": "451.1 - Peribadatan" },
+          { "value": "424", "text": "424 - Guru/Guru Teladan" },
+          { "value": "422", "text": "422 - Administrasi Sekolah" },
+          { "value": "422.4", "text": "422.4 - Uang Sekolah" }
         ]
       },
       { "id": "noUrutSurat", "label": "Nomor Urut Surat", "placeholder": "Contoh: 001" },
@@ -45,27 +48,30 @@
         "type": "select",
         "options": [
           { "value": "421.7", "text": "421.7 - Kegiatan Pelajar / Siswa" },
-          { "value": "421.3", "text": "421.3 - Kurikulum & Pembelajaran" },
-          { "value": "424.1", "text": "424.1 - Kepegawaian / Guru & Staf" }
+          { "value": "425", "text": "425 - Sarana Pendidikan" },
+          { "value": "451.1", "text": "451.1 - Peribadatan" },
+          { "value": "424", "text": "424 - Guru/Guru Teladan" },
+          { "value": "422", "text": "422 - Administrasi Sekolah" },
+          { "value": "422.4", "text": "422.4 - Uang Sekolah" }
         ]
       },
       { "id": "noUrutSurat", "label": "Nomor Urut Surat", "placeholder": "Contoh: 001" },
       {
         "id": "tipeSubjek",
-        "label": "Tipe Penerima",
+        "label": "Tipe Penerima (S / P)",
         "type": "select",
         "options": [
           { "value": "S", "text": "S - Siswa" },
           { "value": "P", "text": "P - Pegawai / Guru" }
         ]
       },
-      { "id": "perihal", "label": "Perihal / Nama Kegiatan", "placeholder": "Contoh: POSMA 26" },
-      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true }
+      { "id": "perihal", "label": "Perihal / Nama Kegiatan", "placeholder": "Contoh: POSMA 26" }
     ],
     "kanan": [
       { "id": "hariTanggal", "label": "Hari / Tanggal Kegiatan", "placeholder": "Sabtu, 22 Agustus 2026" },
       { "id": "waktu", "label": "Waktu", "placeholder": "Pukul 08.00 WIB s.d selesai" },
-      { "id": "tempat", "label": "Tempat / Lokasi Kegiatan", "placeholder": "GRAHA UNESA, Surabaya" }
+      { "id": "tempat", "label": "Tempat / Lokasi Kegiatan", "placeholder": "GRAHA UNESA, Surabaya" },
+      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true }
     ],
     "textarea": {
       "id": "isiKeterangan",
@@ -94,14 +100,35 @@
     "judul": "📜 INPUT SURAT KETERANGAN",
     "jenis": "KETERANGAN",
     "kiri": [
-      { "id": "noSurat", "label": "Nomor Surat", "placeholder": "Contoh: 421.7/388.SX.P/402.4.9.24/2026" },
-      { "id": "perihal", "label": "Judul Surat", "placeholder": "Contoh: Surat Keterangan Siswa Aktif" },
+      {
+        "id": "kodeKlasifikasi",
+        "label": "Kode Klasifikasi Surat",
+        "type": "select",
+        "options": [
+          { "value": "421.7", "text": "421.7 - Kegiatan Pelajar / Siswa" },
+          { "value": "425", "text": "425 - Sarana Pendidikan" },
+          { "value": "451.1", "text": "451.1 - Peribadatan" },
+          { "value": "424", "text": "424 - Guru/Guru Teladan" },
+          { "value": "422", "text": "422 - Administrasi Sekolah" },
+          { "value": "422.4", "text": "422.4 - Uang Sekolah" }
+        ]
+      },
+      { "id": "noUrutSurat", "label": "Nomor Urut Surat", "placeholder": "Contoh: 001" },
+            {
+        "id": "tipeSubjek",
+        "label": "Tipe Penerima (S / P)",
+        "type": "select",
+        "options": [
+          { "value": "S", "text": "S - Siswa" },
+          { "value": "P", "text": "P - Pegawai / Guru" }
+        ]
+      },
       { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
       { "id": "namaPenerima", "label": "Nama Yang Diterangkan", "placeholder": "Nama siswa / pegawai" }
     ],
     "kanan": [
-      { "id": "kelas", "label": "Kelas / Jabatan", "placeholder": "XI IPS 2 / Staf" },
-      { "id": "noIndukSiswa", "label": "NIS / NIP", "placeholder": "199xxxxxx" },
+      { "id": "kelas", "label": "Kelas / Jabatan", "placeholder": "XI-2 / Mahasiswa" },
+      { "id": "noIndukSiswa", "label": "NIS / NISN / NIM", "placeholder": "199xxxxxx" },
       { "id": "ttl", "label": "Tempat, Tanggal Lahir (TTL)", "placeholder": "Surabaya, 17 Agustus 2008" },
       { "id": "alamat", "label": "Alamat Lengkap", "placeholder": "Jl. Raya Surabaya No. 123" }
     ],
