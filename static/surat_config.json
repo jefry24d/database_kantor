@@ -120,9 +120,11 @@
         "type": "select",
         "options": [
           { "value": "S", "text": "S - Siswa" },
-          { "value": "P", "text": "P - Pegawai / Guru" }
+          { "value": "P", "text": "P - Pegawai / Guru" },
+          { "value": "M", "text": "M - Mahasiswa" }
         ]
       },
+      { "id": "perihal", "label": "Perihal / Judul Surat", "placeholder": "Contoh: Surat Keterangan Telah Melakukan Penelitian" },
       { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
       { "id": "namaPenerima", "label": "Nama Yang Diterangkan", "placeholder": "Nama siswa / pegawai" }
     ],
@@ -136,7 +138,7 @@
       "id": "isiKeterangan",
       "label": "Isi Keterangan Bebas:",
       "rows": 3,
-      "default": ""
+      "default": "Bahwa yang bersangkutan adalah benar-benar siswa aktif di SMA Kemala Bhayangkari 1 Surabaya."
     }
   },
   "undangan": {

@@ -102,6 +102,16 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
                         inputNIS.previousElementSibling.innerText = "NIP / NTY";
                         inputNIS.placeholder = "Contoh: 199001012026011001";
                     }
+                } else if (val === 'M') {
+                    // MAHASISWA
+                    if (inputKelas) {
+                        inputKelas.previousElementSibling.innerText = "Jurusan / Universitas";
+                        inputKelas.placeholder = "Contoh: S1 Teknik Informatika - UNESA";
+                    }
+                    if (inputNIS) {
+                        inputNIS.previousElementSibling.innerText = "NIM";
+                        inputNIS.placeholder = "Contoh: 21051204001";
+                    }
                 } else {
                     // JIKA DIPILIH 'S' (SISWA)
                     if (inputKelas) {
@@ -131,7 +141,7 @@ export async function simpanDanCetak() {
     const tipe = getValue('tipeSubjek') || 'S'; // AMBIL KODE TIPE (S ATAU P)
 
     const payload = {
-        jenis: getValue('jenisSurat') || 'rekomendasi',
+        jenis: getValue('jenisSurat') || 'keterangan',
         nomor_surat: nomorSuratLengkap,
         perihal: getValue('perihal'),
         bulan: getValue('bulan') || 'Januari',
@@ -139,19 +149,17 @@ export async function simpanDanCetak() {
         nama_penerima: getValue('namaPenerima'),
 
         // DIBAGI SESUAI TIPE (SISWA ATAU PEGAWAI)
-        kelas: tipe === 'S' ? getValue('kelas') : '-',
-        no_induk_siswa: tipe === 'S' ? getValue('noIndukSiswa') : '-',
-        unit: tipe === 'P' ? getValue('kelas') : '-',
-        no_pegawai: tipe === 'P' ? getValue('noIndukSiswa') : '-',
+        kelas: getValue('kelas'),
+        no_induk_siswa: getValue('noIndukSiswa'),
+        unit: (tipe === 'P' || tipe === 'M') ? getValue('kelas') : '-',
+        no_pegawai: (tipe === 'P' || tipe === 'M') ? getValue('noIndukSiswa') : '-',
 
         ttl: getValue('ttl'),
         alamat: getValue('alamat'),
         isi_keterangan: getValue('isiKeterangan'),
-        nama_event: getValue('perihal'),
         hari_tanggal: getValue('hariTanggal'),
         tempat: getValue('tempat'),
         waktu: getValue('waktu'),
-        alamat_tempat: getValue('alamatTempat'),
         lampiran: getValue('lampiran') || '-'
     };
 
