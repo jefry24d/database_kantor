@@ -54,10 +54,33 @@
                 {% else %}Kelas{% endif %}
             </td>
             <td>:</td>
-            <td>{{ surat['kelas'] or '-' }}</td>
+            <td>{{ surat['kelas'] if surat['kelas'] else '-' }}</td>
         </tr>
-        <tr><td>tempat, tanggal lahir</td><td>:</td><td>{{ surat['ttl'] if surat['ttl'] else '-' }}</td></tr>
-        <tr><td>alamat lengkap</td><td>:</td><td>{{ surat['alamat'] if surat['alamat'] else '-' }}</td></tr>
+
+        <tr>
+            <td>
+                {% if 'SMABHY.P' in surat['nomor_surat'] %}NIP / NTY
+                {% elif 'SMABHY.M' in surat['nomor_surat'] %}NIM
+                {% else %}NIS / NISN{% endif %}
+            </td>
+            <td>:</td>
+            <td>{{ surat['ttl'] if surat['ttl'] else '-' }}</td>
+        </tr>
+
+        <tr>
+            <td>
+                {% if 'SMABHY.M' in surat['nomor_surat'] %}Tahun /Angkatan
+                {% else %}Tempat, Tanggal Lahir{% endif %}
+            </td>
+            <td>:</td>
+            <td>{{ surat['ttl'] if surat['ttl'] else '-' }}</td>
+        </tr>
+
+        <tr>
+            <td>alamat lengkap</td>
+            <td>:</td>
+            <td>{{ surat['alamat'] if surat['alamat'] else '-' }}</td>
+        </tr>
     </table>
 
     <!-- ISIAN KETERANGAN BEBAS TERSERAH USER -->

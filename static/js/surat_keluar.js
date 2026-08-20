@@ -18,6 +18,36 @@ function generateNomorSurat() {
     return `${kode}/${noUrut}.SMABHY.${tipe}/402.4.9.24/${tahun}`;
 }
 
+async function updateInfoNomorTerakhir() {
+    const inputNoUrut = document.getElementById('noUrutSurat');
+    const selectKode = document.getElementById('kodeKlasifikasi');
+    if (!inputNoUrut || !selectKode) return;
+
+    let infoLabel = document.getElementById('infoNoTerakhir');
+    if (!infoLabel) {
+        infoLabel = document.createElement('small');
+        infoLabel.id = 'infoNoTerakhir';
+        infoLabel.style.cssText = 'display:block; margin-top:4px; color:#00fff0; font-weight:bold;';
+        inputNoUrut.parentNode.appendChild(infoLabel);
+    }
+
+    try {
+        const kode = selectKode.value;
+        const res = await fetch(`/api/last-number?kode=${kode}`);
+        const data = await res.json();
+
+        if (data.success) {
+            infoLabel.innerHTML = `📌 Nomor Terakhir: <b style="color:#fffa65;">${data.last_number}</b> | Rekomendasi Selanjutnya: <b style="color:#00ff88;">${data.suggested_number}</b>`;
+        
+            if (!inputNoUrut.value) {
+                inputNoUrut.value = data.suggested_number;
+            }
+        }
+    } catch (err) {
+        console.error("Gagal mengambil nomor terakhir:", err);
+    }
+}
+
 export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
     try {
         const res = await fetch('/static/surat_config.json');
@@ -91,6 +121,7 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
                 const val = e.target.value; // 'S' atau 'P'
                 const inputKelas = document.getElementById('kelas');
                 const inputNIS = document.getElementById('noIndukSiswa');
+                const inputTTL = document.getElementById('ttl');
 
                 if (val === 'P') {
                     // JIKA DIPILIH 'P' (PEGAWAI / GURU)
@@ -102,6 +133,10 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
                         inputNIS.previousElementSibling.innerText = "NIP / NTY";
                         inputNIS.placeholder = "Contoh: 199001012026011001";
                     }
+                    if (inputTTL) {
+                        inputTTL.previousElementSibling.innerText = "Tempat, Tanggal Lahir (TTL)";
+                        inputTTL.placeholder = "Surabaya, 17 Agustus 1945";
+                    }
                 } else if (val === 'M') {
                     // MAHASISWA
                     if (inputKelas) {
@@ -111,6 +146,10 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
                     if (inputNIS) {
                         inputNIS.previousElementSibling.innerText = "NIM";
                         inputNIS.placeholder = "Contoh: 21051204001";
+                    }
+                    if (inputTTL) {
+                        inputTTL.previousElementSibling.innerText = "Tahun Angkatan / Semester";
+                        inputTTL.placeholder = "Contoh: 2026 / Semester 6";
                     }
                 } else {
                     // JIKA DIPILIH 'S' (SISWA)
@@ -122,6 +161,10 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
                         inputNIS.previousElementSibling.innerText = "NIS / NISN";
                         inputNIS.placeholder = "Contoh: 12345 / 005xxxxxx";
                     }
+                    if (inputTTL) {
+                        inputTTL.previousElementSibling.innerText = "Tempat, Tanggal Lahir (TTL)";
+                        inputTTL.placeholder = "Surabaya, 17 Agustus 1945";
+                    }
                 }
             });
         }
@@ -129,6 +172,13 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
     } catch (err) {
         console.error("Error Form Render:", err);
         content.innerHTML = `<p style="color: #ff4757;">❌ Gagal memuat form dari JSON schema!</p>`;
+    }
+
+    updateInfoNomorTerakhir();
+
+    const selectKode = document.getElementById('kodeKlasifikasi');
+    if (selectKode) {
+        selectKode.addEventListener('change', updateInfoNomorTerakhir)
     }
 }
 

@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, session, render_template, redirec
 import sqlite3
 import os
 import time
+import re
 from werkzeug.utils import secure_filename
 from datetime import datetime
 
@@ -372,6 +373,35 @@ def log_activity(username, action, detail):
     )
     conn.commit()
     conn.close()
+
+@surat_bp.route('/api/last-number', methods=['GET'])
+def get_last_number():
+    kode = request.args.get('kode', '421.7')
+
+    conn = sqlite3.connect('arsip_kantor.db')
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT nomor_surat FROM surat
+        WHERE nomor_surat LIKE ?
+        ORDER BY id DESC LIMIT 1
+    """, (f"{kode}/%",))
+
+    row = cursor.fetchone()
+    conn.close()
+
+    if row and row[0]:
+        match = re.search(r'/(\d+)\.', row[0])
+        if match:
+            last_no = match.group(1)
+            next_no = str(int(last_no) + 1).zfill(len(last_no))
+            return jsonify({
+                "success": True,
+                "last_number": last_no,
+                "suggested_number": next_no
+            })
+
+        return jsonify({"success": True, "last_number": "Belum ada", "suggested_number": "001"})
 
 @surat_bp.route('/api/admin/logs', methods=['GET'])
 def get_activity_logs():
