@@ -4,61 +4,173 @@
     <meta charset="UTF-8">
     <title>Surat Tugas - {{ surat['nomor_surat'] }}</title>
     <style>
-        @page { size: A4; margin: 20mm; }
-        body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.5; color: #000; background: #fff; margin: 0; padding: 20px; }
-        .kop-surat { text-align: center; border-bottom: 3px double #000; padding-bottom: 10px; margin-bottom: 20px; font-weight: bold; font-size: 14pt; }
-        .judul-surat { text-align: center; font-weight: bold; font-size: 14pt; text-decoration: underline; margin-bottom: 5px; text-transform: uppercase; }
-        .nomor-surat { text-align: center; margin-bottom: 25px; }
-        table.form-table { width: 100%; margin-left: 20px; margin-bottom: 15px; border-collapse: collapse; }
-        table.form-table td { padding: 3px 5px; vertical-align: top; }
-        .ttd-container { float: right; width: 250px; text-align: center; margin-top: 40px; }
-        .btn-print { position: fixed; top: 20px; right: 20px; padding: 10px 20px; background: #00adb5; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        @media print { .btn-print { display: none; } body { padding: 0; } }
+        /* CSS STANDAR PRINT DOKUMEN ARSIP RESMI */
+        @page {
+        /* Ukuran Kertas F4 / Folio Standar Indonesia */
+        size: 215.9mm 330mm; 
+        
+        /* Margin presisi surat Chikita */
+        margin: 20mm 20mm 15mm 20mm; 
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            color: #000;
+            background: #333;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        /* CONTAINER PAPER SIMULASI */
+        .paper {
+            width: 210mm;
+            min-height: 330mm;
+            padding: 15mm 20mm 20mm 20mm;
+            background: #fff;
+            margin: 0 auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            display: block;
+        }
+
+        /* KOP SURAT SUPAYA LEBARNYA FIX MASUK KERTAS */
+        .kop-container {
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .kop-surat-img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .judul-container {
+            text-align: center;
+            margin-bottom: 35px; /* Makin kebawah & lega! */
+        }
+
+        .judul-surat {
+            text-align: center;
+            font-weight: bold;
+            font-size: 16pt;
+            text-decoration: underline;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .nomor-surat {
+            text-align: center;
+            font-size: 14pt; 
+            margin-bottom: 50px;
+        }
+
+        table.form-table {
+            width: 100%;
+            margin-left: 20px;
+            margin-bottom: 15px;
+            border-collapse: collapse;
+        }
+
+        table.form-table td {
+            padding: 3px 5px;
+            vertical-align: top;
+        }
+
+        .ttd-container {
+            float: right;
+            width: 250px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: #00adb5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 9999;
+        }
+
+        /* KHUSUS SAAT CETAK / SAVE PDF */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .paper {
+                box-shadow: none;
+                width: 100%;
+                margin: 0;
+                padding: 15mm 20mm 20mm 20mm;
+            }
+            .btn-print {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
 
     <button class="btn-print" onclick="window.print()">🖨️ Cetak / Simpan Ke PDF</button>
 
-    <!-- KOP SURAT PATEN -->
-    <div class="kop-surat">
-        KOP SURAT TEMPLATE ARSIP KANTOR
-    </div>
+    <div class="paper">
+        <!-- KOP GAMBAR STATIS -->
+        <div class="kop-container">
+            <img src="{{ url_for('static', filename='img/kop.png') }}" class="kop-surat-img" alt="Kop Surat SMA Kemala Bhayangkari 1">
+        </div>
 
-    <!-- JUDUL & NOMOR SURAT -->
-    <div class="judul-surat">SURAT TUGAS</div>
-    <div class="nomor-surat">Nomor : {{ surat['nomor_surat'] }}</div>
+        <!-- JUDUL & NOMOR SURAT -->
+        <div class="judul-surat">SURAT TUGAS</div>
+        <div class="nomor-surat">Nomor : {{ surat['nomor_surat'] }}</div>
 
-    <!-- PENANDATANGAN -->
-    <p>Yang bertanda tangan di bawah ini :</p>
-    <table class="form-table">
-        <tr><td width="180">Nama</td><td width="15">:</td><td><b>Mr. David Chameleon</b></td></tr>
-        <tr><td>Jabatan</td><td>:</td><td>Kepala Divisi Data Center</td></tr>
-        <tr><td>Alamat</td><td>:</td><td>Surabaya</td></tr>
-    </table>
+        <p>Yang bertanda tangan di bawah ini :</p>
+        <table class="form-table">
+            <tr><td width="150">nama</td><td width="15">:</td><td><b>Dwi Adhika Mintardi, S.Pd</b></td></tr>
+            <tr><td>jabatan</td><td>:</td><td>Kepala SMA Kemala Bhayangkari 1 Surabaya</td></tr>
+            <tr><td>alamat</td><td>:</td><td>Jalan Jend A. Yani 30-32, Surabaya</td></tr>
+        </table>
 
-    <!-- KALIMAT KHUSUS: MEMBERIKAN TUGAS KEPADA -->
-    <p>Memberikan tugas kepada :</p>
-    <table class="form-table">
-        <tr><td width="180">Nama</td><td width="15">:</td><td><b>{{ surat['nama_penerima'] if surat['nama_penerima'] else '-' }}</b></td></tr>
-        <tr><td>Unit / Divisi</td><td>:</td><td>{{ surat['unit'] if surat['unit'] else '-' }}</td></tr>
-        <tr><td>Nomor Pegawai (NIP)</td><td>:</td><td>{{ surat['no_pegawai'] if surat['no_pegawai'] else '-' }}</td></tr>
-    </table>
+        <!-- KALIMAT KHUSUS: MEMBERIKAN TUGAS KEPADA -->
+        <p>Memberikan tugas kepada :</p>
+        <table class="form-table">
+            <tr><td width="150">nama</td><td width="15">:</td><td><b>{{ surat['nama_penerima'] if surat['nama_penerima'] else '-' }}</b></td></tr>
+            {% if surat['kelas'] and surat['kelas'] != '-' %}
+                <tr><td>kelas</td><td>:</td><td>{{ surat['kelas'] }}</td></tr>
+                <tr><td>NIS / NISN</td><td>:</td><td>{{ surat['no_induk_siswa'] if surat['no_induk_siswa'] else '-' }}</td></tr>
+            {% else %}
+                <tr><td>jabatan / Unit</td><td>:</td><td>{{ surat['unit'] if surat['unit'] else '-' }}</td></tr>
+                <tr><td>NIP / NTY</td><td>:</td><td>{{ surat['no_pegawai'] if surat['no_pegawai'] else '-' }}</td></tr>
+            {% endif %}
+        </table>
 
-    <p>Untuk melaksanakan kegiatan “<b>{{ surat['nama_event'] if surat['nama_event'] else surat['perihal'] }}</b>”, pada :</p>
-    <table class="form-table">
-        <tr><td width="180">Hari / Tanggal</td><td width="15">:</td><td>{{ surat['hari_tanggal'] if surat['hari_tanggal'] else '-' }}</td></tr>
-        <tr><td>Tempat / Lokasi</td><td>:</td><td>{{ surat['tempat'] if surat['tempat'] else '-' }}</td></tr>
-    </table>
+        <p>Untuk melaksanakan kegiatan “<b>{{ surat['nama_event'] if surat['nama_event'] else surat['perihal'] }}</b>”, pada :</p>
+        <table class="form-table">
+            <tr><td width="150">hari / tanggal</td><td width="15">:</td><td>{{ surat['hari_tanggal'] if surat['hari_tanggal'] else '-' }}</td></tr>
+            <tr><td>waktu</td><td>:</td><td>{{ surat['waktu'] if surat['waktu'] else '-' }}</td></tr>
+            <tr><td>tempat</td><td>:</td><td>{{ surat['tempat'] if surat['tempat'] else '-' }}</td></tr>
+        </table>
 
-    <!-- KALIMAT PENUTUP RESMI PERMINTAANNYA NYOT -->
-    <p style="margin-top: 25px;">Demikian surat ini dibuat untuk dilaksanakan dengan penuh tanggung jawab dan melaporkan hasilnya secara tertulis kepada Pimpinan.</p>
+        <!-- KALIMAT PENUTUP RESMI PERMINTAANNYA NYOT -->
+        <p style="margin-top: 25px;">Demikian surat ini dibuat untuk dilaksanakan dengan penuh tanggung jawab dan melaporkan hasilnya secara tertulis kepada Pimpinan.</p>
 
-    <!-- TANDA TANGAN -->
-    <div class="ttd-container">
-        <p>Surabaya, {{ surat['tgl_surat'] if surat['tgl_surat'] else '15 Agustus 2026' }}<br>Kepala Divisi,</p>
-        <br><br><br>
-        <p><b><u>Mr. David Chameleon</u></b></p>
+        <!-- TANDA TANGAN -->
+        <div class="ttd-container">
+            <p>Surabaya, {{ surat['tgl_surat_indo'] }}<br>Kepala Sekolah,</p>
+            <br><br><br>
+            <p><b>Dwi Adhika Mintardi, S.Pd</b></p>
+        </div>
     </div>
 
 </body>

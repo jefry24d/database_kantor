@@ -1,27 +1,26 @@
 import { hapusSurat } from './common.js';
+import { initMasterData, setupAutocompleteNama, getMasterData } from './autocomplete_helper.js';
 
-// Helper Ambil Value Input
+initMasterData();
+
 const getValue = (id) => {
     const el = document.getElementById(id);
     return el ? el.value : '';
 };
 
-// Fungsi Generator Nomor Surat Otomatis
 function generateNomorSurat() {
     const kode = getValue('kodeKlasifikasi') || '421.7';
     const noUrut = getValue('noUrutSurat').trim() || '001';
     const tipe = getValue('tipeSubjek') || 'S';
-    
     const tglInput = getValue('tglSurat');
     const tahun = tglInput ? new Date(tglInput).getFullYear() : new Date().getFullYear();
 
     return `${kode}/${noUrut}.SMABHY.${tipe}/402.4.9.24/${tahun}`;
 }
 
-async function updateInfoNomorTerakhir() {
+export async function updateInfoNomorTerakhir() {
     const inputNoUrut = document.getElementById('noUrutSurat');
-    const selectKode = document.getElementById('kodeKlasifikasi');
-    if (!inputNoUrut || !selectKode) return;
+    if (!inputNoUrut) return;
 
     let infoLabel = document.getElementById('infoNoTerakhir');
     if (!infoLabel) {
@@ -32,19 +31,69 @@ async function updateInfoNomorTerakhir() {
     }
 
     try {
-        const kode = selectKode.value;
-        const res = await fetch(`/api/last-number?kode=${kode}`);
+        const res = await fetch('/api/last-number');
         const data = await res.json();
 
         if (data.success) {
-            infoLabel.innerHTML = `📌 Nomor Terakhir: <b style="color:#fffa65;">${data.last_number}</b> | Rekomendasi Selanjutnya: <b style="color:#00ff88;">${data.suggested_number}</b>`;
-        
-            if (!inputNoUrut.value) {
+            infoLabel.innerHTML = `📌 No. Urut Terakhir (Global): <b style="color:#fffa65;">${data.last_number}</b> | Saran Selanjutnya: <b style="color:#00ff88;">${data.suggested_number}</b>`;
+            if (!inputNoUrut.value || inputNoUrut.value === '001') {
                 inputNoUrut.value = data.suggested_number;
             }
         }
     } catch (err) {
         console.error("Gagal mengambil nomor terakhir:", err);
+    }
+}
+
+// Helper untuk memperbarui dropdown Kelas/Unit berdasarkan tipe S atau P
+// Helper untuk memperbarui elemen Kelas/Unit/Jurusan berdasarkan tipe S, P, atau M
+function updateOptionsKelas() {
+    const selectTipe = document.getElementById('tipeSubjek');
+    let elKelas = document.getElementById('kelas');
+    if (!selectTipe || !elKelas) return;
+
+    const tipe = selectTipe.value;
+    const master = getMasterData();
+    const parentContainer = elKelas.parentNode;
+
+    // Kalo tipe M (Mahasiswa), ubah jadi Input Text Biasa
+    if (tipe === 'M') {
+        if (elKelas.tagName === 'SELECT') {
+            const newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.id = 'kelas';
+            newInput.placeholder = 'Contoh: S1 Administrasi Negara - UNESA';
+            newInput.style.cssText = 'background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px; width: 100%;';
+            
+            parentContainer.replaceChild(newInput, elKelas);
+        }
+    } 
+    // Kalo tipe S atau P, kembalikan ke Dropdown Select
+    else {
+        if (elKelas.tagName === 'INPUT') {
+            const newSelect = document.createElement('select');
+            newSelect.id = 'kelas';
+            newSelect.style.cssText = 'background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px; width: 100%;';
+            
+            parentContainer.replaceChild(newSelect, elKelas);
+            elKelas = newSelect; // Re-assign acuan elemen
+        }
+
+        elKelas.innerHTML = '';
+
+        if (tipe === 'P') {
+            elKelas.innerHTML = `<option value="" style="color:#000;">-- Pilih Unit Kerja Guru/Staf --</option>`;
+            const units = [...new Set(master.guru.map(g => g.unit).filter(Boolean))];
+            units.forEach(u => {
+                elKelas.innerHTML += `<option value="${u}" style="color:#000;">👨‍🏫 ${u}</option>`;
+            });
+        } else { // Tipe 'S' (Siswa)
+            elKelas.innerHTML = `<option value="" style="color:#000;">-- Pilih Kelas Siswa --</option>`;
+            const kelases = [...new Set(master.siswa.map(s => s.kelas).filter(Boolean))];
+            kelases.forEach(k => {
+                elKelas.innerHTML += `<option value="${k}" style="color:#000;">🏫 ${k}</option>`;
+            });
+        }
     }
 }
 
@@ -57,10 +106,9 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
         const config = schema[subType] || schema['rekomendasi'];
         const todayStr = new Date().toISOString().split('T')[0];
 
-        // RENDER INPUT ATAU SELECT DROPDOWN
         const makeInputs = (fields) => fields.map(f => {
             if (f.type === 'select') {
-                const optionsHtml = f.options.map(opt => `<option value="${opt.value}" style="color:#000;">${opt.text}</option>`).join('');
+                const optionsHtml = (f.options || []).map(opt => `<option value="${opt.value}" style="color:#000;">${opt.text}</option>`).join('');
                 return `
                     <div style="margin-bottom: 10px;">
                         <label style="display:block; margin-bottom: 4px; font-weight:bold;">${f.label}</label>
@@ -73,7 +121,6 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
 
             const type = f.type || 'text';
             let val = '';
-            
             if (f.isToday || f.id === 'tglSurat') {
                 val = `value="${todayStr}"`;
             } else if (f.defaultValue) {
@@ -114,61 +161,6 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
 
         document.getElementById('btnSimpanCetak').addEventListener('click', simpanDanCetak);
 
-        // --- TAMBAHKAN EVENT LISTENER DI DALAM SINI (SETELAH INNERHTML DIPASANG) ---
-        const selectTipe = document.getElementById('tipeSubjek');
-        if (selectTipe) {
-            selectTipe.addEventListener('change', (e) => {
-                const val = e.target.value; // 'S' atau 'P'
-                const inputKelas = document.getElementById('kelas');
-                const inputNIS = document.getElementById('noIndukSiswa');
-                const inputTTL = document.getElementById('ttl');
-
-                if (val === 'P') {
-                    // JIKA DIPILIH 'P' (PEGAWAI / GURU)
-                    if (inputKelas) {
-                        inputKelas.previousElementSibling.innerText = "Jabatan / Unit Kerja";
-                        inputKelas.placeholder = "Contoh: Guru Matematika / Staf TU";
-                    }
-                    if (inputNIS) {
-                        inputNIS.previousElementSibling.innerText = "NIP / NTY";
-                        inputNIS.placeholder = "Contoh: 199001012026011001";
-                    }
-                    if (inputTTL) {
-                        inputTTL.previousElementSibling.innerText = "Tempat, Tanggal Lahir (TTL)";
-                        inputTTL.placeholder = "Surabaya, 17 Agustus 1945";
-                    }
-                } else if (val === 'M') {
-                    // MAHASISWA
-                    if (inputKelas) {
-                        inputKelas.previousElementSibling.innerText = "Jurusan / Universitas";
-                        inputKelas.placeholder = "Contoh: S1 Teknik Informatika - UNESA";
-                    }
-                    if (inputNIS) {
-                        inputNIS.previousElementSibling.innerText = "NIM";
-                        inputNIS.placeholder = "Contoh: 21051204001";
-                    }
-                    if (inputTTL) {
-                        inputTTL.previousElementSibling.innerText = "Tahun Angkatan / Semester";
-                        inputTTL.placeholder = "Contoh: 2026 / Semester 6";
-                    }
-                } else {
-                    // JIKA DIPILIH 'S' (SISWA)
-                    if (inputKelas) {
-                        inputKelas.previousElementSibling.innerText = "Kelas Siswa";
-                        inputKelas.placeholder = "Contoh: XII IPA 1";
-                    }
-                    if (inputNIS) {
-                        inputNIS.previousElementSibling.innerText = "NIS / NISN";
-                        inputNIS.placeholder = "Contoh: 12345 / 005xxxxxx";
-                    }
-                    if (inputTTL) {
-                        inputTTL.previousElementSibling.innerText = "Tempat, Tanggal Lahir (TTL)";
-                        inputTTL.placeholder = "Surabaya, 17 Agustus 1945";
-                    }
-                }
-            });
-        }
-
     } catch (err) {
         console.error("Error Form Render:", err);
         content.innerHTML = `<p style="color: #ff4757;">❌ Gagal memuat form dari JSON schema!</p>`;
@@ -178,8 +170,24 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
 
     const selectKode = document.getElementById('kodeKlasifikasi');
     if (selectKode) {
-        selectKode.addEventListener('change', updateInfoNomorTerakhir)
+        selectKode.addEventListener('change', updateInfoNomorTerakhir);
     }
+
+    // Event listener perpindahan S / P
+    const selectTipe = document.getElementById('tipeSubjek');
+    if (selectTipe) {
+        selectTipe.addEventListener('change', () => {
+            updateOptionsKelas();
+            const inputNama = document.getElementById('namaPenerima');
+            if (inputNama) inputNama.value = '';
+            const inputNIS = document.getElementById('noIndukSiswa');
+            if (inputNIS) inputNIS.value = '';
+        });
+    }
+
+    // Inisialisasi awal dropdown Kelas/Unit
+    updateOptionsKelas();
+    setupAutocompleteNama();
 }
 
 export async function simpanDanCetak() {
@@ -187,18 +195,25 @@ export async function simpanDanCetak() {
     msg.innerText = "Sedang menyimpan surat...";
     msg.style.color = "#00fff0";
 
+    const jenisSurat = getValue('jenisSurat') || 'KETERANGAN';
     const nomorSuratLengkap = getValue('noSurat') || generateNomorSurat();
-    const tipe = getValue('tipeSubjek') || 'S'; // AMBIL KODE TIPE (S ATAU P)
+    const tipe = getValue('tipeSubjek') || 'S';
+
+    // AUTO-FILL PERIHAL KALO SURAT KETERANGAN (BIAR KAGAK ERROR DIBLOCK SERVER)
+    let perihalVal = getValue('perihal');
+    if (!perihalVal && (jenisSurat === 'KETERANGAN' || jenisSurat === 'KETERANGAN_BEBAS')) {
+        const namaPenerima = getValue('namaPenerima') || 'Siswa/Pegawai';
+        perihalVal = `Surat Keterangan a.n ${namaPenerima}`;
+    }
 
     const payload = {
-        jenis: getValue('jenisSurat') || 'keterangan',
+        jenis: jenisSurat,
         nomor_surat: nomorSuratLengkap,
-        perihal: getValue('perihal'),
+        perihal: perihalVal,
         bulan: getValue('bulan') || 'Januari',
         tgl_surat: getValue('tglSurat'),
         nama_penerima: getValue('namaPenerima'),
 
-        // DIBAGI SESUAI TIPE (SISWA ATAU PEGAWAI)
         kelas: getValue('kelas'),
         no_induk_siswa: getValue('noIndukSiswa'),
         unit: (tipe === 'P' || tipe === 'M') ? getValue('kelas') : '-',
@@ -207,6 +222,7 @@ export async function simpanDanCetak() {
         ttl: getValue('ttl'),
         alamat: getValue('alamat'),
         isi_keterangan: getValue('isiKeterangan'),
+        keterangan_acara: getValue('keteranganAcara'),
         hari_tanggal: getValue('hariTanggal'),
         tempat: getValue('tempat'),
         waktu: getValue('waktu'),

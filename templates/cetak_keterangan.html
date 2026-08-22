@@ -4,97 +4,187 @@
     <meta charset="UTF-8">
     <title>Surat Keterangan - {{ surat['nomor_surat'] }}</title>
     <style>
+        /* KERTAS F4 & MARGIN NARROW SAMALAGI DENGAN UNDANGAN */
         @page {
-        /* Ukuran Kertas F4 / Folio Standar Indonesia */
-        size: 215.9mm 330mm; 
-        
-        /* Margin presisi surat Chikita */
-        margin: 20mm 20mm 15mm 20mm; 
+            size: 215.9mm 330mm; 
+            margin: 6.7mm; 
         }
-        body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.5; color: #000; background: #fff; margin: 0; padding: 20px; }
-        .kop-container { text-align: center; margin-bottom: 15px; }
-        .kop-surat-img { width: 100%; max-height: 120px; object-fit: contain; }
-        .judul-surat { text-align: center; font-weight: bold; font-size: 14pt; text-decoration: underline; margin-bottom: 5px; text-transform: uppercase; }
-        .nomor-surat { text-align: center; margin-bottom: 25px; }
-        table.form-table { width: 100%; margin-left: 20px; margin-bottom: 15px; border-collapse: collapse; }
-        table.form-table td { padding: 3px 5px; vertical-align: top; }
-        .ttd-container { float: right; width: 250px; text-align: center; margin-top: 40px; }
-        .btn-print { position: fixed; top: 20px; right: 20px; padding: 10px 20px; background: #00adb5; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        @media print { .btn-print { display: none; } body { padding: 0; } }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            color: #000;
+            background: #333;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        .paper {
+            width: 215.9mm;
+            min-height: 330mm;
+            padding: 15mm 15mm 15mm 15mm;
+            background: #fff;
+            margin: 0 auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+            display: block;
+        }
+
+        /* KOP CENTER SAMA PERSIS DENGAN UNDANGAN */
+        .kop-container {
+            width: 100%;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .kop-surat-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .judul-surat { 
+            text-align: center; 
+            font-weight: bold; 
+            font-size: 16pt; 
+            text-decoration: underline; 
+            margin-bottom: 5px; 
+            text-transform: uppercase; 
+        }
+
+        .nomor-surat { 
+            text-align: center;
+            font-size: 14pt;  
+            margin-bottom: 55px; 
+        }
+
+        table.form-table { 
+            width: 100%; 
+            margin-left: 20px; 
+            margin-bottom: 15px; 
+            border-collapse: collapse; 
+        }
+
+        table.form-table td { 
+            padding: 3px 5px; 
+            vertical-align: top; 
+        }
+
+        .btn-print { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            padding: 12px 24px; 
+            background: #00adb5; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 1rem;
+            cursor: pointer; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+            z-index: 9999;
+        }
+
+        @media print { 
+            body { 
+                background: #fff; 
+                padding: 0; 
+            } 
+            .paper { 
+                box-shadow: none; 
+                width: 100%; 
+                margin: 0; 
+                padding: 0; 
+            } 
+            .btn-print { 
+                display: none; 
+            } 
+        }
     </style>
 </head>
 <body>
 
     <button class="btn-print" onclick="window.print()">🖨️ Cetak / Simpan Ke PDF</button>
 
-    <!-- KOP SURAT PATEN -->
-    <div class="kop-container">
-        <img src="{{ url_for('static', filename='img/kop.png') }}" class="kop-surat-img" alt="Kop Surat SMA Kemala Bhayangkari 1">
-    </div>
+    <div class="paper">
 
-    <!-- JUDUL & NOMOR SURAT -->
-    <div class="judul-surat">SURAT KETERANGAN</div>
-    <div class="nomor-surat">Nomor : {{ surat['nomor_surat'] }}</div>
+        <!-- KOP SURAT PATEN -->
+        <div class="kop-container">
+            <img src="{{ url_for('static', filename='img/kop.png') }}" class="kop-surat-img" alt="Kop Surat SMA Kemala Bhayangkari 1">
+        </div>
 
-    <!-- PENANDATANGAN -->
-    <p>Yang bertanda tangan di bawah ini :</p>
-    <table class="form-table">
-        <tr><td width="180">nama</td><td width="15">:</td><td><b>Dwi Adhika Mintardi, S.Pd</b></td></tr>
-        <tr><td>jabatan</td><td>:</td><td>Kepala SMA Kemala Bhayangkari 1 Surabaya</td></tr>
-        <tr><td>alamat</td><td>:</td><td>Jalan Jend A. Yani 30-32, Surabaya</td></tr>
-    </table>
+        <!-- JUDUL & NOMOR SURAT -->
+        <div class="judul-surat">SURAT KETERANGAN</div>
+        <div class="nomor-surat">Nomor : {{ surat['nomor_surat'] }}</div>
 
-    <p>Dengan ini menerangkan bahwa :</p>
-    <table class="form-table">
-        <tr><td width="180">nama</td><td width="15">:</td><td><b>{{ surat['nama_penerima'] if surat['nama_penerima'] else '-' }}</b></td></tr>
-        <tr>
-            <td>
-                {% if 'SMABHY.P' in surat['nomor_surat'] %}Jabatan / Unit
-                {% elif 'SMABHY.M' in surat['nomor_surat'] %}Jurusan / Universitas
-                {% else %}Kelas{% endif %}
-            </td>
-            <td>:</td>
-            <td>{{ surat['kelas'] if surat['kelas'] else '-' }}</td>
-        </tr>
+        <!-- PENANDATANGAN -->
+        <p style="margin: 40px 0 10px 0;">Yang bertanda tangan di bawah ini :</p>
+        <table class="form-table">
+            <tr><td width="180">nama</td><td width="15">:</td><td><b>Dwi Adhika Mintardi, S.Pd</b></td></tr>
+            <tr><td>jabatan</td><td>:</td><td>Kepala SMA Kemala Bhayangkari 1 Surabaya</td></tr>
+            <tr><td>alamat</td><td>:</td><td>Jalan Jend A. Yani 30-32, Surabaya</td></tr>
+        </table>
 
-        <tr>
-            <td>
-                {% if 'SMABHY.P' in surat['nomor_surat'] %}NIP / NTY
-                {% elif 'SMABHY.M' in surat['nomor_surat'] %}NIM
-                {% else %}NIS / NISN{% endif %}
-            </td>
-            <td>:</td>
-            <td>{{ surat['ttl'] if surat['ttl'] else '-' }}</td>
-        </tr>
+        <p style="margin: 20px 0 10px 0;">Dengan ini menerangkan bahwa :</p>
+        <table class="form-table">
+            <tr><td width="180">nama</td><td width="15">:</td><td><b>{{ surat['nama_penerima'] if surat['nama_penerima'] else '-' }}</b></td></tr>
+            <tr>
+                <td>
+                    {% if 'SMABHY.P' in surat['nomor_surat'] %}jabatan / unit
+                    {% elif 'SMABHY.M' in surat['nomor_surat'] %}jurusan / universitas
+                    {% else %}kelas{% endif %}
+                </td>
+                <td>:</td>
+                <td>{{ surat['kelas'] if surat['kelas'] else '-' }}</td>
+            </tr>
 
-        <tr>
-            <td>
-                {% if 'SMABHY.M' in surat['nomor_surat'] %}Tahun /Angkatan
-                {% else %}Tempat, Tanggal Lahir{% endif %}
-            </td>
-            <td>:</td>
-            <td>{{ surat['ttl'] if surat['ttl'] else '-' }}</td>
-        </tr>
+            <!-- BARIS NIS / NISN / NIP / NIM -->
+            <tr>
+                <td>
+                    {% if 'SMABHY.P' in surat['nomor_surat'] %}NIP / NTY
+                    {% elif 'SMABHY.M' in surat['nomor_surat'] %}NIM
+                    {% else %}NIS / NISN{% endif %}
+                </td>
+                <td>:</td>
+                <td>{{ surat['no_induk_siswa'] if surat['no_induk_siswa'] else '-' }}</td> <!-- ✅ DAH DIGANTI JADI no_induk_siswa -->
+            </tr>
 
-        <tr>
-            <td>alamat lengkap</td>
-            <td>:</td>
-            <td>{{ surat['alamat'] if surat['alamat'] else '-' }}</td>
-        </tr>
-    </table>
+            <!-- BARIS TTL -->
+            <tr>
+                <td>
+                    {% if 'SMABHY.M' in surat['nomor_surat'] %}tahun / angkatan
+                    {% else %}tempat, tanggal Lahir{% endif %}
+                </td>
+                <td>:</td>
+                <td>{{ surat['ttl'] if surat['ttl'] else '-' }}</td>
+            </tr>
 
-    <!-- ISIAN KETERANGAN BEBAS TERSERAH USER -->
-    <p style="text-align: justify; margin-top: 15px; text-indent: 30px;">
-        {{ surat['isi_keterangan'] or 'Bahwa yang bersangkutan benar-benar siswa aktif di SMA Kemala Bhayangkari 1 Surabaya.' }}
-    </p>
+            <tr>
+                <td>alamat lengkap</td>
+                <td>:</td>
+                <td>{{ surat['alamat'] if surat['alamat'] else '-' }}</td>
+            </tr>
+        </table>
 
-    <p style="margin-top: 25px;">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya.</p>
+        <!-- ISIAN KETERANGAN BEBAS TERSERAH USER -->
+        <p style="text-align: justify; margin-top: 20px; text-indent: 2px;">
+            {{ surat['isi_keterangan'] or 'Bahwa yang bersangkutan benar-benar siswa aktif di SMA Kemala Bhayangkari 1 Surabaya.' }}
+        </p>
 
-    <!-- TANDA TANGAN -->
-    <div class="ttd-container">
-        <p>Surabaya, {{ surat['tgl_surat'] if surat['tgl_surat'] else '15 Agustus 2026' }}<br>Kepala Sekolah,</p>
-        <br><br><br>
-        <p><b>Dwi Adhika Mintardi, S.Pd</b></p>
+        <p style="margin-top: 20px;">Demikian surat keterangan ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya.</p>
+
+        <!-- TANDA TANGAN (DIKUNCI 40% DI KANAN SAMA DENGAN UNDANGAN) -->
+        <div style="display: flex; justify-content: flex-end; margin-top: 80px;">
+            <div style="width: 40%; text-align: left;">
+                <p style="margin: 0;">Surabaya, {{ surat['tgl_surat_indo'] }}<br>Kepala Sekolah,</p>
+                <br><br><br><br>
+                <p style="margin: 0;"><b>Dwi Adhika Mintardi, S.Pd</b></p>
+            </div>
+        </div>
+
     </div>
 
 </body>

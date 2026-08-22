@@ -1,0 +1,13 @@
+{
+  "guru": [
+    { "nama": "Emma Sophia, S.Pd.", "nip": "198501012010012001", "unit": "Guru Matematika" },
+    { "nama": "Emilie Putri, M.Pd.", "nip": "199002022015022002", "unit": "Guru Bahasa Inggris" },
+    { "nama": "Bambang Pamungkas, S.T.", "nip": "198803032012011003", "unit": "Guru Informatika" }
+  ],
+  "siswa": [
+    { "nama": "Ahmad Subagjo", "kelas": "XI IPA 1", "nis": "12345 / 005111" },
+    { "nama": "Emma Watson", "kelas": "XI IPA 1", "nis": "12346 / 005112" },
+    { "nama": "Emilie Thérèse", "kelas": "XII MIPA 2", "nis": "12399 / 005222" },
+    { "nama": "Siti Nurhaliza", "kelas": "XI IPA 1", "nis": "12347 / 005113" }
+  ]
+}

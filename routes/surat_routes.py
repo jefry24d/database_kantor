@@ -146,6 +146,7 @@ def add_surat():
         ttl = data.get('ttl', '')
         alamat = data.get('alamat', '')
         isi_keterangan = data.get('isi_keterangan', '')
+        keterangan_acara = data.get('keterangan_acara', '')
         
         tgl_surat = data.get('tgl_surat', '')
         lampiran = data.get('lampiran', '-')
@@ -163,10 +164,22 @@ def add_surat():
         conn = get_db()
         cursor = conn.cursor()
         cursor.execute("""
-            INSERT INTO surat (jenis_surat, nomor_surat, perihal, bulan, uploaded_by, nama_penerima, unit, no_pegawai, kelas, no_induk_siswa, ttl, alamat, isi_keterangan, nama_event, hari_tanggal, tempat, tgl_surat, lampiran, waktu, alamat_tempat, isi_custom_html)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (jenis, no_surat, perihal, bulan, session.get('username', 'Admin'), nama_penerima, unit, no_pegawai, kelas, no_induk_siswa, ttl, alamat, isi_keterangan, nama_event, hari_tanggal, tempat, tgl_surat, lampiran, waktu, alamat_tempat, isi_custom_html))
-
+            INSERT INTO surat (
+                jenis_surat, nomor_surat, perihal, bulan, uploaded_by, 
+                nama_penerima, unit, no_pegawai, kelas, no_induk_siswa, 
+                ttl, alamat, isi_keterangan, keterangan_acara, nama_event, 
+                hari_tanggal, tempat, tgl_surat, lampiran, waktu, 
+                alamat_tempat, isi_custom_html
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            jenis, no_surat, perihal, bulan, session.get('username', 'Admin'), 
+            nama_penerima, unit, no_pegawai, kelas, no_induk_siswa, 
+            ttl, alamat, isi_keterangan, keterangan_acara, nama_event, 
+            hari_tanggal, tempat, tgl_surat, lampiran, waktu, 
+            alamat_tempat, isi_custom_html
+        ))
+        
         new_id = cursor.lastrowid
         conn.commit()
         conn.close()
@@ -376,32 +389,38 @@ def log_activity(username, action, detail):
 
 @surat_bp.route('/api/last-number', methods=['GET'])
 def get_last_number():
-    kode = request.args.get('kode', '421.7')
+    try:
+        conn = sqlite3.connect('arsip_kantor.db')
+        cursor = conn.cursor()
 
-    conn = sqlite3.connect('arsip_kantor.db')
-    cursor = conn.cursor()
+        cursor.execute("""
+            SELECT nomor_surat FROM surat
+            ORDER BY id DESC LIMIT 1
+        """)
+        row = cursor.fetchone()
+        conn.close()
 
-    cursor.execute("""
-        SELECT nomor_surat FROM surat
-        WHERE nomor_surat LIKE ?
-        ORDER BY id DESC LIMIT 1
-    """, (f"{kode}/%",))
+        if row and row[0]:
+            match = re.search(r'/(\d+)\.', row[0])
+            if match:
+                last_no = match.group(1)
+                next_no = str(int(last_no) + 1).zfill(len(last_no))
 
-    row = cursor.fetchone()
-    conn.close()
+                return jsonify({
+                    "success": True,
+                    "last_number": last_no,
+                    "suggested_number": next_no
+                })
 
-    if row and row[0]:
-        match = re.search(r'/(\d+)\.', row[0])
-        if match:
-            last_no = match.group(1)
-            next_no = str(int(last_no) + 1).zfill(len(last_no))
-            return jsonify({
-                "success": True,
-                "last_number": last_no,
-                "suggested_number": next_no
-            })
+            return jsonify({"success": True, "last_number": "Belum ada", "suggested_number": "001"})
 
-        return jsonify({"success": True, "last_number": "Belum ada", "suggested_number": "001"})
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "message": str(e),
+            "last_number": "Error",
+            "suggested_number": "001"
+        }), 500
 
 @surat_bp.route('/api/admin/logs', methods=['GET'])
 def get_activity_logs():

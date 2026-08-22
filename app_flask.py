@@ -26,7 +26,7 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             jenis_surat TEXT, nomor_surat TEXT, perihal TEXT, bulan TEXT, uploaded_by TEXT,
             nama_penerima TEXT, unit TEXT, no_pegawai TEXT, kelas TEXT DEFAULT '-', no_induk_siswa TEXT DEFAULT '-',
-            ttl TEXT DEFAULT '-', alamat TEXT DEFAULT '-', isi_keterangan TEXT DEFAULT '-', nama_event TEXT,
+            ttl TEXT DEFAULT '-', alamat TEXT DEFAULT '-', isi_keterangan TEXT DEFAULT '-', keterangan_acara TEXT DEFAULT '-', nama_event TEXT,
             hari_tanggal TEXT, tempat TEXT, tgl_surat TEXT DEFAULT '-',
             lampiran TEXT DEFAULT '-', waktu TEXT DEFAULT '-', alamat_tempat TEXT DEFAULT '-',
             isi_custom_html TEXT DEFAULT '-', file_custom_path TEXT DEFAULT '-'
