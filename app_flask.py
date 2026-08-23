@@ -29,7 +29,8 @@ def init_db():
             ttl TEXT DEFAULT '-', alamat TEXT DEFAULT '-', isi_keterangan TEXT DEFAULT '-', keterangan_acara TEXT DEFAULT '-', nama_event TEXT,
             hari_tanggal TEXT, tempat TEXT, tgl_surat TEXT DEFAULT '-',
             lampiran TEXT DEFAULT '-', waktu TEXT DEFAULT '-', alamat_tempat TEXT DEFAULT '-',
-            isi_custom_html TEXT DEFAULT '-', file_custom_path TEXT DEFAULT '-'
+            isi_custom_html TEXT DEFAULT '-', file_custom_path TEXT DEFAULT '-',
+            nama_bank TEXT DEFAULT '-', no_rekening TEXT DEFAULT '-', virtual_account TEXT DEFAULT '-'
         )
     ''')
 
@@ -44,10 +45,12 @@ def init_db():
             perihal TEXT,
             petugas TEXT,
             kode_surat TEXT DEFAULT 'DP',
+            sifat_surat TEXT DEFAULT 'Segera',
+            diteruskan_ke TEXT DEFAULT '-',
             file_scan_path TEXT DEFAULT '-',
             instruksi_pimpinan TEXT DEFAULT '-'
-            )
-        ''')
+        )
+    ''')
 
         # Di dalam init_db() pada file app_flask.py
     cursor.execute('''

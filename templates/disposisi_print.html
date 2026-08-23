@@ -4,134 +4,155 @@
     <meta charset="UTF-8">
     <title>Lembar Disposisi - {{ surat.no_disposisi }}</title>
     <style>
+        @page {
+            size: A5 landscape;
+            margin: 4mm;
+        }
+        * { box-sizing: border-box; }
         body {
             font-family: Arial, sans-serif;
+            font-size: 8.5pt;
             background: #f5f5f5;
-            padding: 20px;
-            color: #000;
+            margin: 0;
+            padding: 10px;
         }
-        .page {
+        .page-a5-landscape {
             background: white;
             width: 210mm;
-            min-height: 297mm;
-            padding: 20mm;
+            height: 148mm;
             margin: 0 auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 6mm 8mm;
             box-sizing: border-box;
+            border: 1px solid #000;
+            overflow: hidden;
+            position: relative;
         }
-        .header {
+        .header-kop {
+            width: 100%;
             text-align: center;
-            border-bottom: 3px double #000;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 2px;
         }
-        .header h2 { margin: 0; font-size: 18pt; text-transform: uppercase; }
-        .header h4 { margin: 5px 0 0 0; font-size: 14pt; }
-        .header p { margin: 2px 0 0 0; font-size: 10pt; }
-        
-        .title-disposisi {
+        .header-kop img {
+            width: 100%;
+            height: auto;
+            max-height: 25mm;
+            object-fit: contain;
+        }
+        .title-box {
             text-align: center;
             font-weight: bold;
-            font-size: 14pt;
-            text-decoration: underline;
-            margin-bottom: 15px;
+            font-size: 10.5pt;
+            margin: 3px 0 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 2px;
         }
-        
-        table.meta-table {
+        table.disposisi-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 15px;
         }
-        table.meta-table td {
-            padding: 6px;
+        table.disposisi-table td {
             border: 1px solid #000;
-            font-size: 10pt;
+            padding: 5px 6px;
+            vertical-align: top;
+            font-size: 8.5pt;
         }
-        
-        .box-disposisi {
+        .checkbox {
+            width: 11px;
+            height: 11px;
             border: 1px solid #000;
-            min-height: 250px;
-            padding: 10px;
-            font-size: 10pt;
+            display: inline-block;
+            margin-right: 3px;
         }
-        
-        .footer-sign {
-            margin-top: 30px;
+        .check-item {
             display: flex;
-            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 4px;
         }
-        .sign-box {
+        .grid-diteruskan {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+            margin-top: 6px;
+        }
+        .instruksi-box {
+            min-height: 48mm;
+        }
+        .ttd-container {
             text-align: center;
-            width: 200px;
+            width: 160px;
+            font-size: 8.5pt;
+            float: right;
+            margin-top: 5px;
         }
-        
         @media print {
             body { background: none; padding: 0; }
-            .page { box-shadow: none; margin: 0; width: 100%; }
+            .page-a5-landscape { box-shadow: none; border: 1px solid #000; width: 100%; height: 100vh; }
             .no-print { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="no-print" style="text-align: center; margin-bottom: 15px;">
-        <button onclick="window.print()" style="padding: 10px 20px; font-size: 1rem; background: #00b894; color: white; border: none; border-radius: 5px; cursor: pointer;">🖨️ Cetak Lembar Disposisi (Print / PDF)</button>
+    <div class="no-print" style="text-align: center; margin-bottom: 10px;">
+        <button onclick="window.print()" style="padding: 8px 16px; background: #00b894; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">🖨️ Cetak Lembar Disposisi (A5 Landscape)</button>
     </div>
 
-    <div class="page">
-        <!-- KOP SURAT KANTOR -->
-        <div class="header">
-            <h2>PEMERINTAH KOTA SURABAYA</h2>
-            <h4>DINAS ADMINISTRASI & KEARSIPAN UTAMA</h4>
-            <p>Jl. Pemuda No. 45, Surabaya, Jawa Timur | Telp: (031) 555-0199</p>
+    <div class="page-a5-landscape">
+        <div class="header-kop">
+            <img src="{{ url_for('static', filename='img/kop.png') }}" alt="Kop Surat">
         </div>
 
-        <div class="title-disposisi">LEMBAR DISPOSISI SURAT MASUK</div>
+        <div class="title-box">LEMBAR DISPOSISI</div>
 
-        <!-- TABEL INFORMASI SURAT -->
-        <table class="meta-table">
+        <table class="disposisi-table">
             <tr>
-                <td width="20%"><b>Surat Dari</b></td>
-                <td width="30%">: {{ surat.pengirim }}</td>
-                <td width="20%"><b>Diterima Tgl</b></td>
-                <td width="30%">: {{ surat.tgl_diterima }}</td>
+                <td width="52%">
+                    <b>Surat Dari :</b> {{ surat.pengirim }}<br>
+                    <b>No. Surat :</b> {{ surat.no_surat_pengirim }}<br>
+                    <b>Tgl. Surat :</b> {{ surat.tgl_surat }}
+                </td>
+                <td width="48%">
+                    <b>Diterima Tgl :</b> {{ surat.tgl_diterima }}<br>
+                    <b>No. Agenda :</b> <b>{{ surat.no_disposisi }}</b><br>
+                    <b>Sifat :</b>
+                    <div style="display: flex; gap: 12px; margin-top: 4px;">
+                        <span class="check-item"><span class="checkbox"></span> S. Segera</span>
+                        <span class="check-item"><span class="checkbox"></span> Segera</span>
+                        <span class="check-item"><span class="checkbox"></span> Rahasia</span>
+                    </div>
+                </td>
             </tr>
             <tr>
-                <td><b>Tgl. Surat</b></td>
-                <td>: {{ surat.tgl_surat }}</td>
-                <td><b>No. Disposisi</b></td>
-                <td>: <b>{{ surat.no_disposisi }}</b></td>
+                <td colspan="2">
+                    <b>Perihal :</b> {{ surat.perihal }}
+                </td>
             </tr>
             <tr>
-                <td><b>No. Surat Pengirim</b></td>
-                <td>: {{ surat.no_surat_pengirim }}</td>
-                <td><b>Kode Klasifikasi</b></td>
-                <td>: <b>[{{ surat.kode_surat }}]</b></td>
-            </tr>
-            <tr>
-                <td><b>Perihal</b></td>
-                <td colspan="3">: {{ surat.perihal }}</td>
+                <td width="40%">
+                    <b>Diteruskan Kepada :</b>
+                    <div class="grid-diteruskan">
+                        <span class="check-item"><span class="checkbox"></span> TAS</span>
+                        <span class="check-item"><span class="checkbox"></span> Wakasek</span>
+                        <span class="check-item"><span class="checkbox"></span> BK</span>
+                        <span class="check-item"><span class="checkbox"></span> MGMP</span>
+                        <span class="check-item"><span class="checkbox"></span> Pembina OSIS</span>
+                        <span class="check-item"><span class="checkbox"></span> UKS</span>
+                    </div>
+                </td>
+                <td width="60%">
+                    <b>Instruksi / Catatan Pimpinan :</b>
+                    <div class="instruksi-box"></div>
+                    
+                    <div class="ttd-container">
+                        <p style="margin: 0;">Kepala Sekolah,</p>
+                        <br><br><br>
+                        <p style="margin: 0;"><b>Dwi Adhika Mintardi, S.Pd.</b></p>
+                    </div>
+                </td>
             </tr>
         </table>
-
-        <!-- CATATAN / INTRUKSI DISPOSISI PIMPIMAN -->
-        <div style="font-weight: bold; margin-bottom: 5px;">DISPOSISI / INSTRUKSI PIMPISAN:</div>
-        <div class="box-disposisi">
-            <p style="color: #666; font-style: italic;">[ Catatan / Petunjuk Tindak Lanjut Pimpinan ]</p>
-            <br><br><br><br><br><br><br><br>
-            <hr style="border: 0; border-top: 1px dashed #ccc;">
-            <p><b>Diteruskan Kepada:</b></p>
-            <p>[  ] Sekretaris Divisi &nbsp;&nbsp;&nbsp;&nbsp; [  ] Kepala Bagian IT &nbsp;&nbsp;&nbsp;&nbsp; [  ] Staf Kepegawaian</p>
-        </div>
-
-        <!-- TANDA TANGAN -->
-        <div class="footer-sign">
-            <div class="sign-box">
-                <p>Surabaya, {{ surat.tgl_diterima }}<br>Petugas Pencatat,</p>
-                <br><br><br>
-                <p><b>( {{ surat.petugas }} )</b></p>
-            </div>
-        </div>
     </div>
 
 </body>

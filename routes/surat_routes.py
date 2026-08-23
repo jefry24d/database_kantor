@@ -56,10 +56,14 @@ def cetak_surat(surat_id):
     conn.close()
 
     if not surat:
-        return "Surat tidak ditemukan nyot!", 404
+        return "Surat tidak ditemukan!", 404
 
     surat_dict = dict(surat)
     surat_dict['tgl_surat_indo'] = format_tanggal_indo(surat_dict.get('tgl_surat'))
+
+    if surat_dict.get('jenis_surat') == 'CUSTOM_FILE' and surat_dict.get('file_custom_path') != '-':
+        upload_folder = os.path.join(current_app.root_path, 'static', 'uploads')
+        return send_from_directory(upload_folder, surat_dict['file_custom_path'])
 
     if surat_dict['jenis_surat'] == 'REKOMENDASI_KOLEKTIF':
         raw_siswa = surat_dict.get('isi_keterangan', '') or ''
@@ -82,6 +86,10 @@ def cetak_surat(surat_id):
         return render_template('cetak_tugas.html', surat=surat_dict)
     elif surat['jenis_surat'] == 'UNDANGAN':
         return render_template('cetak_undangan.html', surat=surat_dict)
+    elif surat_dict['jenis_surat'] == 'KETERANGAN_PIP':
+        return render_template('cetak_keterangan_pip.html', surat=surat_dict)
+    elif surat['jenis_surat'] == 'SARPRAS':
+        return render_template('cetak_sarpras.html', surat=surat_dict)
     elif surat['jenis_surat'] == 'CUSTOM_EDITOR':
         return render_template('cetak_custom.html', surat=surat_dict)
     
@@ -96,7 +104,7 @@ def add_surat():
         jenis = request.form.get('jenis', 'CUSTOM_FILE')
         no_surat = request.form.get('nomor_surat', '').strip()
         perihal = request.form.get('perihal', '').strip()
-        bulan = request.form.get('bulan', 'Januari')
+        nama_penerima = request.form.get('nama_penerima', '').strip()
         tgl_surat = request.form.get('tgl_surat', '')
 
         if not no_surat or not perihal:
@@ -108,7 +116,7 @@ def add_surat():
         if file and file.filename != '':
             if allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                filename_saved = f"custom_{no_surat.replace('/', '_')}_{filename}"
+                filename_saved = f"custom_{int(time.time())}_{filename}"
                 upload_folder = os.path.join(current_app.root_path, 'static', 'uploads')
                 os.makedirs(upload_folder, exist_ok=True)
                 file.save(os.path.join(upload_folder, filename_saved))
@@ -118,9 +126,9 @@ def add_surat():
         conn = get_db()
         cursor = conn.cursor()
         cursor.execute("""
-            INSERT INTO surat (jenis_surat, nomor_surat, perihal, bulan, uploaded_by, tgl_surat, file_custom_path)
+            INSERT INTO surat (jenis_surat, nomor_surat, perihal, nama_penerima, uploaded_by, tgl_surat, file_custom_path)
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (jenis, no_surat, perihal, bulan, session.get('username', 'Admin'), tgl_surat, filename_saved))
+        """, (jenis, no_surat, perihal, nama_penerima, session.get('username', 'Admin'), tgl_surat, filename_saved))
 
         new_id = cursor.lastrowid
         conn.commit()
@@ -158,6 +166,11 @@ def add_surat():
         tempat = data.get('tempat', '')
         isi_custom_html = data.get('isi_custom_html', '-')
 
+        # TANGKAP FIELD KHUSUS PIP DI SINI
+        nama_bank = data.get('nama_bank', '')
+        no_rekening = data.get('no_rekening', '')
+        virtual_account = data.get('virtual_account', '')
+
         if not no_surat or not perihal:
             return jsonify({'success': False, 'message': 'Nomor Surat & Perihal kagak boleh kosong!'})
 
@@ -169,15 +182,15 @@ def add_surat():
                 nama_penerima, unit, no_pegawai, kelas, no_induk_siswa, 
                 ttl, alamat, isi_keterangan, keterangan_acara, nama_event, 
                 hari_tanggal, tempat, tgl_surat, lampiran, waktu, 
-                alamat_tempat, isi_custom_html
+                alamat_tempat, isi_custom_html, nama_bank, no_rekening, virtual_account
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             jenis, no_surat, perihal, bulan, session.get('username', 'Admin'), 
             nama_penerima, unit, no_pegawai, kelas, no_induk_siswa, 
             ttl, alamat, isi_keterangan, keterangan_acara, nama_event, 
             hari_tanggal, tempat, tgl_surat, lampiran, waktu, 
-            alamat_tempat, isi_custom_html
+            alamat_tempat, isi_custom_html, nama_bank, no_rekening, virtual_account
         ))
         
         new_id = cursor.lastrowid
@@ -189,11 +202,16 @@ def add_surat():
         return jsonify({'success': True, 'message': 'Surat berhasil disimpan!', 'surat_id': new_id})
 
 @surat_bp.route('/api/eksplorasi')
+
+@surat_bp.route('/api/eksplorasi')
+@surat_bp.route('/api/surat-keluar')
 def get_eksplorasi():
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT id, jenis_surat, nomor_surat, perihal, bulan, uploaded_by, nama_penerima, unit, no_pegawai, hari_tanggal, tempat, file_custom_path, tgl_surat
+        SELECT id, jenis_surat, nomor_surat, perihal, bulan, uploaded_by, 
+               nama_penerima, unit, no_pegawai, hari_tanggal, tempat, 
+               file_custom_path, tgl_surat
         FROM surat
         ORDER BY id DESC
     """)
@@ -248,6 +266,31 @@ def get_statistik():
 # ==========================================
 # 3. API MODUL SURAT MASUK & DISPOSISI
 # ==========================================
+@surat_bp.route('/api/last-disposisi-number', methods=['GET'])
+def get_last_disposisi_number():
+    kode = request.args.get('kode', 'DP')
+    tahun = datetime.now().year
+    
+    try:
+        conn = get_db()
+        cursor = conn.cursor()
+        # Ambil record terakhir
+        cursor.execute("SELECT no_disposisi FROM surat_masuk ORDER BY id DESC LIMIT 1")
+        row = cursor.fetchone()
+        conn.close()
+
+        next_no = 1
+        if row and row['no_disposisi']:
+            # Extract angka saja dari nomor disposisi terakhir
+            match = re.search(r'(\d+)', str(row['no_disposisi']))
+            if match:
+                next_no = int(match.group(1)) + 1
+
+        formatted_no = f"{next_no:03d}/{kode}/{tahun}"
+        return jsonify({'success': True, 'suggested_number': formatted_no})
+    except Exception as e:
+        return jsonify({'success': True, 'suggested_number': f"001/{kode}/{tahun}"})
+
 @surat_bp.route('/api/surat-masuk', methods=['POST'])
 def add_surat_masuk():
     try:
@@ -262,9 +305,10 @@ def add_surat_masuk():
         perihal = request.form.get('perihal')
         petugas = request.form.get('petugas')
         kode_surat = request.form.get('kode_surat', 'DP')
+        sifat_surat = request.form.get('sifat_surat', 'Segera')
+        diteruskan_ke = request.form.get('diteruskan_ke', '-')
         instruksi_pimpinan = request.form.get('instruksi_pimpinan', '-')
 
-        # Upload file scan diseragamkan ke static/uploads
         file_scan_path = '-'
         if 'file_scan' in request.files:
             file = request.files['file_scan']
@@ -279,16 +323,21 @@ def add_surat_masuk():
             INSERT INTO surat_masuk (
                 no_disposisi, pengirim, tgl_diterima, tgl_surat, 
                 no_surat_pengirim, perihal, petugas, kode_surat, 
-                file_scan_path, instruksi_pimpinan
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                sifat_surat, diteruskan_ke, file_scan_path, instruksi_pimpinan
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (no_disposisi, pengirim, tgl_diterima, tgl_surat, 
               no_surat_pengirim, perihal, petugas, kode_surat, 
-              file_scan_path, instruksi_pimpinan))
+              sifat_surat, diteruskan_ke, file_scan_path, instruksi_pimpinan))
 
         conn.commit()
         conn.close()
 
-        log_activity(session.get('username', 'Admin'), 'TAMBAH_SURAT_MASUK', f'Menambah Surat Masuk No Disposisi: {no_disposisi} dari {pengirim}')
+        # LOG ACTIVITY TERCATAT LENGKAP NYOT!
+        log_activity(
+            session.get('username', petugas), 
+            'TAMBAH_SURAT_MASUK', 
+            f'Menambah Surat Masuk No Disposisi: {no_disposisi} | Pengirim: {pengirim} | Perihal: {perihal}'
+        )
 
         return jsonify({"status": "success", "message": "Surat Masuk berhasil disimpan!"})
 
@@ -405,14 +454,15 @@ def get_last_number():
             if match:
                 last_no = match.group(1)
                 next_no = str(int(last_no) + 1).zfill(len(last_no))
-
                 return jsonify({
                     "success": True,
                     "last_number": last_no,
                     "suggested_number": next_no
                 })
+            # Tetap return meski regex kagak match!
+            return jsonify({"success": True, "last_number": row[0], "suggested_number": "001"})
 
-            return jsonify({"success": True, "last_number": "Belum ada", "suggested_number": "001"})
+        return jsonify({"success": True, "last_number": "Belum ada", "suggested_number": "001"})
 
     except Exception as e:
         return jsonify({
@@ -421,6 +471,27 @@ def get_last_number():
             "last_number": "Error",
             "suggested_number": "001"
         }), 500
+
+@surat_bp.route('/api/surat/approve/<int:surat_id>', methods=['POST'])
+def approve_surat(surat_id):
+    try:
+        conn = sqlite3.connect('arsip_kantor.db')
+        cursor = conn.cursor()
+
+        # Cek jenis surat dulu
+        cursor.execute("SELECT jenis_surat FROM surat WHERE id = ?", (surat_id,))
+        row = cursor.fetchone()
+
+        if row and row[0] == 'CUSTOM':
+            conn.close()
+            return jsonify({"success": False, "message": "Surat Custom tidak memerlukan approval!"}), 400
+
+        cursor.execute("UPDATE surat SET is_approved = 1 WHERE id = ?", (surat_id,))
+        conn.commit()
+        conn.close()
+        return jsonify({"success": True, "message": "Surat berhasil di-approve!"})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
 
 @surat_bp.route('/api/admin/logs', methods=['GET'])
 def get_activity_logs():

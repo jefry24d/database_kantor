@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Surat Sarpras - {{ surat['nomor_surat'] }}</title>
+    <style>
+        /* KERTAS F4 & MARGIN NARROW */
+        @page {
+            size: 215.9mm 330mm; 
+            margin: 10.7mm; 
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 13pt;
+            line-height: 1.5;
+            color: #000;
+            background: #333;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        .paper {
+            width: 215.9mm;
+            min-height: 330mm;
+            padding: 15mm 15mm 15mm 15mm;
+            background: #fff;
+            margin: 0 auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+            display: block;
+        }
+
+        /* KOP CENTER GAK MEKAR */
+        .kop-container {
+            width: 100%;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .kop-surat-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: #00adb5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 9999;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .paper {
+                box-shadow: none;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .btn-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ Cetak / Simpan Ke PDF</button>
+
+    <div class="paper">
+        <!-- 1. KOP SURAT (CENTER) -->
+        <div class="kop-container">
+            <img src="{{ url_for('static', filename='img/kop.png') }}" class="kop-surat-img" alt="Kop Surat">
+        </div>
+
+        <!-- 2. HEADER TOP: KIRI (45%), PEMISAH (15%), KANAN (40%) -->
+        <div style="display: flex; width: 100%; margin-bottom: 25px;">
+            
+            <!-- KOTAK KIRI: NOMOR, LAMPIRAN, PERIHAL -->
+            <div style="width: 45%;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="width: 75px; vertical-align: top; padding: 2px 0;">Nomor</td>
+                        <td style="width: 15px; vertical-align: top; padding: 2px 0; text-align: center;">:</td>
+                        <td style="vertical-align: top; padding: 2px 0;">{{ surat['nomor_surat'] }}</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top; padding: 2px 0;">Lampiran</td>
+                        <td style="vertical-align: top; padding: 2px 0; text-align: center;">:</td>
+                        <td style="vertical-align: top; padding: 2px 0;">{{ surat['lampiran'] if surat['lampiran'] else '-' }}</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top; padding: 2px 0;">Perihal</td>
+                        <td style="vertical-align: top; padding: 2px 0; text-align: center;">:</td>
+                        <td style="vertical-align: top; padding: 2px 0;"><b>{{ surat['perihal'] }}</b></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- SPACER -->
+            <div style="width: 25%;"></div>
+
+            <!-- KOTAK KANAN: TANGGAL & TUJUAN YTH -->
+            <div style="width: 35%; text-align: left;">
+                <div style="margin-bottom: 15px;">
+                    Surabaya, {{ surat['tgl_surat_indo'] if surat['tgl_surat_indo'] else '18 Agustus 2026' }}
+                </div>
+                <div>
+                    Yth. {{ surat['nama_penerima'] if surat['nama_penerima'] else 'Ibu Ketua Pengurus YKB Daerah Jatim' }}<br>
+                    <span style="white-space: pre-line;">{{ surat['alamat'] if surat['alamat'] else 'Jl. Ahmad Yani No. 116 Surabaya' }}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 3. ISI SURAT (MENJOROK LURUS TITIK DUA PERIHAL -> INDENT 90PX) -->
+        <div style="margin-left: 90px; margin-top: 80px; margin-bottom: 35px;">
+            
+            <!-- KALIMAT PEMBUKA -->
+            <p style="text-align: justify; margin: 0 0 15px 0;">
+                Dengan ini kami memberitahukan bahwa berdasarkan kalender kegiatan SMA Kemala Bhayangkari 1 Surabaya Tahun Ajaran 2026-2027, maka SMA Kemala Bhayangkari 1 Surabaya akan mengadakan kegiatan <b>{{ surat['nama_event'] if surat['nama_event'] else '-' }}</b>, maka dengan ini kami memberitahukan pemakaian Sarana dan Prasarana Sekolah yang akan dilaksanakan pada:
+            </p>
+
+            <!-- DETAIL ACARA / SARPRAS -->
+            <table style="width: 90%; border-collapse: collapse; margin-bottom: 20px;">
+                <tr>
+                    <td style="width: 140px; vertical-align: top; padding: 3px 0;">Hari & Tanggal</td>
+                    <td style="width: 15px; vertical-align: top; padding: 3px 0; text-align: center;">:</td>
+                    <td style="vertical-align: top; padding: 3px 0;">{{ surat['hari_tanggal'] if surat['hari_tanggal'] else '-' }}</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top; padding: 3px 0;">Waktu</td>
+                    <td style="vertical-align: top; padding: 3px 0; text-align: center;">:</td>
+                    <td style="vertical-align: top; padding: 3px 0;">{{ surat['waktu'] if surat['waktu'] else 'Pukul 07.00 WIB s.d Selesai' }}</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top; padding: 3px 0;">Tempat / Sarpras</td>
+                    <td style="vertical-align: top; padding: 3px 0; text-align: center;">:</td>
+                    <td style="vertical-align: top; padding: 3px 0;">
+                        {{ surat['tempat'] if surat['tempat'] else '-' }}
+                    </td>
+                </tr>
+            </table>
+
+            <!-- KALIMAT PENUTUP -->
+            <p style="margin: 0 0 25px 0; text-align: justify;">
+                Demikian surat pemberitahuan ini kami sampaikan. Atas perhatian dan kerja sama yang baik, kami ucapkan terima kasih.
+            </p>
+        </div>
+
+        <!-- 4. TTD KEPSEK (ALIGN KANAN - SEJAJAR BLOK TANGGAL) -->
+        <div style="display: flex; justify-content: flex-end; margin-top: 75px;">
+            <div style="width: 40%; text-align: left;">
+                <p style="margin: 0; margin-left: 60px;">Kepala Sekolah,</p>
+                <br><br><br><br>
+                <p style="margin: 0; margin-left: 60px;"><b>Dwi Adhika Mintardi, S.Pd.</b></p>
+            </div>
+        </div>
+
+        <!-- 5. TEMBUSAN (PALING BAWAH POJOK KIRI SURAT) -->
+        {% if surat['keterangan_acara'] %}
+        <div style="margin-top: 85px; font-size: 10pt; text-align: left;">
+            <p style="margin: 0 0 3px 0; font-weight: bold;">Tembusan Yth.:</p>
+            <div style="white-space: pre-line; line-height: 1.3;">{{ surat['keterangan_acara'] }}</div>
+        </div>
+        {% endif %}
+
+</body>
+</html>

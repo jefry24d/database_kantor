@@ -1,137 +1,85 @@
-import { cetakDisposisi, hapusSurat } from './common.js';
+// 🔄 Auto Fetch Nomor Disposisi
+export async function fetchNomorDisposisiAuto() {
+    const kodeSelect = document.getElementById('sm_kode_surat');
+    const inputNoDisposisi = document.getElementById('sm_no_disposisi');
+    
+    if (!kodeSelect || !inputNoDisposisi) return;
+
+    const kode = kodeSelect.value;
+    try {
+        const res = await fetch(`/api/last-disposisi-number?kode=${kode}`);
+        const data = await res.json();
+        if (data.success) {
+            inputNoDisposisi.value = data.suggested_number;
+        }
+    } catch (err) {
+        console.error("Gagal ambil nomor disposisi:", err);
+    }
+}
 
 // 📥 1. Render Form Surat Masuk
 export function renderFormSuratMasuk(content) {
     const userPetugas = typeof CURRENT_USER !== 'undefined' ? CURRENT_USER : 'Staf';
     
     content.innerHTML = `
-        <h2>📥 INPUT SURAT MASUK & DISPOSISI</h2>
-        <p style="color: #ccc; margin-bottom: 20px;">Catat data surat masuk dari instansi luar dan lampirkan file scan jika ada.</p>
+        <h2>📥 INPUT SURAT MASUK</h2>
+        <p style="color: #ccc; margin-bottom: 20px;">Catat data arsip surat masuk dari instansi luar.</p>
 
         <form id="formSuratMasuk" style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px;">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 <div>
-                    <label>No. Urut / No. Disposisi:</label>
-                    <input type="text" id="sm_no_disposisi" placeholder="Contoh: 001/DS/2026" required>
+                    <label>Kode Klasifikasi Surat:</label>
+                    <select id="sm_kode_surat" style="width:100%; padding:10px; border-radius:8px; background:rgba(255,255,255,0.1); color:white;">
+                        <option value="DP" style="color:black;">DP (Disposisi Pimpinan)</option>
+                        <option value="S" style="color:black;">S (Biasa/Sangat)</option>
+                        <option value="P" style="color:black;">P (Penting)</option>
+                        <option value="SR" style="color:black;">SR (Sangat Rahasia)</option>
+                    </select>
 
-                    <label>Pengirim (Pemberi Surat):</label>
-                    <input type="text" id="sm_pengirim" placeholder="Contoh: Dinas Pemkot Surabaya" required>
+                    <label style="margin-top:10px; display:block;">No. Urut / No. Disposisi:</label>
+                    <input type="text" id="sm_no_disposisi" placeholder="Memuat nomor..." required style="width:100%; padding:10px; border-radius:8px; background:rgba(255,255,255,0.1); color:white;">
 
-                    <label>Nomor Surat Pengirim:</label>
-                    <input type="text" id="sm_no_surat_pengirim" placeholder="Contoh: 500/123/402.1/2026" required>
+                    <label style="margin-top:10px; display:block;">Pengirim (Pemberi Surat):</label>
+                    <input type="text" id="sm_pengirim" placeholder="Contoh: Dinas Pemkot Surabaya" required style="width:100%; padding:10px; border-radius:8px; background:rgba(255,255,255,0.1); color:white;">
 
-                    <label>Perihal / Ringkasan Isi:</label>
-                    <textarea id="sm_perihal" rows="3" placeholder="Contoh: Undangan Rapat Evaluasi Anggaran" required style="width:100%; padding:10px; border-radius:8px; background:rgba(255,255,255,0.1); color:white;"></textarea>
+                    <label style="margin-top:10px; display:block;">Nomor Surat Pengirim:</label>
+                    <input type="text" id="sm_no_surat_pengirim" placeholder="Contoh: 500/123/402.1/2026" required style="width:100%; padding:10px; border-radius:8px; background:rgba(255,255,255,0.1); color:white;">
                 </div>
+
                 <div>
                     <label>📅 Tanggal Surat Diterima:</label>
                     <input type="date" id="sm_tgl_diterima" required style="width:100%; padding:10px; border-radius:8px; background:rgba(255,255,255,0.1); color:white;">
 
-                    <label>📅 Tanggal Surat (Asli):</label>
+                    <label style="margin-top:10px; display:block;">📅 Tanggal Surat (Asli):</label>
                     <input type="date" id="sm_tgl_surat" required style="width:100%; padding:10px; border-radius:8px; background:rgba(255,255,255,0.1); color:white;">
 
-                    <label>Kode Klasifikasi Surat:</label>
-                    <select id="sm_kode_surat">
-                        <option value="DP">DP (Disposisi Pimpinan)</option>
-                        <option value="S">S (Biasa/Sangat)</option>
-                        <option value="P">P (Penting)</option>
-                        <option value="SR">SR (Sangat Rahasia)</option>
-                    </select>
+                    <label style="margin-top:10px; display:block;">Petugas Pencatat:</label>
+                    <input type="text" id="sm_petugas" value="${userPetugas}" readonly style="width:100%; padding:10px; border-radius:8px; background: rgba(255,255,255,0.05); color: #00fff0; cursor: not-allowed;">
 
-                    <label>Petugas Pencatat:</label>
-                    <input type="text" id="sm_petugas" value="${userPetugas}" readonly style="background: rgba(255,255,255,0.05); color: #00fff0; cursor: not-allowed;">
+                    <label style="margin-top:10px; display:block;">📁 Upload Scan Surat Asli (.pdf / .jpg / .png):</label>
+                    <input type="file" id="sm_file_scan" accept=".pdf,.png,.jpg,.jpeg" style="width:100%; padding:8px; background:rgba(255,255,255,0.1); border-radius:8px; color:white;">
                 </div>
             </div>
 
             <div style="margin-top: 15px;">
-                <label><b>📁 Upload Scan Surat Asli (.pdf / .jpg / .png):</b></label>
-                <input type="file" id="sm_file_scan" accept=".pdf,.png,.jpg,.jpeg" style="width:100%; padding:10px; background:rgba(255,255,255,0.1); border-radius:8px; color:white;">
+                <label>Perihal / Ringkasan Isi:</label>
+                <textarea id="sm_perihal" rows="3" placeholder="Contoh: Undangan Rapat Evaluasi Anggaran" required style="width:100%; padding:10px; border-radius:8px; background:rgba(255,255,255,0.1); color:white;"></textarea>
             </div>
 
-            <button type="submit" class="btn-primary" style="margin-top: 20px; background: #00b894;">💾 Simpan Surat Masuk</button>
+            <button type="submit" class="btn-primary" style="margin-top: 20px; background: #00b894; padding:10px 20px; border:none; border-radius:8px; color:white; font-weight:bold; cursor:pointer;">💾 Simpan Surat Masuk</button>
             <p id="msgSuratMasuk" style="margin-top: 15px; font-weight: bold;"></p>
         </form>
     `;
 
-    document.getElementById('formSuratMasuk').addEventListener('submit', simpanSuratMasuk);
-}
+    const kodeSelect = document.getElementById('sm_kode_surat');
+    if (kodeSelect) {
+        kodeSelect.addEventListener('change', fetchNomorDisposisiAuto);
+    }
+    fetchNomorDisposisiAuto();
 
-// 📥 2. Fetch & Load Tabel Surat Masuk
-export async function loadTabelSuratMasuk() {
-    const container = document.getElementById('areaTabelEksplorasi');
-    if (!container) return;
-    
-    container.innerHTML = "Sedang mengambil data Surat Masuk...";
-
-    try {
-        const res = await fetch('/api/surat-masuk');
-        const data = await res.json();
-
-        if (data.length === 0) {
-            container.innerHTML = `<p style="color: #ff4757;">Belum ada arsip surat masuk nyot.</p>`;
-            return;
-        }
-
-        let html = `
-            <table style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr style="background: rgba(255,255,255,0.1); text-align: left;">
-                        <th width="40" style="padding: 10px;">No</th>
-                        <th style="padding: 10px;">No. Disposisi</th>
-                        <th style="padding: 10px;">Pengirim</th>
-                        <th style="padding: 10px;">Tgl Masuk</th>
-                        <th style="padding: 10px;">Tgl Surat</th>
-                        <th style="padding: 10px;">No. Surat Pengirim</th>
-                        <th style="padding: 10px;">Perihal</th>
-                        <th style="padding: 10px;">Petugas</th>
-                        <th style="padding: 10px;">Kode</th>
-                        <th width="120" style="padding: 10px;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-
-        data.forEach((d, index) => {
-            let tombolScan = d.file_scan_path !== '-' 
-                ? `<a href="/static/uploads/${d.file_scan_path}" target="_blank" download><button class="btn-primary" style="padding: 4px 8px; font-size: 0.75rem; background: #00b894; border:none; border-radius:4px; margin-top:2px;">⏬ Scan</button></a>`
-                : `<span style="color:#aaa; font-size:0.75rem;">Tanpa Scan</span>`;
-
-            let tombolDisposisi = `<button data-id="${d.id}" class="btn-disposisi btn-primary" style="padding: 4px 8px; font-size: 0.75rem; background: #0984e3; border:none; border-radius:4px;">📄 Disposisi</button>`;
-            let tombolHapus = `<button data-id="${d.id}" class="btn-hapus-sm btn-primary" style="padding: 4px 8px; font-size: 0.75rem; background: #ff4757; border:none; border-radius:4px; margin-top:2px;">🗑️ Hapus</button>`;
-
-            html += `
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <td style="padding: 10px;"><b>${index + 1}</b></td>
-                    <td style="padding: 10px;"><code>${d.no_disposisi}</code></td>
-                    <td style="padding: 10px;"><b>${d.pengirim}</b></td>
-                    <td style="padding: 10px;">${d.tgl_diterima}</td>
-                    <td style="padding: 10px;">${d.tgl_surat}</td>
-                    <td style="padding: 10px;"><code>${d.no_surat_pengirim}</code></td>
-                    <td style="padding: 10px;">${d.perihal}</td>
-                    <td style="padding: 10px;">👤 ${d.petugas}</td>
-                    <td style="padding: 10px;"><b style="color: #00fff0;">[${d.kode_surat}]</b></td>
-                    <td style="padding: 10px;">
-                        <div style="display: flex; gap: 4px; flex-wrap: wrap;">
-                            ${tombolDisposisi} ${tombolScan} ${tombolHapus}
-                        </div>        
-                    </td>
-                </tr>
-            `;
-        });
-
-        html += `</tbody></table>`;
-        container.innerHTML = html;
-
-        // Listener Aksi Surat Masuk (Memakai hapusSurat universal dari common.js)
-        document.querySelectorAll('.btn-disposisi').forEach(btn => {
-            btn.addEventListener('click', (e) => cetakDisposisi(e.target.dataset.id));
-        });
-        document.querySelectorAll('.btn-hapus-sm').forEach(btn => {
-            btn.addEventListener('click', (e) => hapusSurat(e.target.dataset.id, 'masuk', loadTabelSuratMasuk));
-        });
-
-    } catch (err) {
-        container.innerHTML = `<p style="color: #ff4757;">❌ Gagal mengambil data!</p>`;
+    const form = document.getElementById('formSuratMasuk');
+    if (form) {
+        form.addEventListener('submit', simpanSuratMasuk);
     }
 }
 
@@ -164,7 +112,9 @@ export async function simpanSuratMasuk(e) {
         if (data.status === 'success') {
             msg.innerText = "✅ " + data.message;
             msg.style.color = "#00ff88";
-            if (typeof loadPage === 'function') setTimeout(() => { loadPage('eksplorasi'); }, 1200);
+            if (typeof window.loadPage === 'function') {
+                setTimeout(() => { window.loadPage('eksplorasi'); }, 1200);
+            }
         } else {
             msg.innerText = "❌ " + data.message;
             msg.style.color = "#ff4757";
@@ -172,5 +122,72 @@ export async function simpanSuratMasuk(e) {
     } catch (err) {
         msg.innerText = "❌ Terjadi kesalahan server!";
         msg.style.color = "#ff4757";
+    }
+}
+
+export async function loadTabelSuratMasuk() {
+    const content = document.getElementById('areaTabelEksplorasi') 
+                 || document.getElementById('contentArea') 
+                 || document.getElementById('mainContent');
+                 
+    if (!content) return;
+
+    content.innerHTML = `
+        <h2>📂 DAFTAR SURAT MASUK</h2>
+        <p style="color: #ccc; margin-bottom: 20px;">Memuat data surat masuk...</p>
+    `;
+
+    try {
+        const res = await fetch('/api/surat-masuk');
+        const data = await res.json();
+
+        // 🎯 FIX: Pakai Array.isArray karena API Flask return List langsung
+        const listData = Array.isArray(data) ? data : (data.data || []);
+
+        let html = `
+            <h2>📂 DAFTAR SURAT MASUK</h2>
+            <div style="overflow-x:auto; margin-top:20px;">
+                <table style="width:100%; border-collapse:collapse; color:white; text-align:left;">
+                    <thead>
+                        <tr style="background:rgba(255,255,255,0.1); border-bottom:2px solid #555;">
+                            <th style="padding:10px;">No. Disposisi</th>
+                            <th style="padding:10px;">Kode</th>
+                            <th style="padding:10px;">Pengirim</th>
+                            <th style="padding:10px;">No. Surat</th>
+                            <th style="padding:10px;">Perihal</th>
+                            <th style="padding:10px;">Tgl Diterima</th>
+                            <th style="padding:10px;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        if (listData.length === 0) {
+            html += `<tr><td colspan="7" style="padding:15px; text-align:center;">Belum ada data surat masuk.</td></tr>`;
+        } else {
+            listData.forEach(item => {
+                html += `
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                        <td style="padding:10px;">${item.no_disposisi || '-'}</td>
+                        <td style="padding:10px;"><strong>${item.kode_surat || '-'}</strong></td>
+                        <td style="padding:10px;">${item.pengirim || '-'}</td>
+                        <td style="padding:10px;">${item.no_surat_pengirim || '-'}</td>
+                        <td style="padding:10px;">${item.perihal || '-'}</td>
+                        <td style="padding:10px;">${item.tgl_diterima || '-'}</td>
+                        <td style="padding:10px;">
+                            <a href="/cetak-disposisi/${item.id}" target="_blank" style="color:#00fff0; text-decoration:none; margin-right:8px;">🖨️ Disposisi</a>
+                            ${item.file_scan_path && item.file_scan_path !== '-' ? `<a href="/static/uploads/${item.file_scan_path}" target="_blank" style="color:#74b9ff; text-decoration:none;">📄 File</a>` : ''}
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        html += `</tbody></table></div>`;
+        content.innerHTML = html;
+
+    } catch (err) {
+        console.error("Gagal muat tabel surat masuk:", err);
+        content.innerHTML = `<h2 style="color:#ff4757;">❌ Gagal memuat data surat masuk!</h2>`;
     }
 }

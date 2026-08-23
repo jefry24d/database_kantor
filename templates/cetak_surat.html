@@ -167,7 +167,16 @@
 
         <div class="ttd-container">
             <p>Surabaya, {{ surat['tgl_surat_indo'] }}<br>Kepala Sekolah,</p>
-            <br><br><br>
+
+            <!-- WRAPPER UNTUK TTD & STEMPEL -->
+            <div style="height: 75px; position: relative; display: flex; justify-content: center; align-items: center;">
+                {% if surat.is_approved == 1 %}
+                    <!-- Stempel & TTD nempel pas di tengah -->
+                    <img src="{{ url_for('static', filename='img/ttd_stamp.png') }}" 
+                        style="position: absolute; width: 160px; height: auto; top: -10px; left: 50%; transform: translateX(-50%); z-index: 10; pointer-events: none;">
+                {% endif %}
+            </div>
+
             <p><b>Dwi Adhika Mintardi, S.Pd</b></p>
         </div>
     </div>

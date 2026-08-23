@@ -45,8 +45,7 @@ export async function updateInfoNomorTerakhir() {
     }
 }
 
-// Helper untuk memperbarui dropdown Kelas/Unit berdasarkan tipe S atau P
-// Helper untuk memperbarui elemen Kelas/Unit/Jurusan berdasarkan tipe S, P, atau M
+
 function updateOptionsKelas() {
     const selectTipe = document.getElementById('tipeSubjek');
     let elKelas = document.getElementById('kelas');
@@ -201,9 +200,15 @@ export async function simpanDanCetak() {
 
     // AUTO-FILL PERIHAL KALO SURAT KETERANGAN (BIAR KAGAK ERROR DIBLOCK SERVER)
     let perihalVal = getValue('perihal');
-    if (!perihalVal && (jenisSurat === 'KETERANGAN' || jenisSurat === 'KETERANGAN_BEBAS')) {
+    if (!perihalVal) {
         const namaPenerima = getValue('namaPenerima') || 'Siswa/Pegawai';
-        perihalVal = `Surat Keterangan a.n ${namaPenerima}`;
+        if (jenisSurat === 'KETERANGAN_PIP') {
+            perihalVal = `Aktivasi Rekening Simple PIP a.n ${namaPenerima}`;
+        } else if (jenisSurat === 'KETERANGAN' || jenisSurat === 'KETERANGAN_BEBAS') {
+            perihalVal = `Surat Keterangan a.n ${namaPenerima}`;
+        } else {
+            perihalVal = `Surat Keterangan ${jenisSurat} a.n ${namaPenerima}`;
+        }
     }
 
     const payload = {
@@ -213,6 +218,12 @@ export async function simpanDanCetak() {
         bulan: getValue('bulan') || 'Januari',
         tgl_surat: getValue('tglSurat'),
         nama_penerima: getValue('namaPenerima'),
+
+        nama_event: getValue('namaEvent'),
+        
+        nama_bank: getValue('namaBank'),
+        no_rekening: getValue('noRekening'),
+        virtual_account: getValue('virtualAccount'),
 
         kelas: getValue('kelas'),
         no_induk_siswa: getValue('noIndukSiswa'),
@@ -253,101 +264,177 @@ export async function simpanDanCetak() {
     }
 }
 
+// Render Form Khusus Custom File (BISA AUTO GENERATE NO SURAT + AUDIT LOG)
 export function renderCustomSuratHybrid(content) {
     content.innerHTML = `
-        <h2>📜 CUSTOM SURAT HYBRID</h2>
-        <p style="color:#aaa;">Upload dokumen file custom atau buat format tersendiri.</p>
-        <div style="background:rgba(0,0,0,0.2); padding:20px; border-radius:12px;">
-            <label>Nomor Surat:</label>
-            <input type="text" id="cs_no_surat" placeholder="Contoh: 005/CS/2026">
-            <label>Perihal:</label>
-            <input type="text" id="cs_perihal" placeholder="Perihal surat custom">
-            <label>Pilih File (.pdf / .doc / .jpg):</label>
-            <input type="file" id="cs_file" accept=".pdf,.doc,.docx,.png,.jpg">
-            <button id="btnUploadCustom" class="btn-primary" style="margin-top:15px;"> Upload Custom Surat</button>
-            <p id="msgCustom" style="margin-top:10px;"></p>
+        <h2>📤 UPLOAD SURAT CUSTOM / ARSIP DOKUMEN</h2>
+        <p style="color:#aaa;">Input identifikasi database dan upload dokumen (PDF/Word/Gambar).</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background:rgba(0,0,0,0.2); padding:20px; border-radius:12px;">
+            <div>
+                <label style="font-weight:bold; display:block; margin-bottom:4px;">Kode Klasifikasi Surat</label>
+                <select id="kodeKlasifikasi" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px; width: 100%;">
+                    <option value="421.7" style="color:#000;">421.7 - Kegiatan Pelajar / Siswa</option>
+                    <option value="425" style="color:#000;">425 - Sarana Pendidikan</option>
+                    <option value="424" style="color:#000;">424 - Guru/Guru Teladan</option>
+                    <option value="422" style="color:#000;">422 - Administrasi Sekolah</option>
+                </select>
+
+                <label style="font-weight:bold; display:block; margin-top:10px; margin-bottom:4px;">Nomor Urut Surat</label>
+                <input type="text" id="noUrutSurat" placeholder="Contoh: 001" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px; width: 100%;">
+
+                <label style="font-weight:bold; display:block; margin-top:10px; margin-bottom:4px;">Tipe Penerima (S / P)</label>
+                <select id="tipeSubjek" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px; width: 100%;">
+                    <option value="S" style="color:#000;">S - Siswa</option>
+                    <option value="P" style="color:#000;">P - Pegawai / Guru</option>
+                </select>
+
+                <label style="font-weight:bold; display:block; margin-top:10px; margin-bottom:4px;">Perihal / Judul Surat</label>
+                <input type="text" id="perihal" placeholder="Contoh: SK Panitia PPDB 2026" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px; width: 100%;">
+            </div>
+
+            <div>
+                <label style="font-weight:bold; display:block; margin-bottom:4px;">Ditujukan Kepada / Penerima</label>
+                <input type="text" id="namaPenerima" placeholder="Contoh: Seluruh Panitia" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px; width: 100%;">
+
+                <label style="font-weight:bold; display:block; margin-top:10px; margin-bottom:4px;">📅 Tanggal Surat Dibuat</label>
+                <input type="date" id="tglSurat" value="${new Date().toISOString().split('T')[0]}" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px; width: 100%;">
+
+                <label style="font-weight:bold; display:block; margin-top:10px; margin-bottom:4px;">📁 Upload File Surat (.pdf / .doc / .jpg)</label>
+                <input type="file" id="fileSurat" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 8px; width: 100%;">
+            </div>
         </div>
+
+        <button id="btnUploadCustom" class="btn-primary" style="margin-top: 15px;">💾 Simpan ID & Upload Dokumen Custom 🚀</button>
+        <p id="msgCustom" style="margin-top: 10px;"></p>
     `;
+
+    // Ambil nomor urut saran paling baru
+    updateInfoNomorTerakhir();
+
+    const selectKode = document.getElementById('kodeKlasifikasi');
+    if (selectKode) {
+        selectKode.addEventListener('change', updateInfoNomorTerakhir);
+    }
 
     document.getElementById('btnUploadCustom').addEventListener('click', async () => {
         const msg = document.getElementById('msgCustom');
+        msg.innerText = "Proses mengunggah dokumen...";
+        msg.style.color = "#00fff0";
+
         const formData = new FormData();
         formData.append('jenis', 'CUSTOM_FILE');
-        formData.append('nomor_surat', document.getElementById('cs_no_surat').value);
-        formData.append('perihal', document.getElementById('cs_perihal').value);
-        
-        const fileInput = document.getElementById('cs_file');
+        formData.append('nomor_surat', generateNomorSurat());
+        formData.append('perihal', getValue('perihal'));
+        formData.append('nama_penerima', getValue('namaPenerima'));
+        formData.append('tgl_surat', getValue('tglSurat'));
+
+        const fileInput = document.getElementById('fileSurat');
         if (fileInput.files.length > 0) {
             formData.append('file_surat', fileInput.files[0]);
         }
 
-        const res = await fetch('/surat/add', { method: 'POST', body: formData });
-        const data = await res.json();
-        msg.innerText = data.message;
-        msg.style.color = data.success ? '#00ff88' : '#ff4757';
+        try {
+            const res = await fetch('/surat/add', { method: 'POST', body: formData });
+            const data = await res.json();
+            if (data.success) {
+                msg.innerText = "✅ " + data.message;
+                msg.style.color = "#00ff88";
+            } else {
+                msg.innerText = "❌ " + data.message;
+                msg.style.color = "#ff4757";
+            }
+        } catch (err) {
+            msg.innerText = "❌ Gagal koneksi ke server!";
+            msg.style.color = "#ff4757";
+        }
     });
 }
 
 export async function loadTabelSuratKeluar() {
-    const container = document.getElementById('areaTabelEksplorasi');
-    if (!container) return;
-    container.innerHTML = "Memuat data Surat Keluar...";
+    const area = document.getElementById('areaTabelEksplorasi');
+    if (!area) return;
 
     try {
-        const res = await fetch('/api/eksplorasi');
+        const res = await fetch('/api/surat-keluar');
         const data = await res.json();
 
-        if (data.length === 0) {
-            container.innerHTML = `<p style="color: #ff4757;">Belum ada arsip surat keluar nyot.</p>`;
-            return;
-        }
-
         let html = `
-            <table style="width: 100%; border-collapse: collapse;">
+            <table class="fl-table" style="width:100%; text-align:left; border-collapse:collapse;">
                 <thead>
-                    <tr style="background: rgba(255,255,255,0.1); text-align: left;">
-                        <th style="padding: 10px;">No</th>
-                        <th style="padding: 10px;">Tanggal Surat</th>
-                        <th style="padding: 10px;">No. Surat</th>
-                        <th style="padding: 10px;">Perihal</th>
-                        <th style="padding: 10px;">Penerima</th>
-                        <th style="padding: 10px;">Pembuat</th>
-                        <th style="padding: 10px;">Aksi</th>
+                    <tr style="background:rgba(255,255,255,0.1); color:#00fff0;">
+                        <th style="padding:10px;">No</th>
+                        <th>Jenis</th>
+                        <th>No. Surat</th>
+                        <th>Perihal</th>
+                        <th>Penerima</th>
+                        <th>Tgl Surat</th>
+                        <th>Petugas</th>
+                        <th style="text-align:center;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
         `;
 
-        data.forEach((d, index) => {
-            html += `
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <td style="padding: 10px;"><b>${index + 1}</b></td>
-                    <td style="padding: 10px; color:#00fff0;">${d.tgl_surat || '-'}</td>
-                    <td style="padding: 10px;"><code>${d.nomor_surat}</code></td>
-                    <td style="padding: 10px;">${d.perihal}</td>
-                    <td style="padding: 10px;">${d.nama_penerima || '-'}</td>
-                    <td style="padding: 10px;">👤 ${d.uploaded_by}</td>
-                    <td style="padding: 10px;">
-                        <div style="display: flex; gap: 4px;">
-                            <button data-id="${d.id}" class="btn-cetak-sk btn-primary" style="padding:4px 8px; font-size:0.75rem; background:#0984e3; border:none; border-radius:4px;">🖨️ Cetak</button>
-                            <button data-id="${d.id}" class="btn-hapus-sk btn-primary" style="padding:4px 8px; font-size:0.75rem; background:#ff4757; border:none; border-radius:4px;">🗑️ Hapus</button>
-                        </div>
-                    </td>
-                </tr>
-            `;
-        });
+        if (data.length === 0) {
+            html += `<tr><td colspan="8" style="text-align:center; padding:20px;">Belum ada arsip surat keluar.</td></tr>`;
+        } else {
+            data.forEach((d, index) => {
+                // Tombol Approve hanya muncul jika BUKAN Surat Custom
+                let btnApprove = '';
+                if (d.jenis_surat !== 'CUSTOM') {
+                    if (d.is_approved == 1) {
+                        btnApprove = `<span style="background:#00b894; color:white; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold;">✅ Approved</span>`;
+                    } else {
+                        btnApprove = `<button data-id="${d.id}" class="btn-approve-sk" style="padding:5px 10px; font-size:0.75rem; background:#2ed573; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">✅ Approve</button>`;
+                    }
+                } else {
+                    btnApprove = `<span style="color:#aaa; font-size:0.75rem;">-</span>`;
+                }
+
+                html += `
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding:10px;">${index + 1}</td>
+                        <td><span style="background:#0984e3; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:bold;">${d.jenis_surat}</span></td>
+                        <td><strong>${d.nomor_surat}</strong></td>
+                        <td>${d.perihal}</td>
+                        <td>${d.penerima_atau_pihak || '-'}</td>
+                        <td>${d.tgl_surat}</td>
+                        <td><small>👤 ${d.created_by || 'admin'}</small></td>
+                        <td style="text-align:center; display:flex; gap:5px; justify-content:center; align-items:center;">
+                            ${btnApprove}
+                            <button onclick="window.open('/surat/cetak/${d.id}', '_blank')" style="padding:5px 10px; font-size:0.75rem; background:#0984e3; color:white; border:none; border-radius:4px; cursor:pointer;">🖨️ Cetak</button>
+                            <button onclick="hapusSuratKeluar(${d.id})" style="padding:5px 10px; font-size:0.75rem; background:#ff4757; color:white; border:none; border-radius:4px; cursor:pointer;">🗑️ Hapus</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
 
         html += `</tbody></table>`;
-        container.innerHTML = html;
+        area.innerHTML = html;
 
-        document.querySelectorAll('.btn-cetak-sk').forEach(btn => {
-            btn.addEventListener('click', (e) => window.open(`/surat/cetak/${e.target.dataset.id}`, '_blank'));
-        });
-        document.querySelectorAll('.btn-hapus-sk').forEach(btn => {
-            btn.addEventListener('click', (e) => hapusSurat(e.target.dataset.id, 'keluar', loadTabelSuratKeluar));
+        // Event Listener Tombol Approve
+        document.querySelectorAll('.btn-approve-sk').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const id = e.target.dataset.id;
+                if (confirm("Approve surat ini dan tampilkan TTD/Stempel Digital saat dicetak?")) {
+                    try {
+                        const appRes = await fetch(`/api/surat/approve/${id}`, { method: 'POST' });
+                        const appData = await appRes.json();
+                        if (appData.success) {
+                            loadTabelSuratKeluar();
+                        } else {
+                            alert(appData.message);
+                        }
+                    } catch (err) {
+                        alert("Gagal melakukan approval");
+                    }
+                }
+            });
         });
 
     } catch (err) {
-        container.innerHTML = `<p style="color: #ff4757;">❌ Gagal memuat data surat keluar!</p>`;
+        area.innerHTML = `<p style="color:red;">Gagal memuat tabel surat keluar.</p>`;
     }
 }

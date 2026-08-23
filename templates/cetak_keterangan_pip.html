@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Surat Keterangan PIP - {{ surat['nomor_surat'] }}</title>
+    <style>
+        @page {
+            size: 215.9mm 330mm; /* Kertas F4 */
+            margin: 10mm 15mm; 
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 13pt;
+            line-height: 1.4;
+            color: #000;
+            background: #333;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        .paper {
+            width: 215.9mm;
+            min-height: 330mm;
+            padding: 15mm 20mm;
+            background: #fff;
+            margin: 0 auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+        }
+
+        .kop-container {
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .kop-surat-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .judul-surat { 
+            text-align: center; 
+            font-weight: bold; 
+            font-size: 16pt; 
+            margin-bottom: 2px; 
+            text-transform: uppercase; 
+        }
+
+        .sub-judul {
+            text-align: center;
+            font-weight: bold;
+            font-size: 12pt;
+            text-decoration: underline;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .nomor-surat { 
+            text-align: center;
+            font-size: 14pt;  
+            margin-bottom: 60px; 
+        }
+
+        table.form-table { 
+            width: 100%; 
+            margin-left: 15px; 
+            margin-bottom: 15px; 
+            border-collapse: collapse; 
+        }
+
+        table.form-table td { 
+            padding: 2px 4px; 
+            vertical-align: top; 
+        }
+
+        .pip-box {
+            margin-left: 15px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-print { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            padding: 12px 24px; 
+            background: #00adb5; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 1rem;
+            cursor: pointer; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+            z-index: 9999;
+        }
+
+        @media print { 
+            body { background: #fff; padding: 0; } 
+            .paper { box-shadow: none; width: 100%; margin: 0; padding: 0; } 
+            .btn-print { display: none; } 
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()">🖨️ Cetak / Simpan Ke PDF</button>
+
+    <div class="paper">
+
+        <!-- KOP SURAT -->
+        <div class="kop-container">
+            <img src="{{ url_for('static', filename='img/kop.png') }}" class="kop-surat-img" alt="Kop Surat">
+        </div>
+
+        <!-- JUDUL & SUB JUDUL PERSIS CONTOH -->
+        <div class="judul-surat">SURAT KETERANGAN</div>
+        <div class="sub-judul">AKTIVASI REKENING SIMPLE PIP</div>
+        <div class="nomor-surat">Nomor: {{ surat['nomor_surat'] }}</div>
+
+        <!-- DATA PENANDATANGAN -->
+        <p style="margin: 0 0 10px 0;">Yang bertanda tangan di bawah ini</p>
+        <table class="form-table">
+            <tr><td width="140">nama</td><td width="15">:</td><td><b>Dwi Adhika Mintardi, S.Pd.</b></td></tr>
+            <tr><td>jabatan</td><td>:</td><td>Kepala SMA Kemala Bhayangkari 1</td></tr>
+            <tr><td>alamat</td><td>:</td><td>Jalan A. Yani 30-32 Surabaya</td></tr>
+        </table>
+
+        <!-- DATA SISWA -->
+        <p style="margin: 15px 0 10px 0;">dengan ini menerangkan bahwa :</p>
+        <table class="form-table">
+            <tr><td width="140">nama</td><td width="15">:</td><td><b>{{ surat['nama_penerima'] or '-' }}</b></td></tr>
+            <tr><td>kelas</td><td>:</td><td>{{ surat['kelas'] or '-' }}</td></tr>
+            <tr><td>nisn</td><td>:</td><td>{{ surat['no_induk_siswa'] or '-' }}</td></tr>
+            <tr><td>tempat, tanggal lahir</td><td>:</td><td>{{ surat['ttl'] or '-' }}</td></tr>
+            <tr><td>alamat</td><td>:</td><td>{{ surat['alamat'] or '-' }}</td></tr>
+        </table>
+
+        <!-- PARAGRAF ISI PIP -->
+        <p style="text-align: justify; margin-top: 15px; margin-bottom: 10px; line-height: 1.5;">
+            Adalah benar-benar tercatat sebagai siswa SMA Kemala Bhayangkari 1 Surabaya kelas {{ surat['kelas'] or 'X' }} tahun ajaran 2025-2026.
+        </p>
+
+        <p style="text-align: justify; margin-bottom: 5px; line-height: 1.5;">
+            Surat keterangan ini digunakan sebagai kelengkapan administrasi PIP di {{ surat['nama_bank'] or 'BNI' }} dengan identitas
+        </p>
+
+        <!-- SUB TABLE NO REK & VA -->
+        <table class="form-table pip-box">
+            <tr>
+                <td width="140">no rekening</td>
+                <td width="15">:</td>
+                <td><b>{{ surat['no_rekening'] or '-' }}</b></td>
+            </tr>
+            <tr>
+                <td>Virtual Account</td>
+                <td>:</td>
+                <td><b>{{ surat['virtual_account'] or '-' }}</b></td>
+            </tr>
+        </table>
+
+        <!-- PENUTUP -->
+        <p style="margin-top: 15px;">Demikian surat keterangan ini dibuat untuk digunakan sebagaimana mestinya.</p>
+
+        <!-- TANDA TANGAN MEWAH PAS POSISI -->
+        <div style="display: flex; justify-content: flex-end; margin-top: 60px;">
+            <div style="width: 45%; text-align: left;">
+                <p style="margin: 0;">Surabaya, {{ surat['tgl_surat_indo'] }}<br>Kepala Sekolah,</p>
+                <br><br><br><br>
+                <p style="margin: 0;"><b>Dwi Adhika Mintardi, S.Pd.</b></p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

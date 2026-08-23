@@ -170,6 +170,50 @@
       "default": "Bahwa yang bersangkutan adalah benar-benar siswa aktif di SMA Kemala Bhayangkari 1 Surabaya."
     }
   },
+  "keterangan_pip": {
+    "judul": "📜 INPUT SURAT KETERANGAN BEASISWA / PIP",
+    "jenis": "KETERANGAN_PIP",
+    "kiri": [
+      {
+        "id": "kodeKlasifikasi",
+        "label": "Kode Klasifikasi Surat",
+        "type": "select",
+        "options": [
+          { "value": "422.5", "text": "422.5 - Beasiswa" }
+        ]
+      },
+      { "id": "noUrutSurat", "label": "Nomor Urut Surat", "placeholder": "Contoh: 001" },
+      {
+        "id": "tipeSubjek",
+        "label": "Tipe Penerima",
+        "type": "select",
+        "options": [
+          { "value": "S", "text": "S - Siswa" }
+        ]
+      },
+      { "id": "namaPenerima", "label": "Nama Yang Diterangkan", "placeholder": "Nama siswa / pegawai" },
+      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true }
+    ],
+    "kanan": [
+      {
+        "id": "kelas",
+        "label": "Kelas / Jabatan / Unit Kerja",
+        "type": "select"
+      },
+      { "id": "noIndukSiswa", "label": "NIS / NISN / NIM / NIP", "placeholder": "199xxxxxx" },
+      { "id": "ttl", "label": "Tempat, Tanggal Lahir (TTL)", "placeholder": "Surabaya, 17 Agustus 2008" },
+      { "id": "alamat", "label": "Alamat Lengkap", "placeholder": "Jl. Raya Surabaya No. 123" },
+      { "id": "namaBank", "label": "Nama Bank / Mitra:", "placeholder": "Contoh: BNI", "default": "BNI" },
+      { "id": "noRekening", "label": "Nomor Rekening:", "placeholder": "Contoh: 1999882170" },
+      { "id": "virtualAccount", "label": "Virtual Account:", "placeholder": "Contoh: NF0612053214900021" }
+    ],
+    "textarea": {
+    "id": "isiKeterangan",
+    "label": "Paragraf Penutup / Catatan Tambahan (Opsional):",
+    "rows": 3,
+    "default": "Demikian surat keterangan ini dibuat untuk digunakan sebagaimana mestinya."
+  }
+},
   "undangan": {
     "judul": "✉️ INPUT SURAT UNDANGAN",
     "jenis": "UNDANGAN",
@@ -217,18 +261,79 @@
       "default": "Kami mengharap kehadiran Bapak/Ibu pada:"
     }
   },
-  "custom": {
-    "judul": "🛠️ CUSTOM SURAT (HYBRID MODE)",
-    "jenis": "CUSTOM_EDITOR",
-    "editor": [
-      { "id": "customNoSurat", "label": "Nomor Surat", "placeholder": "Nomor surat custom..." },
-      { "id": "customPerihal", "label": "Perihal / Judul Surat", "placeholder": "Perihal surat..." },
-      { "id": "customTglSurat", "label": "📅 Tanggal Surat", "type": "date", "isToday": true }
+  "sarpras": {
+    "judul": "🏫 INPUT SURAT PEMBERITAHUAN / PINJAM SARPRAS",
+    "jenis": "SARPRAS",
+    "kiri": [
+      {
+        "id": "kodeKlasifikasi",
+        "label": "Kode Klasifikasi Surat",
+        "type": "select",
+        "options": [
+          { "value": "422", "text": "422 - Administrasi Sekolah / Sarpras" }
+        ]
+      },
+      { "id": "noUrutSurat", "label": "Nomor Urut Surat", "placeholder": "Contoh: 001" },
+      {
+        "id": "tipeSubjek",
+        "label": "Tipe Penerima (SR)",
+        "type": "select",
+        "options": [
+          { "value": "SR", "text": "SR - Sarpras" }
+        ]
+      },
+      { "id": "perihal", "label": "Perihal Surat", "defaultValue": "Pemberitahuan Pemakaian Sarana dan Prasarana Sekolah" },
+      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
+      { "id": "namaPenerima", "label": "Yth. / Tujuan Surat", "defaultValue": "Ibu Ketua Pengurus YKB Daerah Jatim" },
+      { "id": "alamat", "label": "Alamat Tujuan", "defaultValue": "Jl. Ahmad Yani No. 116 Surabaya" }
     ],
-    "upload": [
-      { "id": "upNoSurat", "label": "Nomor Surat", "placeholder": "Nomor dokumen..." },
-      { "id": "upPerihal", "label": "Perihal / Judul Dokumen", "placeholder": "Perihal dokumen..." },
-      { "id": "upTglSurat", "label": "📅 Tanggal Dokumen", "type": "date", "isToday": true }
+    "kanan": [
+      { "id": "namaEvent", "label": "Nama Kegiatan / Acara", "placeholder": "Contoh: Orasi Kandidat Ketua dan Wakil Ketua OSIS" },
+      { "id": "tempat", "label": "Tempat / Sarpras yang Dipakai", "placeholder": "Contoh: Joglo Tengah dan Lapangan Tengah Sekolah" },
+      { "id": "hariTanggal", "label": "Hari & Tanggal Pelaksanaan", "placeholder": "Contoh: Selasa, 18 Agustus 2026" },
+      { "id": "waktu", "label": "Waktu Pelaksanaan", "defaultValue": "Pukul 07.00 WIB s.d Selesai" },
+      { "id": "lampiran", "label": "Lampiran", "defaultValue": "-" }
+    ],
+    "textarea": {
+      "id": "keteranganAcara",
+      "label": "Daftar Tembusan (Satu baris per tembusan - Opsional):",
+      "rows": 4,
+      "default": "1. Kepala TK Kemala Bhayangkari 1 Surabaya\n2. Kepala SD Kemala Bhayangkari 1 Surabaya\n3. Kepala SMP Kemala Bhayangkari 1 Surabaya\n4. Koordinator Satuan Pengamanan Sekolah Kemala Bhayangkari 1 Surabaya"
+    }
+  },
+  "custom": {
+    "judul": "📤 UPLOAD SURAT CUSTOM / ARSIP LUAR",
+    "jenis": "CUSTOM_FILE",
+    "kiri": [
+      {
+        "id": "kodeKlasifikasi",
+        "label": "Kode Klasifikasi Surat",
+        "type": "select",
+        "options": [
+          { "value": "421.7", "text": "421.7 - Kegiatan Pelajar / Siswa" },
+          { "value": "425", "text": "425 - Sarana Pendidikan" },
+          { "value": "451.1", "text": "451.1 - Peribadatan" },
+          { "value": "424", "text": "424 - Guru/Guru Teladan" },
+          { "value": "422", "text": "422 - Administrasi Sekolah" },
+          { "value": "422.4", "text": "422.4 - Uang Sekolah" }
+        ]
+      },
+      { "id": "noUrutSurat", "label": "Nomor Urut Surat", "placeholder": "Contoh: 001" },
+      {
+        "id": "tipeSubjek",
+        "label": "Tipe Penerima (S / P)",
+        "type": "select",
+        "options": [
+          { "value": "S", "text": "S - Siswa" },
+          { "value": "P", "text": "P - Pegawai / Guru" }
+        ]
+      },
+      { "id": "perihal", "label": "Perihal / Nama SK / Nama Surat", "placeholder": "Contoh: SK Panitia PPDB 2026" }
+    ],
+    "kanan": [
+      { "id": "namaPenerima", "label": "Ditujukan Kepada / Penerima", "placeholder": "Contoh: Panitia PPDB / Seluruh Guru" },
+      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
+      { "id": "fileSurat", "label": "📁 Upload File Surat (.pdf / .docx / .jpg)", "type": "file" }
     ]
   }
 }
