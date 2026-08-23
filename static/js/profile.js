@@ -7,7 +7,8 @@ async function renderProfileView(content) {
     content.innerHTML = `
         <h2>📄 PROFIL SAYA (${user.role ? user.role.toUpperCase() : 'USER'})</h2>
         <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; max-width: 600px; line-height: 2;">
-            <p><b>Nama / Username :</b> ${user.username}</p>
+            <p><b>Nama Lengkap / Gelar :</b> <span style="color:#00fff0; font-weight:bold; font-size:1.1rem;">${user.nama_lengkap || '-'}</span></p>
+            <p><b>Username Login :</b> <code>${user.username}</code></p>
             <p><b>Role / Hak Akses :</b> <span style="background:#0984e3; color:white; padding:2px 8px; border-radius:4px; font-weight:bold;">${user.role}</span></p>
             <p><b>Unit Kerja / Divisi :</b> ${user.unit_kerja}</p>
             <p><b>Jabatan :</b> ${user.jabatan}</p>
@@ -25,7 +26,10 @@ async function renderProfileEdit(content) {
     content.innerHTML = `
         <h2>✏️ EDIT PROFIL SAYA</h2>
         <div style="max-width: 500px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px;">
-            <label style="display:block; margin-top:10px;">Nama / Username:</label>
+            <label style="display:block; margin-top:10px;">Nama Lengkap / Gelar:</label>
+            <input type="text" id="editNamaLengkap" value="${user.nama_lengkap || ''}" placeholder="Contoh: Jefry Oktavianto, S.Kom." style="width:100%; padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
+
+            <label style="display:block; margin-top:10px;">Username Login:</label>
             <input type="text" id="editUsername" value="${user.username}" style="width:100%; padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
 
             <label style="display:block; margin-top:10px;">Unit Kerja / Divisi:</label>
@@ -44,6 +48,7 @@ async function renderProfileEdit(content) {
 }
 
 async function simpanInfoProfil() {
+    const nama_lengkap = document.getElementById('editNamaLengkap').value;
     const username = document.getElementById('editUsername').value;
     const unit_kerja = document.getElementById('editUnit').value;
     const jabatan = document.getElementById('editJabatan').value;
@@ -52,7 +57,7 @@ async function simpanInfoProfil() {
     const res = await fetch('/api/profile/update-info', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ username, unit_kerja, jabatan, bio })
+        body: JSON.stringify({ nama_lengkap, username, unit_kerja, jabatan, bio })
     });
 
     const data = await res.json();
@@ -106,11 +111,12 @@ function renderAdminUsers(content) {
         <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; margin-bottom: 25px; max-width: 600px;">
             <h3>➕ Tambah Member Baru</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <input type="text" id="newAccUser" placeholder="Username Member Baru" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
-                <input type="password" id="newAccPass" placeholder="Password Member Baru" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
+                <input type="text" id="newAccNama" placeholder="Nama Lengkap / Gelar" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
+                <input type="text" id="newAccUser" placeholder="Username Login" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
+                <input type="password" id="newAccPass" placeholder="Password Member" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
                 <input type="text" id="newAccJabatan" placeholder="Jabatan" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
-                <input type="text" id="newAccUnit" placeholder="Unit Kerja / Divisi" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
             </div>
+            <input type="text" id="newAccUnit" placeholder="Unit Kerja / Divisi" style="margin-top: 10px; width:100%; padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
             <select id="newAccRole" style="margin-top: 10px; width:100%; padding:8px; border-radius:6px; background:#222; color:white; border:1px solid rgba(255,255,255,0.2);">
                 <option value="admin">👑 Admin (Full Access / Godmode)</option>
                 <option value="kepsek">🦅 Kepala Sekolah (Approve, Buat, Hapus Surat)</option>
@@ -134,15 +140,12 @@ async function loadAdminUserTable() {
 
     try {
         const res = await fetch('/api/admin/users');
-        
-        // Kalo kena sikat 403 Forbidden (Non-Admin)
         if (res.status === 403) {
             container.innerHTML = `<p style="color:#ff4757; font-weight:bold;">⛔ Akses Ditolak: Fitur kelola akun hanya untuk Admin Godmode.</p>`;
             return;
         }
 
         const data = await res.json();
-
         if (!Array.isArray(data)) {
             container.innerHTML = `<p style="color:#ff4757;">Gagal memuat data user.</p>`;
             return;
@@ -152,10 +155,10 @@ async function loadAdminUserTable() {
             <table style="width:100%; text-align:left; border-collapse:collapse;">
                 <tr style="background:rgba(255,255,255,0.1); color:#00fff0;">
                     <th style="padding:10px;">ID</th>
+                    <th>Nama Lengkap</th>
                     <th>Username</th>
-                    <th>Password saat ini</th>
-                    <th>Role (Hak Akses)</th>
-                    <th>Jabatan</th>
+                    <th>Password</th>
+                    <th>Role</th>
                     <th style="text-align:center;">Aksi Kelola</th>
                 </tr>
         `;
@@ -165,8 +168,9 @@ async function loadAdminUserTable() {
             html += `
                 <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
                     <td style="padding:10px;">${u.id}</td>
-                    <td><input type="text" id="usr_name_${u.id}" value="${u.username}" style="padding: 4px 8px; width: 120px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:4px;"></td>
-                    <td><input type="text" id="usr_pass_${u.id}" value="${u.password}" style="padding: 4px 8px; width: 120px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:4px;"></td>
+                    <td><input type="text" id="usr_nama_${u.id}" value="${u.nama_lengkap || ''}" placeholder="Nama Asli" style="padding: 4px 8px; width: 130px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:4px;"></td>
+                    <td><input type="text" id="usr_name_${u.id}" value="${u.username}" style="padding: 4px 8px; width: 100px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:4px;"></td>
+                    <td><input type="text" id="usr_pass_${u.id}" value="${u.password}" style="padding: 4px 8px; width: 100px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:4px;"></td>
                     <td>
                         <select id="usr_role_${u.id}" style="padding: 4px 8px; background:#222; color:white; border:1px solid rgba(255,255,255,0.2); border-radius:4px;">
                             <option value="admin" ${roleLower === 'admin' ? 'selected' : ''}>👑 Admin</option>
@@ -175,9 +179,8 @@ async function loadAdminUserTable() {
                             <option value="guru" ${roleLower === 'guru' ? 'selected' : ''}>👨‍🏫 Guru</option>
                         </select>
                     </td>
-                    <td>${u.jabatan || '-'}</td>
                     <td style="text-align:center;">
-                        <button onclick="adminSimpanUser(${u.id})" class="btn-primary" style="padding: 4px 10px; font-size: 0.8rem; background:#0984e3; border:none; border-radius:4px; cursor:pointer;">💾 Update Akun</button>
+                        <button onclick="adminSimpanUser(${u.id})" class="btn-primary" style="padding: 4px 10px; font-size: 0.8rem; background:#0984e3; border:none; border-radius:4px; cursor:pointer;">💾 Update</button>
                     </td>
                 </tr>
             `;
@@ -193,6 +196,7 @@ async function loadAdminUserTable() {
 }
 
 async function adminTambahMember() {
+    const nama_lengkap = document.getElementById('newAccNama').value;
     const username = document.getElementById('newAccUser').value;
     const password = document.getElementById('newAccPass').value;
     const jabatan = document.getElementById('newAccJabatan').value;
@@ -202,7 +206,7 @@ async function adminTambahMember() {
     const res = await fetch('/api/admin/user/add', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ username, password, jabatan, unit_kerja, role })
+        body: JSON.stringify({ nama_lengkap, username, password, jabatan, unit_kerja, role })
     });
 
     const data = await res.json();
@@ -212,12 +216,14 @@ async function adminTambahMember() {
 
     if (data.success) {
         loadAdminUserTable();
+        document.getElementById('newAccNama').value = '';
         document.getElementById('newAccUser').value = '';
         document.getElementById('newAccPass').value = '';
     }
 }
 
 async function adminSimpanUser(id) {
+    const nama_lengkap = document.getElementById(`usr_nama_${id}`).value;
     const username = document.getElementById(`usr_name_${id}`).value;
     const password = document.getElementById(`usr_pass_${id}`).value;
     const role = document.getElementById(`usr_role_${id}`).value;
@@ -225,7 +231,7 @@ async function adminSimpanUser(id) {
     const res = await fetch('/api/admin/user/update', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ id, username, password, role })
+        body: JSON.stringify({ id, nama_lengkap, username, password, role })
     });
 
     const data = await res.json();

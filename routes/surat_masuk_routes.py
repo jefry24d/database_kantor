@@ -33,6 +33,8 @@ def get_last_disposisi_number():
 
 @surat_masuk_bp.route('/api/surat-masuk', methods=['POST'])
 def add_surat_masuk():
+    nama_petugas = session.get('nama_lengkap') or request.form.get('petugas') or session.get('username', 'Admin')
+
     current_role = str(session.get('role','')).lower()
     if 'username' not in session or current_role == 'guru':
         log_activity(session.get('username', 'ANONYMOUS'), 'UNAUTHORIZED_ACCESS', 'Role GURU mencoba menginput Surat Masuk!')
@@ -70,14 +72,14 @@ def add_surat_masuk():
                 sifat_surat, diteruskan_ke, file_scan_path, instruksi_pimpinan
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (no_disposisi, pengirim, tgl_diterima, tgl_surat, 
-              no_surat_pengirim, perihal, petugas, kode_surat, 
-              sifat_surat, diteruskan_ke, file_scan_path, instruksi_pimpinan))
+            no_surat_pengirim, perihal, nama_petugas, kode_surat, 
+            sifat_surat, diteruskan_ke, file_scan_path, instruksi_pimpinan))
 
         conn.commit()
         conn.close()
 
         log_activity(
-            session.get('username', petugas), 
+            nama_petugas, 
             'TAMBAH_SURAT_MASUK', 
             f'Menambah Surat Masuk No Disposisi: {no_disposisi} | Pengirim: {pengirim} | Perihal: {perihal}'
         )

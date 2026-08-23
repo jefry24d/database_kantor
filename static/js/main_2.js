@@ -1,6 +1,6 @@
-// 0. SYNC ROLE USER SAKTI (Mencegah Admin kebaca Guru)
-window.CURRENT_USER_ROLE = 'guru'; // Fallback awal
+window.CURRENT_USER_ROLE = 'guru'; 
 window.CURRENT_USER = 'User';
+window.CURRENT_USER_NAME = 'User'; // State global untuk nama asli
 
 (async function syncUser() {
     try {
@@ -10,6 +10,7 @@ window.CURRENT_USER = 'User';
             if (user.logged_in) {
                 window.CURRENT_USER_ROLE = user.role;
                 window.CURRENT_USER = user.username;
+                window.CURRENT_USER_NAME = user.nama_lengkap || user.username;
             }
         }
     } catch (err) {

@@ -59,6 +59,9 @@ def cetak_surat(surat_id):
 
 @surat_keluar_bp.route('/surat/add', methods=['POST'])
 def add_surat():
+    # 📌 TARUH DI SINI NYOT! (Ambil Nama Lengkap dari session, fallback ke username/Admin)
+    pembuat_surat = session.get('nama_lengkap') or session.get('username', 'Admin')
+
     if request.content_type and 'multipart/form-data' in request.content_type:
         jenis = request.form.get('jenis', 'CUSTOM_FILE')
         no_surat = request.form.get('nomor_surat', '').strip()
@@ -87,13 +90,13 @@ def add_surat():
         cursor.execute("""
             INSERT INTO surat (jenis_surat, nomor_surat, perihal, nama_penerima, uploaded_by, tgl_surat, file_custom_path)
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (jenis, no_surat, perihal, nama_penerima, session.get('username', 'Admin'), tgl_surat, filename_saved))
+        """, (jenis, no_surat, perihal, nama_penerima, pembuat_surat, tgl_surat, filename_saved))
 
         new_id = cursor.lastrowid
         conn.commit()
         conn.close()
 
-        log_activity(session.get('username', 'Admin'), 'TAMBAH_SURAT', f'Mengunggah Custom File: {no_surat} - {perihal}')
+        log_activity(pembuat_surat, 'TAMBAH_SURAT', f'Mengunggah Custom File: {no_surat} - {perihal}')
         return jsonify({'success': True, 'message': 'File Custom Surat berhasil diupload!', 'surat_id': new_id})
 
     else:
@@ -143,7 +146,7 @@ def add_surat():
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
-            jenis, no_surat, perihal, bulan, session.get('username', 'Admin'), 
+            jenis, no_surat, perihal, bulan, pembuat_surat, 
             nama_penerima, unit, no_pegawai, kelas, no_induk_siswa, 
             ttl, alamat, isi_keterangan, keterangan_acara, nama_event, 
             hari_tanggal, tempat, tgl_surat, lampiran, waktu, 
@@ -154,7 +157,7 @@ def add_surat():
         conn.commit()
         conn.close()
 
-        log_activity(session.get('username', 'Admin'), 'TAMBAH_SURAT', f'Membuat Surat [{jenis}]: {no_surat} - {perihal}')
+        log_activity(pembuat_surat, 'TAMBAH_SURAT', f'Membuat Surat [{jenis}]: {no_surat} - {perihal}')
         return jsonify({'success': True, 'message': 'Surat berhasil disimpan!', 'surat_id': new_id})
 
 @surat_keluar_bp.route('/api/eksplorasi')
@@ -163,11 +166,26 @@ def get_eksplorasi():
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT id, jenis_surat, nomor_surat, perihal, bulan, uploaded_by, 
-               nama_penerima, unit, no_pegawai, hari_tanggal, tempat, 
-               file_custom_path, tgl_surat
-        FROM surat
-        ORDER BY id DESC
+        SELECT 
+            s.id,
+            s.jenis_surat,
+            s.nomor_surat,
+            s.perihal,
+            s.bulan,
+
+            COALESCE(u.nama_lengkap, s.uploaded_by) AS uploaded_by,
+
+            s.nama_penerima,
+            s.unit,
+            s.no_pegawai,
+            s.hari_tanggal,
+            s.tempat,
+            s.file_custom_path,
+            s.tgl_surat
+        FROM surat s
+        LEFT JOIN users u
+            ON u.username = s.uploaded_by
+        ORDER BY s.id DESC
     """)
     rows = [dict(row) for row in cursor.fetchall()]
     conn.close()
@@ -209,7 +227,8 @@ def get_last_number():
 def approve_surat(surat_id):
     current_role = str(session.get('role','')).lower()
     if 'username' not in session or current_role not in ['admin', 'kepsek']:
-        log_activity(session.get('username', 'ANONYMOUS'), 'UNAUTHORIZED_ACCESS', f'Mencoba approve Surat Keluar ID: {surat_id}')
+        pembuat_action = session.get('nama_lengkap') or session.get('username', 'ANONYMOUS')
+        log_activity(pembuat_action, 'UNAUTHORIZED_ACCESS', f'Mencoba approve Surat Keluar ID: {surat_id}')
         return jsonify({"success": False, "message": "❗ AKSES DITOLAK!"}), 403
 
     try:
@@ -231,7 +250,8 @@ def approve_surat(surat_id):
         conn.commit()
         conn.close()
 
-        log_activity(session.get('username'), 'APPROVE_SURAT', f"Menyetujui Surat Keluar No: {row['nomor_surat']} (ID: {surat_id})")
+        pembuat_action = session.get('nama_lengkap') or session.get('username')
+        log_activity(pembuat_action, 'APPROVE_SURAT', f"Menyetujui Surat Keluar No: {row['nomor_surat']} (ID: {surat_id})")
         return jsonify({"success": True, "message": "Surat berhasil di-approve!"})
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
@@ -239,13 +259,14 @@ def approve_surat(surat_id):
 @surat_keluar_bp.route('/api/surat/<int:id>', methods=['DELETE'])
 def delete_surat_keluar(id):
     current_role = str(session.get('role','')).lower()
+    pembuat_action = session.get('nama_lengkap') or session.get('username', 'ANONYMOUS')
+
     if 'username' not in session or current_role not in ['admin', 'kepsek']:
-        log_activity(session.get('username', 'ANONYMOUS'), 'UNAUTHORIZED_ACCESS', f'Mencoba hapus Surat Keluar ID: {id}')
+        log_activity(pembuat_action, 'UNAUTHORIZED_ACCESS', f'Mencoba hapus Surat Keluar ID: {id}')
         return jsonify({"success": False, "message": "❗ AKSES DITOLAK!"}), 403
     
     conn = get_db()
     cursor = conn.cursor()
-    # Ambil dulu detail suratnya sebelum dihapus permanen!
     cursor.execute("SELECT nomor_surat, perihal FROM surat WHERE id = ?", (id,))
     row = cursor.fetchone()
 
@@ -255,7 +276,7 @@ def delete_surat_keluar(id):
         conn.commit()
         conn.close()
 
-        log_activity(session.get('username', 'Admin'), 'HAPUS_SURAT', f'Menghapus Surat Keluar ID: {id} | No: {no_surat} | Perihal: {perihal}')
+        log_activity(pembuat_action, 'HAPUS_SURAT', f'Menghapus Surat Keluar ID: {id} | No: {no_surat} | Perihal: {perihal}')
         return jsonify({'status': 'success', 'message': 'Surat keluar berhasil dihapus nyot!'})
     
     conn.close()

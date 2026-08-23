@@ -419,9 +419,9 @@ export async function loadTabelSuratKeluar() {
                         <td><span style="background:#0984e3; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:bold;">${d.jenis_surat}</span></td>
                         <td><strong>${d.nomor_surat}</strong></td>
                         <td>${d.perihal}</td>
-                        <td>${d.penerima_atau_pihak || '-'}</td>
+                        <td>${d.nama_penerima || '-'}</td>
                         <td>${d.tgl_surat}</td>
-                        <td><small>👤 ${d.created_by || 'admin'}</small></td>
+                        <td><small>👤 ${d.uploaded_by || '-'}</small></td>
                         <td style="text-align:center; display:flex; gap:5px; justify-content:center; align-items:center;">
                             ${btnApprove}
                             <button onclick="window.open('/surat/cetak/${d.id}', '_blank')" style="padding:5px 10px; font-size:0.75rem; background:#0984e3; color:white; border:none; border-radius:4px; cursor:pointer;">🖨️ Cetak</button>
