@@ -12,13 +12,13 @@
         <div class="nav-brand">📑 SMABHY TAS</div>
         
         <ul class="nav-menu">
-            <li onclick="loadPage('masuk')">Eksplorasi</li>
-            <li onclick="loadPage('audit-log')">Riwayat Aktivitas</li>
+            <li onclick="loadPage('masuk')">EKSPLORASI</li>
+            <li onclick="loadPage('audit-log')">AKTIVITAS PENGGUNA</li>
 
             <li class="dropdown">
-                <span>Surat Menyurat</span>
+                <span>SURAT MENYURAT</span>
                 <ul class="dropdown-menu">
-                    <li onclick="loadPage('input-masuk')">Surat Masuk</li>
+                    <li onclick="loadPage('input-masuk')">SURAT MASUK</li>
 
                     <li class="dropdown-sub">
                         <span>Surat Keluar ▾</span>
@@ -36,26 +36,26 @@
                 </ul>
             </li>
 
-            <li onclick="loadPage('stats')">Statistik & Rekap Arsip</li>
+            <li onclick="loadPage('stats')">STATISTIK ARSIP SURAT</li>
 
             <li class="dropdown">
-                <span>💀 Akun Saya ▾</span>
+                <span>AKUN SAYA ▾</span>
                 <ul class="dropdown-menu">
-                    <li onclick="loadPage('profile-view')">📄 Profil Saya</li>
-                    <li onclick="loadPage('profile-edit')">✏️ Edit Profil</li>
-                    <li onclick="loadPage('profile-password')">🔒 Ubah Password</li>
+                    <li onclick="loadPage('profile-view')">PROFIL SAYA</li>
+                    <li onclick="loadPage('profile-edit')">EDIT PROFIL</li>
+                    <li onclick="loadPage('profile-password')">UBAH PASSWORD</li>
                     
                     {% if session.get('role') and session.get('role')|lower == 'admin' %}
                         <hr style="border-color: rgba(255,255,255,0.1); margin: 5px 0;">
-                        <li onclick="loadPage('admin-users')" style="color: #fffa65; font-weight: bold;">👑 Kelola Akun Member</li>
+                        <li onclick="loadPage('admin-users')" style="color: #fffa65; font-weight: bold;">KELOLA AKUN</li>
                     {% endif %}
                 </ul>
             </li>
-            <li onclick="alert('Butuh bantuan? Hubungi Admin Kantor nyot!')">Bantuan</li>
+            <li onclick="alert('Butuh bantuan? Hubungi Admin Kantor nyot!')">BANTUAN</li>
         </ul>
 
         <div class="nav-user">
-            <a href="/logout"><button class="btn-logout">Logout</button></a>
+            <a href="/logout"><button class="btn-logout">LOGOUT</button></a>
         </div>
     </nav>
 

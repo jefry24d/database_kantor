@@ -6,9 +6,8 @@
 }
 
 body {
-    /* Background mural + Lapisan Gelap Transparan (Dark Overlay 0.75) */
     background: linear-gradient(rgba(18, 18, 18, 0.78), rgba(18, 18, 18, 0.88)), 
-                url('bg-mural.webp') no-repeat center center fixed;
+                url('smabhaone.png') no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
     min-height: 100vh;
@@ -168,7 +167,7 @@ tr:hover {
 /* 🔐 STYLING KHUSUS HALAMAN LOGIN (CANVA GLASSMORPHISM) */
 .login-body {
     background: linear-gradient(rgba(18, 18, 18, 0.75), rgba(18, 18, 18, 0.88)), 
-                url('bg-mural.webp') no-repeat center center fixed;
+                url('smabhaone.png') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
     display: flex;
