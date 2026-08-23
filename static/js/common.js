@@ -30,11 +30,9 @@ export function switchEksplorasiTab(type, callbackMasuk, callbackKeluar) {
     }
 }
 
-// 🗑️ Helper Hapus Surat Universal dengan Konfirmasi Yes/No
 export async function hapusSurat(id, tipe, callbackRefresh) {
     const namaTipe = tipe === 'masuk' ? 'Surat Masuk' : 'Surat Keluar';
     
-    // 🛑 POP-UP KONFIRMASI YES / NO
     const yakin = confirm(`⚠️ YAKIN MAU HAPUS ARSIP INI?\n\nData ${namaTipe} (ID: ${id}) akan dihapus permanen dan dicatat ke Audit Log!`);
     
     if (!yakin) return; // Kalau No/Cancel, batalkan!

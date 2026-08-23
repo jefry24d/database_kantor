@@ -59,7 +59,6 @@ def cetak_surat(surat_id):
 
 @surat_keluar_bp.route('/surat/add', methods=['POST'])
 def add_surat():
-    # 📌 TARUH DI SINI NYOT! (Ambil Nama Lengkap dari session, fallback ke username/Admin)
     pembuat_surat = session.get('nama_lengkap') or session.get('username', 'Admin')
 
     if request.content_type and 'multipart/form-data' in request.content_type:

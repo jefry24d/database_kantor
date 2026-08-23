@@ -4,7 +4,6 @@ from .utils import get_db, log_activity
 
 auth_bp = Blueprint('auth_bp', __name__)
 
-# 🔑 LOGIN / LOGOUT
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login_page():
     if request.method == 'POST':
@@ -39,7 +38,6 @@ def logout():
     session.clear()
     return redirect(url_for('auth_bp.login_page'))
 
-# 👤 PROFILE & USER MANAGEMENT API
 @auth_bp.route('/api/profile', methods=['GET'])
 def get_profile():
     if 'username' not in session:

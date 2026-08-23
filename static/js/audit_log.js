@@ -35,14 +35,14 @@ async function loadTabelAuditLog() {
         `;
 
         logs.forEach(log => {
-            let colorAksi = '#00b894'; // Hijau (Default)
+            let colorAksi = '#00b894';
 
             if (log.action.includes('HAPUS') || log.action.includes('FAILED')) {
-                colorAksi = '#ff4757'; // Merah (Bahaya/Hapus/Gagal)
+                colorAksi = '#ff4757';
             } else if (log.action.includes('UNAUTHORIZED') || log.action.includes('ADMIN')) {
-                colorAksi = '#ffa502'; // Oranye (Peringatan Akses/Admin)
+                colorAksi = '#ffa502';
             } else if (log.action.includes('UPDATE') || log.action.includes('APPROVE')) {
-                colorAksi = '#70a1ff'; // Biru (Perubahan Data)
+                colorAksi = '#70a1ff';
             }
 
             html += `

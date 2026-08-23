@@ -59,7 +59,6 @@ export function setupAutocompleteNama() {
                 return matchNama && matchKelas;
             });
         } else {
-            // Tipe 'M' (Mahasiswa) - Bebas ngetik manual tanpa autocomplete master data
             suggestionBox.style.display = 'none';
             return;
         }

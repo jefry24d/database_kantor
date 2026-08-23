@@ -55,7 +55,6 @@ function updateOptionsKelas() {
     const master = getMasterData();
     const parentContainer = elKelas.parentNode;
 
-    // Kalo tipe M (Mahasiswa), ubah jadi Input Text Biasa
     if (tipe === 'M') {
         if (elKelas.tagName === 'SELECT') {
             const newInput = document.createElement('input');

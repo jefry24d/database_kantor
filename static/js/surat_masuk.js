@@ -157,8 +157,6 @@ export async function loadTabelSuratMasuk() {
     try {
         const res = await fetch('/api/surat-masuk');
         const data = await res.json();
-
-        // 🎯 FIX: Pakai Array.isArray karena API Flask return List langsung
         const listData = Array.isArray(data) ? data : (data.data || []);
 
         let html = `

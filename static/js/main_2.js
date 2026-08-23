@@ -45,9 +45,7 @@ async function loadPage(page, subType = '') {
         } else if (page === 'stats') {
             renderStatsPage(content);
         } 
-        // -------------------------------------------------------------
-        // FIX: ROUTER UNTUK MENU PROFIL & KELOLA USER (ADMIN/STAF)
-        // -------------------------------------------------------------
+
         else if (page === 'profile-view') {
             if (window.renderProfileView) window.renderProfileView(content);
         } else if (page === 'profile-edit') {
@@ -68,7 +66,6 @@ async function loadPage(page, subType = '') {
     }
 }
 
-// 3. Render Halaman Eksplorasi
 function renderEksplorasi(content) {
     const userRole = (window.CURRENT_USER_ROLE || 'guru').toLowerCase();
     const isGuru = userRole === 'guru';
@@ -188,5 +185,4 @@ async function renderStatsPage(content) {
     }
 }
 
-// Global Export untuk HTML
 window.loadPage = loadPage;
