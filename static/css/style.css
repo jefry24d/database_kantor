@@ -1,3 +1,9 @@
+/* ==========================================================================
+   🎓 STYLE UTAMA SYSTEM - (LOGIN HARVARD + DASHBOARD CRIMSON MODERN)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,6 +11,7 @@
     font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
 }
 
+/* 📌 BODY DEFAULT (UNTUK DASHBOARD) */
 body {
     background: linear-gradient(rgba(18, 18, 18, 0.78), rgba(18, 18, 18, 0.88)), 
                 url('smabhaone.png') no-repeat center center fixed;
@@ -14,20 +21,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 100px; /* Jarak biar kagak ketutup navbar melayang */
+    padding-top: 100px;
 }
 
-/* 🌟 CANVA STYLE FLOATING NAVBAR (MELAYANG DI ATAS) */
+/* 📌 CANVA STYLE FLOATING NAVBAR DASHBOARD */
 .navbar-floating {
     position: fixed;
     top: 20px;
     width: 90%;
-    max-width: 1200px;
-    background: rgba(30, 30, 30, 0.65); /* Glassmorphism transparan */
-    backdrop-filter: blur(16px); /* Effect blur estetik */
+    max-width: 1600px;
+    background: rgba(30, 30, 30, 0.65);
+    backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.125);
-    border-radius: 50px; /* Capsule pill shape khas Canva */
+    border-radius: 50px;
     padding: 12px 30px;
     display: flex;
     justify-content: space-between;
@@ -39,7 +46,7 @@ body {
 .nav-brand {
     font-weight: 800;
     font-size: 1.2rem;
-    color: #ed4071;
+    color: #ffffff;
     letter-spacing: 1px;
 }
 
@@ -60,7 +67,7 @@ body {
 }
 
 .nav-menu li:hover {
-    background: rgba(248, 75, 121, 0.765);
+    background: #a51c30;
     color: #ffffff;
     transform: translateY(-2px);
 }
@@ -72,7 +79,7 @@ body {
 }
 
 .btn-logout {
-    background: #ff4757;
+    background: #a51c30;
     color: white;
     padding: 8px 16px;
     border-radius: 20px;
@@ -83,11 +90,11 @@ body {
 }
 
 .btn-logout:hover {
-    background: #ff6b81;
-    box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
+    background: #c4263f;
+    box-shadow: 0 0 10px rgba(165, 28, 48, 0.5);
 }
 
-/* 📦 KONTEN UTAMA (GLASS CARD CONTAINER) */
+/* 📌 KONTEN UTAMA DASHBOARD */
 .main-container {
     width: 90%;
     max-width: 1100px;
@@ -103,8 +110,8 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
-/* INPUT & BUTTON FORM STYLING */
-input, select {
+/* INPUT & BUTTON FORM STYLING DASHBOARD */
+input, select, textarea {
     width: 100%;
     padding: 12px 16px;
     margin: 10px 0 20px 0;
@@ -115,17 +122,17 @@ input, select {
     font-size: 1rem;
 }
 
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
     outline: none;
-    border-color: #ff97bc;
-    box-shadow: 0 0 8px rgba(253, 42, 112, 0.679);
+    border-color: #a51c30;
+    box-shadow: 0 0 8px rgba(165, 28, 48, 0.679);
 }
 
 button.btn-primary {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #ff6b81, #ec4d7a);
-    color: #000;
+    background: linear-gradient(135deg, #a51c30, #7f1222);
+    color: #fff;
     font-weight: 800;
     font-size: 1rem;
     border: none;
@@ -136,7 +143,7 @@ button.btn-primary {
 
 button.btn-primary:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 15px rgba(231, 69, 126, 0.6);
+    box-shadow: 0 0 15px rgba(165, 28, 48, 0.6);
 }
 
 /* TABLES STYLING */
@@ -155,7 +162,7 @@ th, td {
 }
 
 th {
-    background-color: rgba(244, 47, 113, 0.719);
+    background-color: #a51c30;
     color: #fafafa;
     font-weight: 700;
 }
@@ -164,62 +171,11 @@ tr:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* 🔐 STYLING KHUSUS HALAMAN LOGIN (CANVA GLASSMORPHISM) */
-.login-body {
-    background: linear-gradient(rgba(18, 18, 18, 0.75), rgba(18, 18, 18, 0.88)), 
-                url('smabhaone.png') no-repeat center center fixed;
-    background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 0; /* Override padding-top bawaan body */
-}
-
-.login-card {
-    width: 100%;
-    max-width: 400px;
-    background: rgba(24, 24, 27, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 24px;
-    padding: 40px 30px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-    text-align: center;
-}
-
-.login-card h2 {
-    color: #f6508d;
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-.login-card p.subtitle {
-    color: #aaa;
-    font-size: 0.9rem;
-    margin-bottom: 25px;
-}
-
-.error-msg {
-    color: #ff4757;
-    background: rgba(255, 71, 87, 0.15);
-    border: 1px solid rgba(255, 71, 87, 0.3);
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    margin-top: 15px;
-    display: none; /* Sembunyi kalo kagak ada error */
-}
-
-/* 🛸 DROPDOWN STYLING KELAS CANVA */
+/* 📌 DROPDOWN STYLING KELAS CANVA */
 .nav-menu li.dropdown, .nav-menu li.dropdown-sub {
     position: relative;
 }
 
-/* Menu Dropdown Utama (Tingkat 1) */
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -236,7 +192,7 @@ tr:hover {
 }
 
 .nav-menu li.dropdown:hover > .dropdown-menu {
-    display: block; /* Muncul pas di-hover */
+    display: block;
 }
 
 .dropdown-menu li {
@@ -248,11 +204,10 @@ tr:hover {
 }
 
 .dropdown-menu li:hover {
-    background: rgba(255, 0, 30, 0.2) !important;
-    color: #fc96b7 !important;
+    background: rgba(165, 28, 48, 0.3) !important;
+    color: #ffffff !important;
 }
 
-/* Sub-Menu Dropdown Ke Samping (Tingkat 2) */
 .dropdown-sub-menu {
     display: none;
     position: absolute;
@@ -269,12 +224,11 @@ tr:hover {
 }
 
 .dropdown-sub:hover > .dropdown-sub-menu {
-    display: block; /* Muncul ke samping pas di-hover */
+    display: block;
 }
 
-/* 📱 RESPONSIVE DESIGN UNTUK HP (SAMSUNG A06 & HP LAINNYA) */
+/* 📌 RESPONSIVE DESIGN UNTUK HP */
 @media screen and (max-width: 768px) {
-    /* 1. Navbar Melayang Menyesuaikan Layar HP */
     .navbar-floating {
         flex-direction: column;
         padding: 10px 15px;
@@ -296,7 +250,6 @@ tr:hover {
         font-size: 0.85rem;
     }
 
-    /* 2. Container Utama & Glass Card */
     .main-container {
         padding: 10px;
     }
@@ -305,35 +258,239 @@ tr:hover {
         padding: 15px;
     }
 
-    /* 3. Form Grid dari 2 Kolom Jadi 1 Kolom Tegak Lurus di HP */
     div[style*="display: grid"],
     div[style*="grid-template-columns"] {
         grid-template-columns: 1fr !important;
         gap: 10px !important;
     }
 
-    /* 4. Input & Textarea Membesar Pas Ditekan Jari HP */
-    input[type="text"], 
-    input[type="password"], 
-    input[type="date"], 
-    select, 
-    textarea {
-        font-size: 1rem !important;
-        padding: 12px !important;
-        box-sizing: border-box;
-    }
-
-    /* 5. Tabel Eksplorasi Bisa Di-scroll Kesamping di Layar HP */
     #tabelEksplorasi, #tabelAdminUsers, #hasilSearch {
         overflow-x: auto;
         display: block;
         white-space: nowrap;
     }
+}
 
-    /* 6. Tombol-Tombol Lebih Empuk Diklik Pake Jempol */
-    .btn-primary, .btn-logout {
-        width: 100%;
-        padding: 12px;
-        font-size: 1rem;
-    }
+/* ==========================================================================
+   🎓 FITUR KODE KHUSUS LOGIN HARVARD LOOK & MODAL POP-UP (NEMPEL DI BAWAH)
+   ========================================================================== */
+
+body.login-body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.85) 60%, rgba(255, 255, 255, 1) 100%), 
+                url('bg-login.jpg') no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding-top: 0 !important;
+    color: #1e1e1e;
+}
+
+.harvard-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    width: 100%;
+    background: #fff;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #fff;
+}
+
+.harvard-logo {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+}
+
+.brand-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: #1e1e1e;
+    line-height: 1.1;
+}
+
+.brand-title small {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #4a4a4a;
+}
+
+.hero-container {
+    text-align: center;
+    padding: 80px 20px 120px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.welcome-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 4.5rem;
+    font-weight: 400;
+    color: #1e1e1e;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.welcome-quote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #333333;
+    max-width: 700px;
+    margin: 0 auto 35px auto;
+    line-height: 1.6;
+}
+
+.btn-harvard-login {
+    background-color: #a51c30;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(165, 28, 48, 0.3);
+}
+
+.btn-harvard-login:hover {
+    background-color: #7f1222;
+    transform: translateY(-2px);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 90%;
+    max-width: 420px;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #888;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.modal-logo {
+    height: 65px;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.modal-header h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    color: #1e1e1e;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.input-group {
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    margin: 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    color: #333;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #a51c30;
+    background: #fff;
+    box-shadow: none;
+}
+
+.password-group .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+.btn-primary-submit {
+    width: 100%;
+    padding: 14px;
+    background: #a51c30;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.btn-primary-submit:hover {
+    background: #7f1222;
 }

@@ -3,27 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Agenda Surat Canva Vibes</title>
-    <!-- 🛑 CSS MURNI PANGGIL DARI FILE EXTERNAL (KAGAK ADA CSS NYATU DI SINI!) -->
+    <title>SMABHAONE SURABAYA</title>
+    <!-- Google Font Mirip Harvard (Georgia/Cinzel/Playfair) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome buat Icon Show/Hide Password & Search -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="login-body">
 
-    <div class="login-card">
-        <h2>WORKSPACE LOGIN</h2>
-        <p class="subtitle">Agenda Surat Kantor - Canva Modern Edition</p>
+    <!-- 🏛️ NAVBAR HARVARD STYLE -->
+    <header class="harvard-navbar">
+        <div class="nav-left">
+            <img src="{{ url_for('static', filename='css/icon-school.png') }}" alt="Logo SMABHAONE" class="harvard-logo">
+            <span class="brand-title">SMABHAONE<br><small>SURABAYA</small></span>
+        </div>
+    </header>
 
-        <form id="formLogin">
-            <input type="text" id="username" placeholder="Masukkan Username" required autocomplete="off">
-            <input type="password" id="password" placeholder="Masukkan Password" required>
-            <button type="submit" class="btn-primary" style="margin-top: 10px;">Masuk ke Dashboard 🚀</button>
-        </form>
+    <!-- 🎓 MAIN HERO CONTENT -->
+    <main class="hero-container">
+        <h1 class="welcome-heading">Welcome to Smabhaone</h1>
+        <p class="welcome-quote">"Cerdas Pikir Luar Biasa, Cerdas Hati Lebih Utama"</p>
+        <button id="openLoginBtn" class="btn-harvard-login">Login ke Portal</button>
+    </main>
 
-        <div id="pesanError" class="error-msg"></div>
+    <!-- 🪟 POP-UP MODAL LOGIN NGAMBANG -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-content">
+            <span id="closeModalBtn" class="close-btn">&times;</span>
+            <div class="modal-header">
+                <img src="{{ url_for('static', filename='css/icon-school.png') }}" alt="Logo SMABHAONE" class="modal-logo">
+                <h2>PORTAL LOGIN</h2>
+            </div>
+            
+            <form id="formLogin">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Masukkan Username" required autocomplete="off">
+                </div>
+                
+                <div class="input-group password-group">
+                    <input type="password" id="password" placeholder="Masukkan Password" required>
+                    <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+                </div>
+
+                <button type="submit" class="btn-primary-submit">Masuk ke Dashboard</button>
+            </form>
+
+            <div id="pesanError" class="error-msg"></div>
+        </div>
     </div>
 
-    <!-- ⚡ LOGIKA SCRIPT LOGIN ASYNC -->
+    <!-- ⚡ SCRIPT LOGIKA LOGIN & MODAL POP-UP -->
     <script>
+        // Modal Control
+        const modal = document.getElementById('loginModal');
+        const openBtn = document.getElementById('openLoginBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+
+        openBtn.addEventListener('click', () => modal.classList.add('active'));
+        closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        // Toggle Show/Hide Password
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Script Async Form Login
         document.getElementById('formLogin').addEventListener('submit', async (e) => {
             e.preventDefault();
             const errBox = document.getElementById('pesanError');
