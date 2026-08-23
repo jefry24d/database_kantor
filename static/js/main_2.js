@@ -1,3 +1,22 @@
+// 0. SYNC ROLE USER SAKTI (Mencegah Admin kebaca Guru)
+window.CURRENT_USER_ROLE = 'guru'; // Fallback awal
+window.CURRENT_USER = 'User';
+
+(async function syncUser() {
+    try {
+        const res = await fetch('/api/user/me');
+        if (res.ok) {
+            const user = await res.json();
+            if (user.logged_in) {
+                window.CURRENT_USER_ROLE = user.role;
+                window.CURRENT_USER = user.username;
+            }
+        }
+    } catch (err) {
+        console.error("Gagal sync user info:", err);
+    }
+})();
+
 // 1. Import semua fungsi modul
 import { renderFormSuratMasuk, loadTabelSuratMasuk } from './surat_masuk.js';
 import { renderFormSuratKeluar, renderCustomSuratHybrid, loadTabelSuratKeluar } from './surat_keluar.js';
@@ -50,6 +69,9 @@ async function loadPage(page, subType = '') {
 
 // 3. Render Halaman Eksplorasi
 function renderEksplorasi(content) {
+    const userRole = (window.CURRENT_USER_ROLE || 'guru').toLowerCase();
+    const isGuru = userRole === 'guru';
+
     content.innerHTML = `
         <h2>📁 EKSPLORASI ARSIP SURAT</h2>
         
@@ -62,8 +84,8 @@ function renderEksplorasi(content) {
         </div>
 
         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <button id="btnEksMasuk" class="btn-primary" style="background: #00b894; flex: 1; cursor:pointer;">📥 Surat Masuk</button>
-            <button id="btnEksKeluar" class="btn-primary" style="background: rgba(255,255,255,0.1); flex: 1; cursor:pointer;">📤 Surat Keluar</button>
+            ${!isGuru ? `<button id="btnEksMasuk" class="btn-primary" style="background: #00b894; flex: 1; cursor:pointer;">📥 Surat Masuk</button>` : ''}
+            <button id="btnEksKeluar" class="btn-primary" style="background: ${isGuru ? '#00b894' : 'rgba(255,255,255,0.1)'}; flex: 1; cursor:pointer;">📤 Surat Keluar</button>
         </div>
 
         <div id="areaTabelEksplorasi"></div>
@@ -85,8 +107,11 @@ function renderEksplorasi(content) {
         });
     }
 
-    // Default load Tabel Surat Masuk
-    loadTabelSuratMasuk();
+    if (isGuru) {
+        loadTabelSuratKeluar();
+    } else {
+        loadTabelSuratMasuk();
+    }
 
     // Event Auto Search
     const searchInput = document.getElementById('globalSearchInput');

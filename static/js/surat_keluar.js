@@ -356,6 +356,18 @@ export async function loadTabelSuratKeluar() {
     if (!area) return;
 
     try {
+        let userRole = 'guru';
+        try {
+            const resUser = await fetch('/api/user/me');
+            const dataUser = await resUser.json();
+            if (dataUser.logged_in) {
+                userRole = String(dataUser.role).toLowerCase();
+            }
+        } catch (e) {
+            console.error("Gagal mengambil info user role", e);
+        }
+        
+
         const res = await fetch('/api/surat-keluar');
         const data = await res.json();
 
@@ -386,10 +398,19 @@ export async function loadTabelSuratKeluar() {
                     if (d.is_approved == 1) {
                         btnApprove = `<span style="background:#00b894; color:white; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold;">✅ Approved</span>`;
                     } else {
-                        btnApprove = `<button data-id="${d.id}" class="btn-approve-sk" style="padding:5px 10px; font-size:0.75rem; background:#2ed573; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">✅ Approve</button>`;
+                        if (userRole === 'admin' || userRole === 'kepsek') {
+                            btnApprove = `<button data-id="${d.id}" class="btn-approve-sk" style="padding:5px 10px; font-size:0.75rem; background:#2ed573; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">✅ Approve</button>`;
+                        } else {
+                            btnApprove = `<span style="color:#ffa502; font-size:0.75rem; font-weight:bold;">PENDING!</span>`;
+                        }
                     }
                 } else {
                     btnApprove = `<span style="color:#aaa; font-size:0.75rem;">-</span>`;
+                }
+
+                let btnHapus = '';
+                if (userRole !== 'guru') {
+                    btnHapus = `<button onclick="hapusSuratKeluar(${d.id})" style="padding:5px 10px; font-size:0.75rem; background:#ff4757; color:white; border:none; border-radius:4px; cursor:pointer;">🗑️ Hapus</button>`;
                 }
 
                 html += `
@@ -404,7 +425,7 @@ export async function loadTabelSuratKeluar() {
                         <td style="text-align:center; display:flex; gap:5px; justify-content:center; align-items:center;">
                             ${btnApprove}
                             <button onclick="window.open('/surat/cetak/${d.id}', '_blank')" style="padding:5px 10px; font-size:0.75rem; background:#0984e3; color:white; border:none; border-radius:4px; cursor:pointer;">🖨️ Cetak</button>
-                            <button onclick="hapusSuratKeluar(${d.id})" style="padding:5px 10px; font-size:0.75rem; background:#ff4757; color:white; border:none; border-radius:4px; cursor:pointer;">🗑️ Hapus</button>
+                            ${btnHapus} <!-- 👈 PAKE VARIABEL btnHapus DI SINI! -->
                         </td>
                     </tr>
                 `;
@@ -438,3 +459,28 @@ export async function loadTabelSuratKeluar() {
         area.innerHTML = `<p style="color:red;">Gagal memuat tabel surat keluar.</p>`;
     }
 }
+
+// Add fungsi hapusSuratKeluar & pasang ke window scope
+export async function hapusSuratKeluar(id) {
+    if (!confirm("Apakah Anda yakin ingin menghapus surat keluar ini?")) return;
+
+    try {
+        const res = await fetch(`/api/surat/${id}`, {
+            method: 'DELETE'
+        });
+        const data = await res.json();
+
+        if (res.ok && (data.status === 'success' || data.success)) {
+            alert("✅ " + (data.message || "Surat berhasil dihapus!"));
+            loadTabelSuratKeluar(); // Reload tabel
+        } else {
+            alert("❌ " + (data.message || "Gagal menghapus surat!"));
+        }
+    } catch (err) {
+        console.error("Error delete:", err);
+        alert("❌ Terjadi kesalahan koneksi ke server!");
+    }
+}
+
+// WAJIB KARENA DIPANGGIL VIA ONCLICK="" DI HTML
+window.hapusSuratKeluar = hapusSuratKeluar;

@@ -37,15 +37,17 @@
             </li>
 
             <li onclick="loadPage('stats')">Statistik & Rekap Arsip</li>
-            <!-- 👤 DROPDOWN AKUN SAYA MELAYANG -->
+
             <li class="dropdown">
                 <span>💀 Akun Saya ▾</span>
                 <ul class="dropdown-menu">
                     <li onclick="loadPage('profile-view')">📄 Profil Saya</li>
                     <li onclick="loadPage('profile-edit')">✏️ Edit Profil</li>
                     <li onclick="loadPage('profile-password')">🔒 Ubah Password</li>
-                    {% if role == 'Admin' %}
-                    <li onclick="loadPage('admin-users')">👑 Kelola & Tambah Member</li>
+                    
+                    {% if session.get('role') and session.get('role')|lower == 'admin' %}
+                        <hr style="border-color: rgba(255,255,255,0.1); margin: 5px 0;">
+                        <li onclick="loadPage('admin-users')" style="color: #fffa65; font-weight: bold;">👑 Kelola Akun Member</li>
                     {% endif %}
                 </ul>
             </li>

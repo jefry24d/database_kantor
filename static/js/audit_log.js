@@ -35,7 +35,16 @@ async function loadTabelAuditLog() {
         `;
 
         logs.forEach(log => {
-            let colorAksi = log.action.includes('HAPUS') ? '#ff4757' : '#00b894';
+            let colorAksi = '#00b894'; // Hijau (Default)
+
+            if (log.action.includes('HAPUS') || log.action.includes('FAILED')) {
+                colorAksi = '#ff4757'; // Merah (Bahaya/Hapus/Gagal)
+            } else if (log.action.includes('UNAUTHORIZED') || log.action.includes('ADMIN')) {
+                colorAksi = '#ffa502'; // Oranye (Peringatan Akses/Admin)
+            } else if (log.action.includes('UPDATE') || log.action.includes('APPROVE')) {
+                colorAksi = '#70a1ff'; // Biru (Perubahan Data)
+            }
+
             html += `
                 <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                     <td style="padding: 10px; color: #aaa;"><code>${log.created_at}</code></td>

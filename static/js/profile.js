@@ -5,12 +5,13 @@ async function renderProfileView(content) {
     const user = await res.json();
 
     content.innerHTML = `
-        <h2>📄 PROFIL SAYA (${user.role.toUpperCase()})</h2>
+        <h2>📄 PROFIL SAYA (${user.role ? user.role.toUpperCase() : 'USER'})</h2>
         <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; max-width: 600px; line-height: 2;">
             <p><b>Nama / Username :</b> ${user.username}</p>
+            <p><b>Role / Hak Akses :</b> <span style="background:#0984e3; color:white; padding:2px 8px; border-radius:4px; font-weight:bold;">${user.role}</span></p>
             <p><b>Unit Kerja / Divisi :</b> ${user.unit_kerja}</p>
             <p><b>Jabatan :</b> ${user.jabatan}</p>
-            <p><b>Bio / Catatan :</b> ${user.bio}</p>
+            <p><b>Bio / Catatan :</b> ${user.bio || '-'}</p>
         </div>
     `;
 }
@@ -24,17 +25,17 @@ async function renderProfileEdit(content) {
     content.innerHTML = `
         <h2>✏️ EDIT PROFIL SAYA</h2>
         <div style="max-width: 500px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px;">
-            <label>Nama / Username:</label>
-            <input type="text" id="editUsername" value="${user.username}">
+            <label style="display:block; margin-top:10px;">Nama / Username:</label>
+            <input type="text" id="editUsername" value="${user.username}" style="width:100%; padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
 
-            <label>Unit Kerja / Divisi:</label>
-            <input type="text" id="editUnit" value="${user.unit_kerja}">
+            <label style="display:block; margin-top:10px;">Unit Kerja / Divisi:</label>
+            <input type="text" id="editUnit" value="${user.unit_kerja}" style="width:100%; padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
 
-            <label>Jabatan:</label>
-            <input type="text" id="editJabatan" value="${user.jabatan}">
+            <label style="display:block; margin-top:10px;">Jabatan:</label>
+            <input type="text" id="editJabatan" value="${user.jabatan}" style="width:100%; padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
 
-            <label>Bio / Catatan:</label>
-            <textarea id="editBio" rows="3" style="width:100%; background:rgba(255,255,255,0.05); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:10px;">${user.bio}</textarea>
+            <label style="display:block; margin-top:10px;">Bio / Catatan:</label>
+            <textarea id="editBio" rows="3" style="width:100%; background:rgba(255,255,255,0.05); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:10px;">${user.bio || ''}</textarea>
 
             <button onclick="simpanInfoProfil()" class="btn-primary" style="margin-top: 15px;">💾 Save Perubahan</button>
             <p id="msgEdit" style="margin-top: 10px;"></p>
@@ -65,11 +66,11 @@ function renderProfilePassword(content) {
     content.innerHTML = `
         <h2>🔒 UBAH PASSWORD</h2>
         <div style="max-width: 400px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px;">
-            <label>Masukkan Password Lama :</label>
-            <input type="password" id="passLama" placeholder="Wajib diisi!">
+            <label style="display:block; margin-top:10px;">Masukkan Password Lama :</label>
+            <input type="password" id="passLama" placeholder="Wajib diisi!" style="width:100%; padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
 
-            <label>Masukkan Password Baru :</label>
-            <input type="password" id="passBaru" placeholder="Masukkan password baru">
+            <label style="display:block; margin-top:10px;">Masukkan Password Baru :</label>
+            <input type="password" id="passBaru" placeholder="Masukkan password baru" style="width:100%; padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
 
             <button onclick="simpanPasswordBaru()" class="btn-primary" style="margin-top: 15px;">💾 Save Password Baru</button>
             <p id="msgPass" style="margin-top: 10px;"></p>
@@ -97,7 +98,7 @@ async function simpanPasswordBaru() {
     }
 }
 
-// 👑 ADMIN KELOLA USER
+// 👑 ADMIN KELOLA USER (SUPPORT 4 LEVEL HIRARKI)
 function renderAdminUsers(content) {
     content.innerHTML = `
         <h2>👑 KHUSUS ADMIN: KELOLA & TAMBAH MEMBER BARU</h2>
@@ -105,21 +106,23 @@ function renderAdminUsers(content) {
         <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; margin-bottom: 25px; max-width: 600px;">
             <h3>➕ Tambah Member Baru</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <input type="text" id="newAccUser" placeholder="Username Member Baru">
-                <input type="password" id="newAccPass" placeholder="Password Member Baru">
-                <input type="text" id="newAccJabatan" placeholder="Jabatan">
-                <input type="text" id="newAccUnit" placeholder="Unit Kerja / Divisi">
+                <input type="text" id="newAccUser" placeholder="Username Member Baru" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
+                <input type="password" id="newAccPass" placeholder="Password Member Baru" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
+                <input type="text" id="newAccJabatan" placeholder="Jabatan" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
+                <input type="text" id="newAccUnit" placeholder="Unit Kerja / Divisi" style="padding:8px; border-radius:6px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
             </div>
-            <select id="newAccRole" style="margin-top: 10px;">
-                <option value="Staf">Role: Staf Biasa</option>
-                <option value="Admin">Role: Admin Godmode</option>
+            <select id="newAccRole" style="margin-top: 10px; width:100%; padding:8px; border-radius:6px; background:#222; color:white; border:1px solid rgba(255,255,255,0.2);">
+                <option value="admin">👑 Admin (Full Access / Godmode)</option>
+                <option value="kepsek">🦅 Kepala Sekolah (Approve, Buat, Hapus Surat)</option>
+                <option value="staf">📋 Staf Administrasi (Buat & Hapus Surat)</option>
+                <option value="guru" selected>👨‍🏫 Guru (Buat Surat Saja)</option>
             </select>
             <br>
             <button onclick="adminTambahMember()" class="btn-primary" style="margin-top: 10px;">➕ Buat Akun Member</button>
             <p id="msgAddMember" style="margin-top: 5px;"></p>
         </div>
 
-        <h3>📋 Daftar Seluruh Akun Staf Kantor</h3>
+        <h3>📋 Daftar Seluruh Akun Staf & Guru Kantor</h3>
         <div id="tabelAdminUsers">Loading data user...</div>
     `;
     loadAdminUserTable();
@@ -127,43 +130,66 @@ function renderAdminUsers(content) {
 
 async function loadAdminUserTable() {
     const container = document.getElementById('tabelAdminUsers');
-    const res = await fetch('/api/admin/users');
-    const data = await res.json();
+    if (!container) return;
 
-    let html = `
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Password saat ini</th>
-                <th>Role</th>
-                <th>Jabatan</th>
-                <th>Aksi Kelola</th>
-            </tr>
-    `;
+    try {
+        const res = await fetch('/api/admin/users');
+        
+        // Kalo kena sikat 403 Forbidden (Non-Admin)
+        if (res.status === 403) {
+            container.innerHTML = `<p style="color:#ff4757; font-weight:bold;">⛔ Akses Ditolak: Fitur kelola akun hanya untuk Admin Godmode.</p>`;
+            return;
+        }
 
-    data.forEach(u => {
-        html += `
-            <tr>
-                <td>${u.id}</td>
-                <td><input type="text" id="usr_name_${u.id}" value="${u.username}" style="padding: 4px 8px; width: 120px;"></td>
-                <td><input type="text" id="usr_pass_${u.id}" value="${u.password}" style="padding: 4px 8px; width: 120px;"></td>
-                <td>
-                    <select id="usr_role_${u.id}" style="padding: 4px 8px;">
-                        <option value="Admin" ${u.role === 'Admin' ? 'selected' : ''}>Admin</option>
-                        <option value="Staf" ${u.role === 'Staf' ? 'selected' : ''}>Staf</option>
-                    </select>
-                </td>
-                <td>${u.jabatan}</td>
-                <td>
-                    <button onclick="adminSimpanUser(${u.id})" class="btn-primary" style="padding: 4px 10px; font-size: 0.8rem;">💾 Update Akun</button>
-                </td>
-            </tr>
+        const data = await res.json();
+
+        if (!Array.isArray(data)) {
+            container.innerHTML = `<p style="color:#ff4757;">Gagal memuat data user.</p>`;
+            return;
+        }
+
+        let html = `
+            <table style="width:100%; text-align:left; border-collapse:collapse;">
+                <tr style="background:rgba(255,255,255,0.1); color:#00fff0;">
+                    <th style="padding:10px;">ID</th>
+                    <th>Username</th>
+                    <th>Password saat ini</th>
+                    <th>Role (Hak Akses)</th>
+                    <th>Jabatan</th>
+                    <th style="text-align:center;">Aksi Kelola</th>
+                </tr>
         `;
-    });
 
-    html += `</table>`;
-    container.innerHTML = html;
+        data.forEach(u => {
+            const roleLower = String(u.role).toLowerCase();
+            html += `
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:10px;">${u.id}</td>
+                    <td><input type="text" id="usr_name_${u.id}" value="${u.username}" style="padding: 4px 8px; width: 120px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:4px;"></td>
+                    <td><input type="text" id="usr_pass_${u.id}" value="${u.password}" style="padding: 4px 8px; width: 120px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:4px;"></td>
+                    <td>
+                        <select id="usr_role_${u.id}" style="padding: 4px 8px; background:#222; color:white; border:1px solid rgba(255,255,255,0.2); border-radius:4px;">
+                            <option value="admin" ${roleLower === 'admin' ? 'selected' : ''}>👑 Admin</option>
+                            <option value="kepsek" ${roleLower === 'kepsek' ? 'selected' : ''}>🦅 Kepsek</option>
+                            <option value="staf" ${roleLower === 'staf' ? 'selected' : ''}>📋 Staf</option>
+                            <option value="guru" ${roleLower === 'guru' ? 'selected' : ''}>👨‍🏫 Guru</option>
+                        </select>
+                    </td>
+                    <td>${u.jabatan || '-'}</td>
+                    <td style="text-align:center;">
+                        <button onclick="adminSimpanUser(${u.id})" class="btn-primary" style="padding: 4px 10px; font-size: 0.8rem; background:#0984e3; border:none; border-radius:4px; cursor:pointer;">💾 Update Akun</button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        html += `</table>`;
+        container.innerHTML = html;
+
+    } catch (err) {
+        console.error(err);
+        container.innerHTML = `<p style="color:#ff4757;">Terjadi kesalahan sistem saat memuat tabel.</p>`;
+    }
 }
 
 async function adminTambahMember() {
@@ -209,7 +235,7 @@ async function adminSimpanUser(id) {
     }
 }
 
-// Paste di bagian paling bawah static/js/profile.js
+// Global Export
 window.renderProfileView = renderProfileView;
 window.renderProfileEdit = renderProfileEdit;
 window.renderProfilePassword = renderProfilePassword;

@@ -1,18 +1,14 @@
 from flask import Blueprint, jsonify, request, session, render_template, redirect, url_for
 import sqlite3
+from .utils import get_db, log_activity
 
 auth_bp = Blueprint('auth_bp', __name__)
-
-def get_db():
-    conn = sqlite3.connect('arsip_kantor.db')
-    conn.row_factory = sqlite3.Row
-    return conn
 
 # 🔑 LOGIN / LOGOUT
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login_page():
     if request.method == 'POST':
-        data = request.json
+        data = request.json or {}
         username = data.get('username', '').strip()
         password = data.get('password', '').strip()
 
@@ -25,14 +21,18 @@ def login_page():
         if user:
             session['username'] = user['username']
             session['role'] = user['role']
+            log_activity(user['username'], 'LOGIN_SUCCESS', f"User {user['username']} ({user['role']}) berhasil login.")
             return jsonify({'success': True, 'message': f"Selamat datang, {user['username']}!"})
         else:
+            log_activity(username or 'ANONYMOUS', 'LOGIN_FAILED', f"Percobaan login gagal untuk username: '{username}'")
             return jsonify({'success': False, 'message': 'Username atau Password Salah Cok!'})
 
     return render_template('login.html')
 
 @auth_bp.route('/logout')
 def logout():
+    username = session.get('username', 'ANONYMOUS')
+    log_activity(username, 'LOGOUT', f"User {username} telah logout.")
     session.clear()
     return redirect(url_for('auth_bp.login_page'))
 
@@ -57,7 +57,7 @@ def update_profile_info():
     if 'username' not in session:
         return jsonify({'success': False, 'message': 'Belum login'}), 401
         
-    data = request.json
+    data = request.json or {}
     new_username = data.get('username', '').strip()
     jabatan = data.get('jabatan', '').strip()
     unit_kerja = data.get('unit_kerja', '').strip()
@@ -66,14 +66,17 @@ def update_profile_info():
     if len(new_username) < 3:
         return jsonify({'success': False, 'message': '⚠️ Username minimal 3 karakter asli cok!'})
 
+    old_username = session['username']
     conn = get_db()
     cursor = conn.cursor()
     try:
         cursor.execute("UPDATE users SET username = ?, jabatan = ?, unit_kerja = ?, bio = ? WHERE username = ?",
-                       (new_username, jabatan, unit_kerja, bio, session['username']))
+                       (new_username, jabatan, unit_kerja, bio, old_username))
         conn.commit()
         session['username'] = new_username
         conn.close()
+        
+        log_activity(old_username, 'UPDATE_PROFILE', f"Mengubah profil. Username baru: {new_username}, Jabatan: {jabatan}")
         return jsonify({'success': True, 'message': '✅ Profil & Nama akun berhasil diperbarui!'})
     except sqlite3.IntegrityError:
         conn.close()
@@ -84,7 +87,7 @@ def change_password():
     if 'username' not in session:
         return jsonify({'success': False, 'message': 'Belum login'}), 401
 
-    data = request.json
+    data = request.json or {}
     pass_lama = data.get('pass_lama', '').strip()
     pass_baru = data.get('pass_baru', '').strip()
 
@@ -98,17 +101,21 @@ def change_password():
 
     if not user or user['password'] != pass_lama:
         conn.close()
+        log_activity(session['username'], 'CHANGE_PASSWORD_FAILED', 'Gagal ganti password (Password lama salah).')
         return jsonify({'success': False, 'message': '❌ Password lama Anda SALAH!'})
 
     cursor.execute("UPDATE users SET password = ? WHERE username = ?", (pass_baru, session['username']))
     conn.commit()
     conn.close()
+    
+    log_activity(session['username'], 'CHANGE_PASSWORD_SUCCESS', 'Berhasil memperbarui password akun.')
     return jsonify({'success': True, 'message': '✅ Password berhasil diperbarui!'})
 
 # 👑 ADMIN API
 @auth_bp.route('/api/admin/users', methods=['GET'])
 def admin_get_users():
-    if 'username' not in session or session.get('role') != 'Admin':
+    if 'username' not in session or session.get('role') != 'admin':
+        log_activity(session.get('username', 'ANONYMOUS'), 'UNAUTHORIZED_ACCESS', 'Mencoba mengakses API Admin User Management')
         return jsonify({'success': False, 'message': 'Akses khusus Admin Godmode!'}), 403
 
     conn = get_db()
@@ -120,10 +127,11 @@ def admin_get_users():
 
 @auth_bp.route('/api/admin/user/update', methods=['POST'])
 def admin_update_user():
-    if 'username' not in session or session.get('role') != 'Admin':
+    if 'username' not in session or session.get('role') != 'admin':
+        log_activity(session.get('username', 'ANONYMOUS'), 'UNAUTHORIZED_ACCESS', 'Mencoba update user via Admin API')
         return jsonify({'success': False, 'message': 'Akses khusus Admin Godmode!'}), 403
 
-    data = request.json
+    data = request.json or {}
     user_id = data.get('id')
     new_username = data.get('username', '').strip()
     new_password = data.get('password', '').strip()
@@ -139,6 +147,8 @@ def admin_update_user():
                        (new_username, new_password, new_role, user_id))
         conn.commit()
         conn.close()
+        
+        log_activity(session['username'], 'ADMIN_UPDATE_USER', f"Mengedit Akun ID {user_id}: Username={new_username}, Role={new_role}")
         return jsonify({'success': True, 'message': f'Akun ID {user_id} berhasil diupdate jadi {new_role}!'})
     except sqlite3.IntegrityError:
         conn.close()
@@ -146,10 +156,11 @@ def admin_update_user():
 
 @auth_bp.route('/api/admin/user/add', methods=['POST'])
 def admin_add_user():
-    if 'username' not in session or session.get('role') != 'Admin':
+    if 'username' not in session or session.get('role') != 'admin':
+        log_activity(session.get('username', 'ANONYMOUS'), 'UNAUTHORIZED_ACCESS', 'Mencoba tambah user via Admin API')
         return jsonify({'success': False, 'message': 'Akses khusus Admin!'}), 403
 
-    data = request.json
+    data = request.json or {}
     username = data.get('username', '').strip()
     password = data.get('password', '').strip()
     role = data.get('role', 'Staf')
@@ -166,7 +177,20 @@ def admin_add_user():
                        (username, password, role, jabatan, unit_kerja))
         conn.commit()
         conn.close()
+        
+        log_activity(session['username'], 'ADMIN_ADD_USER', f"Menambahkan user baru: {username} ({role})")
         return jsonify({'success': True, 'message': f'✅ Member baru ({username}) berhasil ditambahkan!'})
     except sqlite3.IntegrityError:
         conn.close()
         return jsonify({'success': False, 'message': 'Username sudah terpakai!'})
+
+@auth_bp.route('/api/user/me', methods=['GET'])
+def get_current_user():
+    if 'username' not in session:
+        return jsonify({'logged_in': False}), 401
+        
+    return jsonify({
+        'logged_in': True,
+        'username': session.get('username'),
+        'role': session.get('role', 'guru')
+    })

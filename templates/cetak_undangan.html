@@ -176,7 +176,15 @@
         <div style="display: flex; justify-content: flex-end; margin-top: 80px;">
             <div style="width: 40%; text-align: left;">
                 <p style="margin: 0;">Kepala Sekolah,</p>
-                <br><br><br><br>
+
+                <div style="height: 75px; position: relative; display: flex; justify-content: center; align-items: center;">
+                    {% if surat.is_approved == 1 %}
+                    <!-- Stempel & TTD nempel pas di tengah -->
+                        <img src="{{ url_for('static', filename='img/ttd_stamp.png') }}" 
+                            style="position: absolute; width: 280px; height: auto; top: -55px; left: 35%; transform: translateX(-50%); z-index: 10; pointer-events: none;">
+                    {% endif %}
+                </div>
+
                 <p style="margin: 0;"><b>Dwi Adhika Mintardi, S.Pd.</b></p>
             </div>
         </div>

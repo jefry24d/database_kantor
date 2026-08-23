@@ -17,8 +17,25 @@ export async function fetchNomorDisposisiAuto() {
     }
 }
 
-// 📥 1. Render Form Surat Masuk
 export function renderFormSuratMasuk(content) {
+    // Ambil dari variabel global sakti
+    const userRole = (window.CURRENT_USER_ROLE || 'guru').toLowerCase();
+
+    // ⛔ HANYA BLOKIR JIKA BENAR-BENAR GURU
+    if (userRole === 'guru') {
+        content.innerHTML = `
+            <div style="background: rgba(235, 77, 75, 0.15); border: 1px solid #eb4d4b; padding: 25px; border-radius: 12px; text-align: center; color: white;">
+                <h2 style="color: #ff7979; margin-bottom: 10px;">⛔ AKSES DITOLAK</h2>
+                <p style="color: #ccc;">Fitur Input Surat Masuk khusus untuk Staf Administrasi & Admin.</p>
+                <button onclick="window.loadPage('eksplorasi')" class="btn-primary" style="margin-top: 15px; background: #0984e3; padding: 10px 20px; border: none; border-radius: 8px; color: white; cursor: pointer; font-weight: bold;">
+                    🔙 Kembali ke Eksplorasi
+                </button>
+            </div>
+        `;
+        return;
+    }
+    // ... SISA FORM KE BAWAH KAGAK USAH DIUBAH
+
     const userPetugas = typeof CURRENT_USER !== 'undefined' ? CURRENT_USER : 'Staf';
     
     content.innerHTML = `
