@@ -185,4 +185,20 @@ async function renderStatsPage(content) {
     }
 }
 
+const phoneBtn = document.getElementById('btn-phone-drawer');
+const phoneDrawer = document.getElementById('phone-drawer');
+const closeBtn = document.getElementById('close-drawer');
+const overlay = document.getElementById('drawer-overlay');
+
+function toggleDrawer() {
+  phoneDrawer.classList.toggle('open');
+  overlay.classList.toggle('open');
+}
+
+if(phoneBtn) {
+  phoneBtn.addEventListener('click', toggleDrawer);
+  closeBtn.addEventListener('click', toggleDrawer);
+  overlay.addEventListener('click', toggleDrawer);
+}
+
 window.loadPage = loadPage;

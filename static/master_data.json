@@ -1,13 +1,5290 @@
 {
-  "guru": [
-    { "nama": "Emma Sophia, S.Pd.", "nip": "198501012010012001", "unit": "Guru Matematika" },
-    { "nama": "Emilie Putri, M.Pd.", "nip": "199002022015022002", "unit": "Guru Bahasa Inggris" },
-    { "nama": "Bambang Pamungkas, S.T.", "nip": "198803032012011003", "unit": "Guru Informatika" }
-  ],
-  "siswa": [
-    { "nama": "Ahmad Subagjo", "kelas": "XI IPA 1", "nis": "12345 / 005111" },
-    { "nama": "Emma Watson", "kelas": "XI IPA 1", "nis": "12346 / 005112" },
-    { "nama": "Emilie Thérèse", "kelas": "XII MIPA 2", "nis": "12399 / 005222" },
-    { "nama": "Siti Nurhaliza", "kelas": "XI IPA 1", "nis": "12347 / 005113" }
-  ]
+    "guru": [
+        {
+            "nama": "Dwi Adhika Mintardi, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Matematika"
+        },
+        {
+            "nama": "Drs. Edie Susanto",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran B.Indonesia"
+        },
+        {
+            "nama": "Suaibatul Islamiyah, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Geografi"
+        },
+        {
+            "nama": "Teguh Handoyono, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Sejarah"
+        },
+        {
+            "nama": "Choirun Nisa', M.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Fisika"
+        },
+        {
+            "nama": "Ismanu Hartono, S.Pd., M.Si.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran B.Indonesia"
+        },
+        {
+            "nama": "Sony Macsandra, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Sosiologi"
+        },
+        {
+            "nama": "Arum Yuswanti, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Eko/Akuntansi"
+        },
+        {
+            "nama": "Drs. Mariyadi",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran A.Islam"
+        },
+        {
+            "nama": "Drs. H. Mudhar",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran A.Islam"
+        },
+        {
+            "nama": "Nadlilatul Laili, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Kimia"
+        },
+        {
+            "nama": "Maria Alfianti, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Biologi"
+        },
+        {
+            "nama": "Wahyudi, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Kimia"
+        },
+        {
+            "nama": "Agus Purnomo, S.S.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran B.Inggris"
+        },
+        {
+            "nama": "Sri Widodo, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran BP/BK"
+        },
+        {
+            "nama": "Eko Handoko, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Matematika"
+        },
+        {
+            "nama": "Erika Budi Setyorini, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran BP/BK"
+        },
+        {
+            "nama": "Asmadji Sugeng Purnomo, S.Si.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Matematika"
+        },
+        {
+            "nama": "Nur Aini, S.S.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran B.Inggris"
+        },
+        {
+            "nama": "Ninoek Roesnilawati, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Matematika"
+        },
+        {
+            "nama": "Siska Dewi Yunita, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran B.Indonesia"
+        },
+        {
+            "nama": "Dodik Daryono, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran B.Jepang"
+        },
+        {
+            "nama": "Fathur Rozy, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Fisika"
+        },
+        {
+            "nama": "Septian Bagus Saputro, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Olahraga"
+        },
+        {
+            "nama": "Drs. Antonius Suliyanto",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran A. Katolik"
+        },
+        {
+            "nama": "Kharis Matul Muarifah, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Sejarah"
+        },
+        {
+            "nama": "Farhan Yudistira, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Olahraga"
+        },
+        {
+            "nama": "Hj. Siti Dutufiyah, M.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Eko/KWR"
+        },
+        {
+            "nama": "Amelia Savitri, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Matematika"
+        },
+        {
+            "nama": "Piti After Wise Hia, M.Th.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran A.Kristen"
+        },
+        {
+            "nama": "Garcelina Rizky Anindika, M.Si.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Laboran"
+        },
+        {
+            "nama": "Naili Mufarrohah, M.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran A.Islam"
+        },
+        {
+            "nama": "Saraswati Ayuning Putri Prasetio, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran B.Indonesia"
+        },
+        {
+            "nama": "Maghrisya Putri Yudistia, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran B.Inggris"
+        },
+        {
+            "nama": "Ferra Irawanti, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Seni Rupa"
+        },
+        {
+            "nama": "Emil Tegar Salas Efendi, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Seni Rupa"
+        },
+        {
+            "nama": "Sandi Mahdias Aziz, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Biologi"
+        },
+        {
+            "nama": "Roy Agatha, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Geografi"
+        },
+        {
+            "nama": "Rendi Putra Itaqullah, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Sejarah"
+        },
+        {
+            "nama": "Mutiara Sukma Lynardhianti, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Kewirausahaan"
+        },
+        {
+            "nama": "Fadhli Rahman Rinadi, S. Sos.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran BK"
+        },
+        {
+            "nama": "Ni Wayan Desy Wulansari, S.E., M.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran A.Hindu"
+        },
+        {
+            "nama": "Yulia Wijaya, S.E.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran A.Budha"
+        },
+        {
+            "nama": "Graena Pelangi Nagara, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran B.Inggris"
+        },
+        {
+            "nama": "Wahyuningtyas Puspita Sari, S.Sos.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Sosiologi"
+        },
+        {
+            "nama": "Aditya Kusuma Yudha, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Olahraga"
+        },
+        {
+            "nama": "Finna Astri Widiyana, S.Sos.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran BK"
+        },
+        {
+            "nama": "Navita Fayola Frihanggrahita, S.Sos.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Sosiologi"
+        },
+        {
+            "nama": "Nanda Sasvira Wulandari, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Matematika"
+        },
+        {
+            "nama": "Muhammad Bintang Nugraha, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran PPKn"
+        },
+        {
+            "nama": "Adelia Fitriani, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran PPKn"
+        },
+        {
+            "nama": "Sri Hartutik",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Bendahara"
+        },
+        {
+            "nama": "Heru Puspito",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Bendahara"
+        },
+        {
+            "nama": "Syamsi Poniman, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Tata Usaha"
+        },
+        {
+            "nama": "Krisana Yudi Wijayanti, S.T.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Tata Usaha"
+        },
+        {
+            "nama": "Imaniar Fajar Rahmadhani, S.Agr",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Tata Usaha"
+        },
+        {
+            "nama": "Rachmad Aditya Pradyta Djayaprana S.Hum.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Tata Usaha"
+        },
+        {
+            "nama": "Jepry Oktavianto, S.Pd.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Tata Usaha"
+        },
+        {
+            "nama": "Nur Wahyu Kinanti, S.Ptk.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Perpustakaan"
+        },
+        {
+            "nama": "Rachmad Hidayat, S.Kom.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Tata Usaha"
+        },
+        {
+            "nama": "Alif Maulana Rabbani, S.IIP.",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Perpustakaan"
+        },
+        {
+            "nama": "Djoko Susanto",
+            "nip": "-",
+            "unit": "Guru Mata Pelajaran Tata Usaha"
+        }
+    ],
+    "siswa": [
+        {
+            "nama": "ACINTYA AMBARWATI",
+            "nis": 14833,
+            "nisn": 102845312,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "ADELIA MARTHA INDRIA PUTRI",
+            "nis": 14834,
+            "nisn": 106991766,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "ALDEQ SULTAN PRATAMA",
+            "nis": 14847,
+            "nisn": 101919650,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "ALVIN DWI PRAMONO",
+            "nis": 14850,
+            "nisn": 106907066,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "AMELIA MAHARANI WULANDARI",
+            "nis": 14855,
+            "nisn": 107361200,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "BRIAN NAUFAL ABBASY",
+            "nis": 14892,
+            "nisn": 104385912,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "CHANTIKA EFIYANA ADHI SETYA",
+            "nis": 14898,
+            "nisn": 104634631,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "CHELSEA CAHYA SETIAWAN",
+            "nis": 14902,
+            "nisn": 106614738,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "CHYNTIA ARIELLA",
+            "nis": 14904,
+            "nisn": 102581514,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "DIKA FIRMANSYAH",
+            "nis": 14919,
+            "nisn": 112872238,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "EMILIE AUDREY HAMDOYO",
+            "nis": 14929,
+            "nisn": 119983416,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "FAREL ANDRIANO KOENTORO",
+            "nis": 14937,
+            "nisn": 104687778,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "FARRENA ELYASA WINONA",
+            "nis": 14940,
+            "nisn": 104191856,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "FERDIAN PRATAMA PUTRA",
+            "nis": 14946,
+            "nisn": 101476835,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "HANUNNAH ISMAHANI HANIFAH",
+            "nis": 14960,
+            "nisn": 107660750,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "Hilmi Ali Musyaffa'",
+            "nis": 14965,
+            "nisn": 102785630,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "MELIA SUMARTONO",
+            "nis": 15000,
+            "nisn": 101568785,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "MOCH. ZHELDANO AGRA MURPHI",
+            "nis": 15003,
+            "nisn": 115955162,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "MUHAMMAD FARID ABYANSYAH",
+            "nis": 15014,
+            "nisn": 106604209,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "MUHAMMAD IRFANUDDAQIQI YAQIN",
+            "nis": 15019,
+            "nisn": 115013846,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "MUSTIKA RAMADHANI",
+            "nis": 15025,
+            "nisn": 101141711,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "NATASHA AURORA FABRIANE",
+            "nis": 15034,
+            "nisn": 115924436,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "NISRINA NABIL RAMADHANI",
+            "nis": 15041,
+            "nisn": 104883835,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "PUTRA DANISH WIJAYA",
+            "nis": 15047,
+            "nisn": 117677884,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "PUTRI ISNANI KALYANA W",
+            "nis": 15048,
+            "nisn": 3118736024,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "RAFANSYAH RAMADHAN ELMAR",
+            "nis": 15053,
+            "nisn": 107686214,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "RAYHAN VAI ARIFIN ",
+            "nis": 15058,
+            "nisn": 3111879003,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "RIZKY AKHMAL MINARDI",
+            "nis": 15063,
+            "nisn": 3116075110,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "RR. ZAKIA NUR SAFITRI",
+            "nis": 15065,
+            "nisn": 101678709,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "SYAVALIA SEPZIAN RAMADHANI",
+            "nis": 15090,
+            "nisn": 101113016,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "TENNOFALLAH REGINA PUTRI UTAMA",
+            "nis": 15092,
+            "nisn": 107916242,
+            "kelas": "X - 1"
+        },
+        {
+            "nama": "ADINDA THIARA AMELIA",
+            "nis": 14835,
+            "nisn": 108271397,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "ALYKA PUTRI RIYADI",
+            "nis": 14854,
+            "nisn": 101567864,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "ANINDYTA DWI NOVARIANY",
+            "nis": 14862,
+            "nisn": 93461292,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "ARINDA PUTRI SALSABILLA PERWITA SARI",
+            "nis": 14869,
+            "nisn": 95478595,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "ARKANANTA WILDAN SYANDRYAN",
+            "nis": 14871,
+            "nisn": 104353848,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "ATTURRAHMA AISYAH PUTRI",
+            "nis": 14877,
+            "nisn": 111904093,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "BIMANTARA ARYA NUGRAHA",
+            "nis": 14891,
+            "nisn": 103553501,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "Chanda Devira Anggraini",
+            "nis": 14897,
+            "nisn": 118299529,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "DAIFULLAH ADALARDO NATHA DEWANTO",
+            "nis": 14909,
+            "nisn": 118060240,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "Damian Alamsyah Putra",
+            "nis": 14910,
+            "nisn": 103612457,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "DAVIN RAISSA FAUSTINE SETIAWAN",
+            "nis": 14912,
+            "nisn": 109209045,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "FALAH HAIDAR PURWANTO",
+            "nis": 14934,
+            "nisn": 118342209,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "FAREL YUSUP AFRIZAL",
+            "nis": 14938,
+            "nisn": 111450465,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "GWENZHIA PUTRI MAHENDRA",
+            "nis": 14958,
+            "nisn": 104039040,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "I'tisyam Mughtar",
+            "nis": 14970,
+            "nisn": 96902381,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "LEONEL MAHESA CESAR",
+            "nis": 14991,
+            "nisn": 104008753,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "MUHAMAD RAIHAN REVALINO OCTORA ARIANTO",
+            "nis": 15008,
+            "nisn": 102968131,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "MUHAMMAD AZKA NUR FIRDAUSI",
+            "nis": 15011,
+            "nisn": 3108567035,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "MUHAMMAD MAULANA BRILIAN",
+            "nis": 15020,
+            "nisn": 104106051,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "MUHAMMAD SURYA DHARMA ALI",
+            "nis": 15023,
+            "nisn": 103807504,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "MUTIARA RAMADHANI",
+            "nis": 15026,
+            "nisn": 102959090,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "PRANATA INDRA JAYA",
+            "nis": 15045,
+            "nisn": 105213778,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "RATU BEBI DIWANZHAH",
+            "nis": 15056,
+            "nisn": 102749855,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "RIZQ KIRANA RAMADHANI",
+            "nis": 15064,
+            "nisn": 111479799,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "SAHCIEL FEDORA REVYLDA",
+            "nis": 15069,
+            "nisn": 123910152,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "SILVA AFRILLIA",
+            "nis": 15085,
+            "nisn": 107608870,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "Tania Angelina",
+            "nis": 15091,
+            "nisn": 106815718,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "WILDAN ARKANA PUTRA IRAWAN",
+            "nis": 15099,
+            "nisn": 104176440,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "ZAHRA RAHMAWATI WICAKSONO",
+            "nis": 15108,
+            "nisn": 106400806,
+            "kelas": "X - 2"
+        },
+        {
+            "nama": "AFIF RAFIDHAN ATHARI",
+            "nis": 14839,
+            "nisn": 109963934,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "ANGELIQUE WIDJAJA",
+            "nis": 14860,
+            "nisn": 115930347,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "ANSYA SYANANDRA PUTRA WINTORO",
+            "nis": 14865,
+            "nisn": 115684452,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "ARVIN ADITYA IRWANSYAH",
+            "nis": 14873,
+            "nisn": 101763844,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "AUDREY EUGINIA AGATHA",
+            "nis": 14878,
+            "nisn": 101896987,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "CHARISSA SHAFIA NURHIDAYAT",
+            "nis": 14900,
+            "nisn": 113938527,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "CHECIL JINGGA DWI SAPUTRI",
+            "nis": 14901,
+            "nisn": 116243760,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "DIMAS ABHINAYA KUSUMA",
+            "nis": 14920,
+            "nisn": 106500211,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "ELLYA RACHMAWATI PUTRI",
+            "nis": 14926,
+            "nisn": 105077275,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "GAUDI ANINDYA PUTRI",
+            "nis": 14952,
+            "nisn": 116626759,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "KAISELA NUARI SETYANA",
+            "nis": 14977,
+            "nisn": 114320266,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "KHAIRIEL GIBRAN FATHONY",
+            "nis": 14981,
+            "nisn": 105249703,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "M.RAISHA ARYASATYA SUBIANTO",
+            "nis": 14994,
+            "nisn": 114307131,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "MAYRIZA KHRISNA SYAH PUTRA",
+            "nis": 14999,
+            "nisn": 3110999486,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "MOCHAMMAD QAIS EKA WAHYUDI",
+            "nis": 15006,
+            "nisn": 113725298,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "NAUFAL HANIF PUTRADIKA",
+            "nis": 15036,
+            "nisn": 109132507,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "Nawang Wulan Jannatul Firdaus",
+            "nis": 15038,
+            "nisn": 117765350,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "PUTRI ZAFIRA AAYLA FITONO",
+            "nis": 15049,
+            "nisn": 3114899703,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "RAVI ALIF YULIANTO",
+            "nis": 15057,
+            "nisn": 102448799,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "SATRIYA FAJAR BAGASKARA",
+            "nis": 15076,
+            "nisn": 107925983,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "SENJA CHANDRA MAGHFIROH",
+            "nis": 15079,
+            "nisn": 117017127,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "SHELLA AGMASAYU FITRIANA",
+            "nis": 15082,
+            "nisn": 105686496,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "Sukma Atrifa Jannah",
+            "nis": 15087,
+            "nisn": 116842823,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "SULTHAN AHNAF FAIRUZ ALAUDIN",
+            "nis": 15088,
+            "nisn": 103132539,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "VERLYTA SASKIA RAMADHANI",
+            "nis": 15093,
+            "nisn": 118107768,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "VERONYKA NOVIANY",
+            "nis": 15094,
+            "nisn": 112060679,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "XAVERIA LUTHFI ARIEFINA",
+            "nis": 15101,
+            "nisn": 103322433,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "Xavior William Daromes",
+            "nis": 15102,
+            "nisn": 113558025,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "ZAHIRA GADIS APRILIANA",
+            "nis": 15107,
+            "nisn": 113425634,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "ZASKYA KARUNIA NUR JANNA",
+            "nis": 15110,
+            "nisn": 103916664,
+            "kelas": "X - 3"
+        },
+        {
+            "nama": "AALIYAH RIZKI RAHMANIA",
+            "nis": 111111,
+            "nisn": 117236970,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "AISYAH MEILI JASMIN KURNIAWAN",
+            "nis": 14843,
+            "nisn": 3117835739,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "ALISYA BERLIANA MAHARANI",
+            "nis": 14848,
+            "nisn": 112521786,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "ANNISA SYAHADAH MUTA'AWILA",
+            "nis": 14864,
+            "nisn": 101206931,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "AURELLYA RIZKY ANNURU",
+            "nis": 14881,
+            "nisn": 103535039,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "BARET ALEZ SAMBORA",
+            "nis": 14889,
+            "nisn": 118071868,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "DEWI POEPOET WULANDARI",
+            "nis": 14916,
+            "nisn": 112631717,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "DONY ANUGRAH PRATAMA",
+            "nis": 14923,
+            "nisn": 116810071,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "Ferdinand Moreno Pratama",
+            "nis": 14947,
+            "nisn": 101537547,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "GRAZIELLA ANANDA PUTRI",
+            "nis": 14956,
+            "nisn": 102422618,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "HASHIFAH ALIYAH AQILA",
+            "nis": 14963,
+            "nisn": 3112037706,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "HELDA SOFI RIANA",
+            "nis": 14964,
+            "nisn": 104625266,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "ILHAM SAPTA DWI RAFELINO",
+            "nis": 14968,
+            "nisn": 116420760,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "KEVIN TIRTA SUBAGYA",
+            "nis": 14979,
+            "nisn": 116424026,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "KIARA AULIA SHAFINA",
+            "nis": 14984,
+            "nisn": 114141419,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "MAJDA RAMDHAN KAROMA",
+            "nis": 14995,
+            "nisn": 3101147192,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "MUHAMMAD ALIF DHIYA'ULHAQ",
+            "nis": 15009,
+            "nisn": 108261015,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "NATHASYA APRILIA REGINA PUTRI",
+            "nis": 15035,
+            "nisn": 111745890,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "NAUFAL RIFQI SAFARAZ",
+            "nis": 15037,
+            "nisn": 117515203,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "RAFA ARJUNA PUTRA",
+            "nis": 15052,
+            "nisn": 117498291,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "RESTI ERINA DWARAWATI",
+            "nis": 15061,
+            "nisn": 103648329,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "SAKINAH ROBIATUL ARIFIN",
+            "nis": 15071,
+            "nisn": 113698222,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "SATYA NARYAMA",
+            "nis": 15077,
+            "nisn": 115149160,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "SHAZIA FIRZANAH SHAQILLA",
+            "nis": 15081,
+            "nisn": 107453715,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "SOFIA ALESHA SAFIRA",
+            "nis": 15086,
+            "nisn": 106342677,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "SYAHRUL RACHMAN",
+            "nis": 15089,
+            "nisn": 116156586,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "VERROLD SAVERIO KEANDRA",
+            "nis": 15095,
+            "nisn": 103334650,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "VIOLETTA ALMADINA WIBOWO",
+            "nis": 15097,
+            "nisn": 108562151,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "ZASKYA AZALEA LATIEFA GUNAWAN",
+            "nis": 15109,
+            "nisn": 3118214611,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "ZILVANA ZAHRA ZANDRIARIVA",
+            "nis": 15113,
+            "nisn": 106867046,
+            "kelas": "X - 4"
+        },
+        {
+            "nama": "ADITYA KHARISMA EFFENDHY",
+            "nis": 14836,
+            "nisn": 107015219,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "ALMAYRA NARESWARI LITUHAYU WIYANTORO",
+            "nis": 14849,
+            "nisn": 3114280123,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "ALYA NUR AZIZAH",
+            "nis": 14852,
+            "nisn": 118916629,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "ARIZA PUTRI ALFINIA",
+            "nis": 14870,
+            "nisn": 114979620,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "ATHAYA SALSABILA VIATY PRASETYO",
+            "nis": 14876,
+            "nisn": 112778322,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "BALIN ARGA'DON FIRMANSYAH",
+            "nis": 14886,
+            "nisn": 118257240,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "Barcelona Malakiano",
+            "nis": 14887,
+            "nisn": 118741990,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "CAHYANI PRIFTA ROSALIA",
+            "nis": 14888,
+            "nisn": 108819759,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "DAFFA SATRYA FITRASYAH",
+            "nis": 14893,
+            "nisn": 106498239,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "DEVINA AYU RAHMANIA PUTRI",
+            "nis": 14908,
+            "nisn": 102330059,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "DHIKA WIDYA ANUGERAH",
+            "nis": 14915,
+            "nisn": 103418782,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "ELECTRA LETICYA PRIANGGONO",
+            "nis": 14917,
+            "nisn": 101680024,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "FELICIA ALTA LAURA AGUSTIN",
+            "nis": 14925,
+            "nisn": 119909171,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "HAFIDH BAHRUR ROHMAN",
+            "nis": 14959,
+            "nisn": 106657527,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "IQBAL RIFAT AL GAFUR",
+            "nis": 14969,
+            "nisn": 116025665,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "KEIZHA EMILY AYU PUTRI",
+            "nis": 14978,
+            "nisn": 106291119,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "KIRANA AZZAHRA PRABAWATI",
+            "nis": 14985,
+            "nisn": 109369461,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "LOLITA YASMINE MILANO",
+            "nis": 14993,
+            "nisn": 112326387,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "MOCHAMMAD ARIEF RAHMAN HAKIM",
+            "nis": 15005,
+            "nisn": 107672698,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "MUHAMMAD BURHANA ROBBIHI HANIIFAN",
+            "nis": 15012,
+            "nisn": 119782283,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "MUHAMMAD RAFI AGTA BUANA",
+            "nis": 15021,
+            "nisn": 114535436,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "NAJA TANAYA TSABITA WIBOWO",
+            "nis": 15031,
+            "nisn": 105598316,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "Najwa Aurelia Az-Zahra",
+            "nis": 15033,
+            "nisn": 109782365,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "NUR ZAHRA ALYA SAICHONI",
+            "nis": 15042,
+            "nisn": 116506838,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "PANDU SETYO NUR WIBAWANTO",
+            "nis": 15043,
+            "nisn": 102065314,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "RAISSA ALLIYA RACHMAN",
+            "nis": 15054,
+            "nisn": 111122175,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "RENO IRFANO SATRIAWAN",
+            "nis": 15060,
+            "nisn": 118859622,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "SAVA AUREL SYAHIRAH",
+            "nis": 15078,
+            "nisn": 106681781,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "WIFI ELISYA PUTRI LUISANJAYA",
+            "nis": 15098,
+            "nisn": 103600068,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "Zhafira Zauhair",
+            "nis": 15075,
+            "nisn": 112596833,
+            "kelas": "X - 5"
+        },
+        {
+            "nama": "ABDUL AZIZ AL-ROZAQ",
+            "nis": 14830,
+            "nisn": 102093596,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "ABDUL HAFIZ",
+            "nis": 14831,
+            "nisn": 113564178,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "ADITYA RAFI PUTRA PERKASA",
+            "nis": 14837,
+            "nisn": 111691754,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "ARCSHY FACHRI NUR RIZKY JULIANTO",
+            "nis": 14866,
+            "nisn": 106072512,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "ARROYYAN MAULANA HALIM NUGERAHA",
+            "nis": 14872,
+            "nisn": 107458571,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "ARYA PRATAMA SAMBAGA IHATRA",
+            "nis": 14874,
+            "nisn": 3109977332,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "AUREL ANINDYA PUTRI SOFIA",
+            "nis": 14879,
+            "nisn": 112347130,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "DANISWARA PUTRA GUNAWAN",
+            "nis": 14911,
+            "nisn": 101811586,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "DZAKY CAHYA MAIANDIKA",
+            "nis": 14924,
+            "nisn": 103162666,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "ELSYA MEY ZAFANA",
+            "nis": 14927,
+            "nisn": 115369279,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "FANESSA FIRSTYA VEERMAN",
+            "nis": 14936,
+            "nisn": 113065502,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "JIBRILL KAYLA",
+            "nis": 14973,
+            "nisn": 102018175,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "Khansa Naqa Qonitah",
+            "nis": 14982,
+            "nisn": 107774915,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "KHASYIFA WAFI'AIN HIDANIA",
+            "nis": 14983,
+            "nisn": 108825700,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "KIRANA FATIMAH AZZARAH",
+            "nis": 14986,
+            "nisn": 102063934,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "LANANG KAISAR PRATAMA",
+            "nis": 14988,
+            "nisn": 106902446,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "LIVINA AURA SALSABILA",
+            "nis": 14992,
+            "nisn": 104523298,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "MOCH. JASIR FADHIL",
+            "nis": 15002,
+            "nisn": 105731887,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "MUHAMMAD HANDAL RIVANO",
+            "nis": 15017,
+            "nisn": 3107967703,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "MUHAMMAD RENDY IRWANSYAH PUTRA",
+            "nis": 15022,
+            "nisn": 108199286,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "NADIEN ZIVANNA ASYRILIA",
+            "nis": 15027,
+            "nisn": 105738616,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "NAFIS SYAHRANI",
+            "nis": 15028,
+            "nisn": 104159427,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "Raafindra Zidan Firdaus",
+            "nis": 15050,
+            "nisn": 104429451,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "Revand Sean Aryawan",
+            "nis": 15062,
+            "nisn": 115343357,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "SABIAN PUTRA JAFA PURWANTARA",
+            "nis": 15066,
+            "nisn": 116913807,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "SAFIRA ZALFANIA PUTRI",
+            "nis": 15068,
+            "nisn": 107072869,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "SASMITA FRISILIA SALSABILA",
+            "nis": 15074,
+            "nisn": 93850524,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "VIKO PUTRA RAMADHAN",
+            "nis": 15096,
+            "nisn": 102354629,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "YUDITA ORLIN AUREA",
+            "nis": 15106,
+            "nisn": 109768610,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "Zidni Istighfarin Pribadi",
+            "nis": 15112,
+            "nisn": 115625763,
+            "kelas": "X - 6"
+        },
+        {
+            "nama": "Achmad Davino Ardiansyah",
+            "nis": 14836,
+            "nisn": 116932410,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "AFFAN TAYO KHOIRULLAH",
+            "nis": 14841,
+            "nisn": 117754224,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "AFRIZAL WILDAN PUTRA SANTOSO",
+            "nis": 14849,
+            "nisn": 109252469,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "ALVIN RIZKY HIMAWAN",
+            "nis": 14852,
+            "nisn": 106318110,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "ANCITA MEDY CHAIWELLA",
+            "nis": 14870,
+            "nisn": 106661928,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "ANERZA FIRZANAH A'BIDAH ALQOF",
+            "nis": 14876,
+            "nisn": 119099621,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "AUREL NINDI RAMADHANI",
+            "nis": 14886,
+            "nisn": 112669785,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "CANDY SETIAWAN",
+            "nis": 14887,
+            "nisn": 109508278,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "CANTIKA MARHETA SURYA SAHRATUZZITA",
+            "nis": 14888,
+            "nisn": 107815430,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "CHIKITA MAULIDYA PUTRI WIDNIE",
+            "nis": 14893,
+            "nisn": 116278933,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "DERYNO HAMDANI APRILLIO",
+            "nis": 14908,
+            "nisn": 116424003,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "DINA ANGEL LINA",
+            "nis": 14915,
+            "nisn": 117370487,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "DINA NOVELIA",
+            "nis": 14917,
+            "nisn": 104798201,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "ERIKA DWI RISTY",
+            "nis": 14925,
+            "nisn": 102001095,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "FARRAH RIANTY FITRIARINI",
+            "nis": 14959,
+            "nisn": 105125041,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "FEBRION REDICA PUTRA",
+            "nis": 14969,
+            "nisn": 119390372,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "JELITA NUR HAIBAH",
+            "nis": 14978,
+            "nisn": 106377177,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "JILL CLEARESTA FRIKA EFFENDI",
+            "nis": 14985,
+            "nisn": 119239864,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "LATHIFA JULIAVIHANA",
+            "nis": 14993,
+            "nisn": 115481026,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "MARSYA AUNI BATRISYIA INTANI",
+            "nis": 15005,
+            "nisn": 101121016,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "MIFAL AFGHANI",
+            "nis": 15012,
+            "nisn": 104173172,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "MUHAMMAD ANDRE ARDHIYANTO",
+            "nis": 15021,
+            "nisn": 103289149,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "MUHAMMAD EVAN NUR FIRDAUS",
+            "nis": 15031,
+            "nisn": 116165312,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "MUHAMMAD ICHSAN ARDIANSYAH",
+            "nis": 15033,
+            "nisn": 115989002,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "NAILAH BAHIROTUL ALFIYAH",
+            "nis": 15042,
+            "nisn": 106550080,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "Raden Mohammad Rizqy Syah Bintang",
+            "nis": 15043,
+            "nisn": 108982149,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "RENATA DWI RAHAYU",
+            "nis": 14945,
+            "nisn": 101240249,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "SAHELGA PUAN KINANTI",
+            "nis": 15054,
+            "nisn": 115603166,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "SHEVINA AURA NIDJI SHAKINAH",
+            "nis": 15060,
+            "nisn": 103823964,
+            "kelas": "X - 7"
+        },
+        {
+            "nama": "AISYAZARA LOVEIS GIANT HANDOKO",
+            "nis": 14844,
+            "nisn": 125595090,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "ANGGUN ANITA SARI",
+            "nis": 14861,
+            "nisn": 113952962,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "ANNISA MAHESWARI ZARIFAH",
+            "nis": 14863,
+            "nisn": 102443946,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "ARDITHO KENJIRO ARIO PRATAMA",
+            "nis": 14868,
+            "nisn": 118529637,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "AURORA CLORINDA WIJAYA",
+            "nis": 14882,
+            "nisn": 105602254,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "AZAHRA DWI APRILIA",
+            "nis": 14883,
+            "nisn": 113697969,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "Aziizah Fithriyyah Rahmawati",
+            "nis": 14884,
+            "nisn": 106481296,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "AZRA KIRANI SYAKIRA PUTRI",
+            "nis": 14885,
+            "nisn": 116000722,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "CHARISSA ANINDITA GYASI",
+            "nis": 14899,
+            "nisn": 103475501,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "CHYNTIYA FITRIANI PUTRI",
+            "nis": 14906,
+            "nisn": 3101186340,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "DIANDRA ARKANANTA",
+            "nis": 14918,
+            "nisn": 108335714,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "EVAN XAVIER ETHELINE",
+            "nis": 14931,
+            "nisn": 116636500,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "FADILAH INDAH",
+            "nis": 14932,
+            "nisn": 108237001,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "FAKHRI ALTHAF",
+            "nis": 14933,
+            "nisn": 119130083,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "Falenza Cantika Efendi",
+            "nis": 14935,
+            "nisn": 106322696,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "FEBRIAN ARIFFIANTO",
+            "nis": 14942,
+            "nisn": 97675782,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "FERRETO ADERYANSYAH SAKRA",
+            "nis": 14949,
+            "nisn": 102969392,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "FIRMAN EKA PUTRA",
+            "nis": 14950,
+            "nisn": 101880857,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "FITRI AYU HARYANI",
+            "nis": 14951,
+            "nisn": 113563508,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "Ghaniyyu Akma Putra Cahyono",
+            "nis": 14953,
+            "nisn": 106539512,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "HARIS PRAYOGA WICAKSONO",
+            "nis": 14961,
+            "nisn": 101045677,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "KEYANDRA RASENDRIYA",
+            "nis": 14980,
+            "nisn": 104872246,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "MORILLO DWI ELIANO",
+            "nis": 14997,
+            "nisn": 103358721,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "MUHAMMAD FAVIANO",
+            "nis": 15015,
+            "nisn": 113480710,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "MUHAMMAD GALANG BORNEO SUNU HANDARU",
+            "nis": 15016,
+            "nisn": 105976608,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "MUHAMMAD YOGA PRASTYA",
+            "nis": 15024,
+            "nisn": 3116244402,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "NAILA KARTIKA PUTRI",
+            "nis": 15029,
+            "nisn": 117175526,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "NAJLA RAFA KHOIRIYA MUSLIMAH",
+            "nis": 15032,
+            "nisn": 102523343,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "SALSABILA ARDHANI AZHAAR",
+            "nis": 15072,
+            "nisn": 116440611,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "SALSABILLA BALQIS AZZURA",
+            "nis": 15073,
+            "nisn": 116678434,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "YOVAN SEPTA WANDANA",
+            "nis": 15105,
+            "nisn": 102111412,
+            "kelas": "X - 8"
+        },
+        {
+            "nama": "AKILAH PRIMA AURORA LIBING",
+            "nis": 14845,
+            "nisn": 113029391,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "AL AKBAR GIO MAHA PUTRA",
+            "nis": 14846,
+            "nisn": 101350713,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "ANASTASYA ARIESTI ARDIANA",
+            "nis": 14856,
+            "nisn": 113357955,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "ANGELICA PUTRI JOSHUA",
+            "nis": 14859,
+            "nisn": 108492260,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "ARDHANA RESWARYA WIBOWO",
+            "nis": 14867,
+            "nisn": 112552969,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "BAYU IBRA KURNIAVEVA",
+            "nis": 14890,
+            "nisn": 114514477,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "Callista Queena Gracia Hardinata",
+            "nis": 14894,
+            "nisn": 111195063,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "DESAK PUTU ANYA KUSUMA WARDANA",
+            "nis": 14914,
+            "nisn": 109166187,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "EMERALDA CHARISA WIDYAN",
+            "nis": 14928,
+            "nisn": 101273824,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "FATHIR BAZFAHEEM",
+            "nis": 14941,
+            "nisn": 3105702835,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "FEBRIAN DICKY PUTRA ARIANTA",
+            "nis": 14943,
+            "nisn": 114217063,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "FERDINAND PUTRA SETIAWAN",
+            "nis": 14948,
+            "nisn": 117967010,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "Gracelynn Chrisellda Tan",
+            "nis": 14954,
+            "nisn": 118845501,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "GRACIELA PUTRI ULI MANURUNG",
+            "nis": 14955,
+            "nisn": 119978454,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "GRICELDA ALEXANDRIA SUNDAH",
+            "nis": 14957,
+            "nisn": 107678891,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "I GUSTI NGURAH SURYA GAVINDRA",
+            "nis": 14966,
+            "nisn": 115931396,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "I KADE YOGA SAPUTRA",
+            "nis": 14967,
+            "nisn": 101875998,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "Jeslin Shalom Christa Budiono",
+            "nis": 14972,
+            "nisn": 116065396,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "JOHANA MARGARETHA KAWUWUNG",
+            "nis": 14975,
+            "nisn": 101800934,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "JULIAN CHRISTIAN MELVIN",
+            "nis": 14976,
+            "nisn": 93098217,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "KRISTIAN EZEKHIEL WASKITO",
+            "nis": 14987,
+            "nisn": 101393039,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "LATICIA BELLA CONCETTA",
+            "nis": 14990,
+            "nisn": 117552604,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "MARIA KASIH CHRISTIANA",
+            "nis": 14996,
+            "nisn": 119719599,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "MONIQUE MARCELIA",
+            "nis": 15007,
+            "nisn": 115590111,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "NI PUTU PANDE FEBY SARASWATI",
+            "nis": 15042,
+            "nisn": 112706470,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "NICOLAS RAYINDO INARAYA",
+            "nis": 15043,
+            "nisn": 114416683,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "PRISCILLA AGNIN DYASPURI",
+            "nis": 15046,
+            "nisn": 115109705,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "SHARON ALEXANDRIA SHALOOM MADIAN",
+            "nis": 15080,
+            "nisn": 106447318,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "SHEVANYA FIRAVELOVE CARDOSO",
+            "nis": 15083,
+            "nisn": 109462578,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "YAN HEMAS PANDANARU PLAIKOIL",
+            "nis": 15103,
+            "nisn": 104582580,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "YOSUA AGUNG KURNIAWAN",
+            "nis": 15104,
+            "nisn": 101669076,
+            "kelas": "X - 9"
+        },
+        {
+            "nama": "ABHISTA EVAN VEASNA",
+            "nis": 15116,
+            "nisn": 99057836,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "ABI MANYU JUNI ALDI",
+            "nis": 14554,
+            "nisn": 98233137,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "Afrisya Putih Wimala",
+            "nis": 14559,
+            "nisn": 93457317,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "ALVINO IMTIYAAZ YUSRAN",
+            "nis": 14573,
+            "nisn": 91289788,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "AMELIA BELVA FABIOLA",
+            "nis": 14575,
+            "nisn": 96528644,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "ANANDA PUTRA FERIANS",
+            "nis": 14820,
+            "nisn": 91868745,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "ARDEN RE RONALDO",
+            "nis": 14587,
+            "nisn": 95633958,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "DAVA ISMAYA PUTRA WIBISONO",
+            "nis": 14625,
+            "nisn": 92737626,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "DEVI RATNA LESTARI",
+            "nis": 14829,
+            "nisn": 94261786,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "DOVINO PUTRA PRATAMA",
+            "nis": 14635,
+            "nisn": 107543685,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "DZAKA ANANDA KUSDARDJANTO",
+            "nis": 14637,
+            "nisn": 96869285,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "DZAKWAN BAHTRANU RAMADHANI ADIMAR",
+            "nis": 14638,
+            "nisn": 91040247,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "DZAKY AL'AZIZ",
+            "nis": 14639,
+            "nisn": 103233655,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "FAJAR HAMONANGAN TAMBUNAN",
+            "nis": 14649,
+            "nisn": 96082191,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "Faliha Nurkamila",
+            "nis": 14651,
+            "nisn": 108290399,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "Fikrii Amrullah Kamiil",
+            "nis": 14819,
+            "nisn": 101344639,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "JAYENG WIKRAHADI ARUBRAHMANA",
+            "nis": 14672,
+            "nisn": 94176685,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "LINGGA PARAMUDYA CITRA MAHARDIKA",
+            "nis": 14688,
+            "nisn": 95304838,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "MOZZA AURELIA ZABRINA",
+            "nis": 14705,
+            "nisn": 106551870,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "MUHAMMAD DAFA APRILIO",
+            "nis": 14710,
+            "nisn": 115531321,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "MUHAMMAD DEDE APRILYANTO",
+            "nis": 14711,
+            "nisn": 107819323,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "MUHAMMAD RAFA ATHA KAMIL",
+            "nis": 14825,
+            "nisn": 3096456975,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "NABILA AYUNINGTYAS",
+            "nis": 14725,
+            "nisn": 92761250,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "NADINE PERMATA FIRANI",
+            "nis": 14730,
+            "nisn": 101465380,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "NIKMATUL KHOLIDAH",
+            "nis": 14739,
+            "nisn": 88385181,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "PASSAMA",
+            "nis": 14743,
+            "nisn": 94724779,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "RADITYA PUTRA WITONO",
+            "nis": 14752,
+            "nisn": 92310381,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "RAISA SAFA TALITA ARFANDY",
+            "nis": 14758,
+            "nisn": 93881269,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "RAMADANI",
+            "nis": 14759,
+            "nisn": 3095861712,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "RANIA RIZKI ZAYYANA",
+            "nis": 14762,
+            "nisn": 93947719,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "RAVIKA PUTRI ANGGRAINI",
+            "nis": 14763,
+            "nisn": 92727372,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "RIDWAN AINUR YAHYA",
+            "nis": 14772,
+            "nisn": 91060216,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "SEGARWANGI HAFIZUL HILMI",
+            "nis": 14780,
+            "nisn": 97840604,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "TRICILYA NUR FAIZZA",
+            "nis": 14803,
+            "nisn": 97602286,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "XAVIER ABHYTA AL FATIH ANUGRAH",
+            "nis": 14810,
+            "nisn": 108961672,
+            "kelas": "XI - 1"
+        },
+        {
+            "nama": "AKBAR DZIL DAFA AL-GHAISAN",
+            "nis": 14565,
+            "nisn": 92165450,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "ALIF FIRMANSYAH",
+            "nis": 14566,
+            "nisn": 98030370,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "ANINDYA PUTRI ARTANTI",
+            "nis": 14583,
+            "nisn": 91840075,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "ARDIAN BAGUS OKTAVIAN",
+            "nis": 14588,
+            "nisn": 109483246,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "ATHA FERDIANSYAH JAMAL BUNGASAU",
+            "nis": 14596,
+            "nisn": 108644638,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "Athala Diwendra Putra",
+            "nis": 14597,
+            "nisn": 91002787,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "AZKA ZESAINA DEWI SUYITNO",
+            "nis": 14602,
+            "nisn": 95273405,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "AZWA ARDILLA",
+            "nis": 14603,
+            "nisn": 95513658,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "AZZAHRA DESYAFRENSA SUSANTO",
+            "nis": 14604,
+            "nisn": 96376705,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "CANTIKA JASMINE AISYAH PONTOH",
+            "nis": 14613,
+            "nisn": 99737929,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "Citra Clarissa Anindya Sari",
+            "nis": 14618,
+            "nisn": 106370874,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "DAFFA SHOLAKHUDIN ARGANATA",
+            "nis": 14621,
+            "nisn": 106336002,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "DAKHA TWELVIAN APRILIANO",
+            "nis": 14622,
+            "nisn": 103264611,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "DEWANGGA ANURAGA SATRIA SEMBADA",
+            "nis": 14629,
+            "nisn": 92676636,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "ERLANGGA ABDILLAH SANTOSO",
+            "nis": 14645,
+            "nisn": 3102565613,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "GRACIO EKO INDRIYAWAN",
+            "nis": 14660,
+            "nisn": 102975961,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "HAPPY PENANTIAN AIRIN",
+            "nis": 14664,
+            "nisn": 3104969805,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "Ibra Wangsa Rahmadanian",
+            "nis": 14666,
+            "nisn": 93306378,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "ISAM RAMADHAN",
+            "nis": 14671,
+            "nisn": 97598576,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "JOEVANCA NAYLA APRILIA ADIBAH",
+            "nis": 14674,
+            "nisn": 102007405,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "KAYSAR RAMADAN",
+            "nis": 14676,
+            "nisn": 98803775,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "KEMAS SAGALLA",
+            "nis": 14677,
+            "nisn": 106684940,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "KHABIL TANJUNG",
+            "nis": 14681,
+            "nisn": 91865875,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "KHANSA ZHAFIRAH NUGROHO",
+            "nis": 14683,
+            "nisn": 96205285,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "Modric Alvaro Vicenzo",
+            "nis": 14702,
+            "nisn": 98573821,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "MOUNICA QIAN NIAZA",
+            "nis": 14704,
+            "nisn": 95821274,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "MUHAMMAD ARGYA MAHATMA PUTRA",
+            "nis": 14709,
+            "nisn": 107624793,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "NAIZAR DAYLOVESYA ARTA",
+            "nis": 14732,
+            "nisn": 101829291,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "NUR LIFIYA ARLINTANG",
+            "nis": 14740,
+            "nisn": 96442497,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "RAFANO IVANDER WIRASENA",
+            "nis": 14754,
+            "nisn": 94242717,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "RAYHAN NAIM IHSAN KARIM",
+            "nis": 14764,
+            "nisn": 93879074,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "REVANO PUTRA DEWANDHARU",
+            "nis": 14767,
+            "nisn": 99665766,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "SABRINA CAHAYUWILUJENG",
+            "nis": 14776,
+            "nisn": 107395257,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": "Sang Aldiandra Pratama",
+            "nis": 14779,
+            "nisn": 92999483,
+            "kelas": "XI - 2"
+        },
+        {
+            "nama": " MICHAEL AL ACHMAD FAYYAS",
+            "nis": 14698,
+            "nisn": 105591657,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "AFINO TRI ALFARIZKI",
+            "nis": 14558,
+            "nisn": 109706248,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "ALTAF ZAFARAN YUSKAR",
+            "nis": 14570,
+            "nisn": 92469184,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "ARETHA FATHINAH MYESHIA",
+            "nis": 14589,
+            "nisn": 102312328,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "Arya Ardiansyah Putra Wibowo",
+            "nis": 14592,
+            "nisn": 92155964,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "Beryl Hamizan Rabbani",
+            "nis": 14607,
+            "nisn": 106758672,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "BINTANG ARDANA PUTRI ERWANTO",
+            "nis": 14608,
+            "nisn": 115705718,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "CAESAR WISHNUTAMA SASMITO",
+            "nis": 14610,
+            "nisn": 99702139,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "CAKRA GILBERT RUHUT HALOMOAN RAJA GUK GUK",
+            "nis": 14612,
+            "nisn": 102608281,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "CHRISTABELL IMANTAKA WORU",
+            "nis": 14615,
+            "nisn": 95672921,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "CHRISTEA INIESTHA PUTRI",
+            "nis": 14616,
+            "nisn": 97570574,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "Elbert Immanuel Pusporaharjo",
+            "nis": 14641,
+            "nisn": 105934524,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "FIQIH AMRULLAH",
+            "nis": 14655,
+            "nisn": 95664561,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "GABRIELLA MARGARETHA SIBUEA",
+            "nis": 14658,
+            "nisn": 109529588,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "HIZKIA NIKAO HARSEN",
+            "nis": 14665,
+            "nisn": 108813157,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "IQBIE MUHAMMAD ABIL",
+            "nis": 14668,
+            "nisn": 108505779,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "KHANSA AURILIA FRIDA",
+            "nis": 14682,
+            "nisn": 104313775,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "LUQMANUL HAKIM AL BISHRI",
+            "nis": 14691,
+            "nisn": 107089082,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "LUSTY FATIMAH RASENDRIYA",
+            "nis": 14692,
+            "nisn": 103440423,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "M. AKMAL BAIHAQI",
+            "nis": 14708,
+            "nisn": 92391778,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "MOCHAMMAD HADZIQ AS SYAIROFI",
+            "nis": 14701,
+            "nisn": 105752466,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "NABILA AWALIA PUTRI",
+            "nis": 14724,
+            "nisn": 105238062,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "NI KADEK SAGITA DEWI AVESA",
+            "nis": 14737,
+            "nisn": 108257422,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "RAFFA ZAKARIA ZAKHI",
+            "nis": 14823,
+            "nisn": 92633120,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "RENA AKHILA DEFKA",
+            "nis": 14765,
+            "nisn": 105158758,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "RENDRA BACTIAR WIBISONO",
+            "nis": 14766,
+            "nisn": 99690113,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "REZA TRIYANI FAUSTINA MAULIDIYAH",
+            "nis": 14827,
+            "nisn": 93457605,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "REZKY AZZAM MALIEQ RAMADHAN",
+            "nis": 14770,
+            "nisn": 97243241,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "SAFIRA HANA AZZAHRA",
+            "nis": 14778,
+            "nisn": 94632781,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "SHABRINA RIZQI MEIDIANA PUTRI",
+            "nis": 14782,
+            "nisn": 106551911,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "SHATA ARHAB HARIYANTO",
+            "nis": 14785,
+            "nisn": 3100757602,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "SHOLAHUDIN SURYA RACHMAN",
+            "nis": 14788,
+            "nisn": 107342723,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "SUNDAY NUR PUTRA EMAS",
+            "nis": 14791,
+            "nisn": 95166932,
+            "kelas": "XI - 3"
+        },
+        {
+            "nama": "ABIZARD ZAIDAN PUTRA",
+            "nis": 14555,
+            "nisn": 97589822,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "ADE GANANG GUNAWAN",
+            "nis": 14556,
+            "nisn": 97936683,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "Aisyah Athaya Hafizha",
+            "nis": 14563,
+            "nisn": 103338088,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "ALMIRA JINGGA AZALIA",
+            "nis": 14569,
+            "nisn": 107894535,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "AMIRAH RAHMA FIRMANSYAH",
+            "nis": 14577,
+            "nisn": 95415011,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "ANANDA KEVIN PUTRA RENGGALIS",
+            "nis": 14578,
+            "nisn": 96107923,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "Arkan Ataya Hidayat",
+            "nis": 14590,
+            "nisn": 95420110,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "ARUNA ARSY DAIVANO",
+            "nis": 14591,
+            "nisn": 92883023,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "AURELIA ABINA NEFERTITI",
+            "nis": 14598,
+            "nisn": 93309983,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "AURELIA KINANTHI SHOHIB",
+            "nis": 14599,
+            "nisn": 98813329,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "AZALIA HOSHI KHALISTA",
+            "nis": 14601,
+            "nisn": 102924036,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "CARISSA NAILA PARAMITHA",
+            "nis": 14614,
+            "nisn": 104774719,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "CINTA EZALLEA",
+            "nis": 14617,
+            "nisn": 115463377,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "CITRA FEBRIANTY SAPUTRO",
+            "nis": 14619,
+            "nisn": 3102456416,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "DAFA EGAN BIMANTARA",
+            "nis": 14620,
+            "nisn": 95160825,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "DEWINTA AMELIA PUTRI",
+            "nis": 14630,
+            "nisn": 96250450,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "Dhania Neysha Ramadhani",
+            "nis": 14631,
+            "nisn": 93327525,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "FABITHA INDIRA AL KHALIFI",
+            "nis": 14647,
+            "nisn": 106223014,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "FARAH NUR AYESHA",
+            "nis": 14652,
+            "nisn": 104333737,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "MOHAMMAD ALVIN SATRIA NARARYA",
+            "nis": 14824,
+            "nisn": 108411892,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "MUHAMMAD NAILUL AUTAR",
+            "nis": 14715,
+            "nisn": 91827457,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "MUHAMMAD RAFI RABBANI",
+            "nis": 14717,
+            "nisn": 88858084,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "PUDELIKEWA ILHAM DZUL'ALFARADHA",
+            "nis": 14745,
+            "nisn": 3091581952,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "PUTRI ASSYIFA EMMEILIANA",
+            "nis": 14746,
+            "nisn": 107516608,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "RICARDO YOGA PAMUNGKAS",
+            "nis": 14771,
+            "nisn": 109634078,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "SHAFWAN YUSRIL TRI INDIANTO",
+            "nis": 14784,
+            "nisn": 101850658,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "SHERLY FEBBY ATHA",
+            "nis": 14786,
+            "nisn": 93461131,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "SYAFATUS AZ-ZAHRA",
+            "nis": 14792,
+            "nisn": 96550799,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "SYAHNADA AUREL KUMALA PUTRI",
+            "nis": 14796,
+            "nisn": 96994194,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "SYIRANISA NABILA",
+            "nis": 14799,
+            "nisn": 3098337537,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "WISNU ADIBRATA IBRAHIM",
+            "nis": 14809,
+            "nisn": 101560154,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "YESSINTA BHERLIANA",
+            "nis": 14812,
+            "nisn": 92223259,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "ZHAIDAN ZIDNAA NABHAN MAULANA ADI YOGA",
+            "nis": 14817,
+            "nisn": 91364300,
+            "kelas": "XI - 4"
+        },
+        {
+            "nama": "ALIFIA DINDA PUTRI AGUSTIN",
+            "nis": 14567,
+            "nisn": 99426061,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "ASHIVA PUTRI RESTRIANA",
+            "nis": 14594,
+            "nisn": 104777128,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "ASSA AURA MAGDHALENA",
+            "nis": 14595,
+            "nisn": 3105698265,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "BAIM LANDO PUTRA WINKE",
+            "nis": 14606,
+            "nisn": 95948689,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "EVAN RIZQULLAH",
+            "nis": 14646,
+            "nisn": 96806375,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "FAIZI MIRZA SAPUTRA",
+            "nis": 14648,
+            "nisn": 97990501,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "FYELLA CANTIKA SAFASEPTRI",
+            "nis": 14657,
+            "nisn": 97774196,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "ICA NABILA NUR AIMA",
+            "nis": 14667,
+            "nisn": 103012440,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "IRSAN KUSTRIANDI",
+            "nis": 14670,
+            "nisn": 3105595579,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "IVAN ARISAPUTRA RATYANTO",
+            "nis": 14826,
+            "nisn": 104638077,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "KEVIN WIJAYA",
+            "nis": 14679,
+            "nisn": 95331939,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "Khanza Khalila Sharen",
+            "nis": 14684,
+            "nisn": 107090641,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "KHOIRIYATUM MUBAROKAH",
+            "nis": 14685,
+            "nisn": 95212015,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "LELLY LAVILA RAHMAH",
+            "nis": 14687,
+            "nisn": 98479440,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "MOHAMMAD PRINZKY IRZAMAULANA",
+            "nis": 14703,
+            "nisn": 98011030,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "MUCHAMMAD FACHRI KHAIZAN",
+            "nis": 14706,
+            "nisn": 3091806386,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "Muhammad Saddam Alfaruk",
+            "nis": 14719,
+            "nisn": 3093789598,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "MUTIARA CITRA KIRANA",
+            "nis": 14723,
+            "nisn": 94590698,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "NADIA ANGGRAINI MUTIARA SETIA SARI",
+            "nis": 14729,
+            "nisn": 104068922,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "NAJWA AURELLYA AMANDITA",
+            "nis": 14733,
+            "nisn": 92855544,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "PRAYATA SUHARSYAH ARZAHFIF",
+            "nis": 14744,
+            "nisn": 108760153,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "RAFIKA DINDA DEWI KHUMAIRO'",
+            "nis": 14755,
+            "nisn": 3080886518,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "RAIHAN KUSUMA PUTRA DEWA",
+            "nis": 14757,
+            "nisn": 104660006,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "Ramaditya Karunia Putra",
+            "nis": 14760,
+            "nisn": 92626633,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "SERLY SYAFAROTUL INAYAH",
+            "nis": 14781,
+            "nisn": 91555349,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "SHIFA SHARA SALSABILA",
+            "nis": 14787,
+            "nisn": 105257926,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "SYAFITRI RACHMA MIA",
+            "nis": 14795,
+            "nisn": 91340346,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "SYFA ANINDYA RACHMAN",
+            "nis": 14797,
+            "nisn": 93253217,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "TRYSTAN GANENDRA SUKARNO PUTRA",
+            "nis": 14804,
+            "nisn": 109797306,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "YASMIEN PUTRI WIRADINATA",
+            "nis": 14811,
+            "nisn": 97031855,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "YUANIZHA SALMA AISYHA",
+            "nis": 14813,
+            "nisn": 101949073,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "Yulia Fitri Azzahra Wicaksanti",
+            "nis": 14814,
+            "nisn": 91911173,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "ZAHRA CHINDAGA MAKAILA",
+            "nis": 14815,
+            "nisn": 68059966,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "ZHAFRAN AHMAD MAULANA",
+            "nis": 14816,
+            "nisn": 91986160,
+            "kelas": "XI - 5"
+        },
+        {
+            "nama": "ADINDA SAFARAH ANASTASYA",
+            "nis": 14557,
+            "nisn": 105733508,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "AFIN DAVA QUDS QOIST",
+            "nis": 14600,
+            "nisn": 103603546,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "AFRIZAL OKTAVIAN PUTRA WANDONO",
+            "nis": 14560,
+            "nisn": 102571465,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "AHMAD DANIALIN HAIDAR REZA",
+            "nis": 14561,
+            "nisn": 103256406,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "ALVINO ARIO PRATAMA",
+            "nis": 14572,
+            "nisn": 106654507,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "ANASTASYA JULIA PUTRI",
+            "nis": 14580,
+            "nisn": 97108176,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "ANGELINA DIAN PARAMITHA",
+            "nis": 14581,
+            "nisn": 92275625,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "ANGGI NARISWARI SUYATNO",
+            "nis": 14582,
+            "nisn": 101471241,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "ANUGRATA ASVARI ASAMAJAYA",
+            "nis": 14585,
+            "nisn": 105833695,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "CAESAR RADIFZA PAMUNGKAS",
+            "nis": 14609,
+            "nisn": 108295029,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "DESTRYA OLIVIA PUTRI",
+            "nis": 14628,
+            "nisn": 97912917,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "EL BRAHIMI ADILLA PUTRA",
+            "nis": 14640,
+            "nisn": 92239194,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "Elizabeth Revakara Ariela",
+            "nis": 14643,
+            "nisn": 105856186,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "Elnova Dwi Salsabilah",
+            "nis": 14644,
+            "nisn": 96842014,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "IQNASYAVA CLEARESTA",
+            "nis": 14669,
+            "nisn": 3096538811,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "KEYSHA DWI MEY ARSANTI",
+            "nis": 14680,
+            "nisn": 99973681,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "Lionel Edgarth Cristo Runtuwene",
+            "nis": 14689,
+            "nisn": 94184394,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "MAHASURA CARAKA DANU MAHARSI",
+            "nis": 14693,
+            "nisn": 108360662,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "Meidnight Efflo Rizqia",
+            "nis": 14696,
+            "nisn": 94219271,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "MELVINO VIMALA DHARMADI",
+            "nis": 14697,
+            "nisn": 105114178,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "Muhamad Rayhan Dhaifullah",
+            "nis": 14707,
+            "nisn": 3100982510,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "MUHAMMAD FAKHRIE RAIHAN AKBAR",
+            "nis": 14712,
+            "nisn": 94274464,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "MUHAMMAD NAUFAL NASRUL IBAD",
+            "nis": 14716,
+            "nisn": 95990280,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "MUHAMMAD RIZKY HANANDITA WIDIANSYAH",
+            "nis": 14718,
+            "nisn": 109818528,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "Naila Zahra Khafidza Faradis",
+            "nis": 14731,
+            "nisn": 106846364,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "NAYSILA FITRIA AGUSTIN",
+            "nis": 14734,
+            "nisn": 92014677,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "Nurfatmah",
+            "nis": 14741,
+            "nisn": 109055237,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "Rafa Fayruzia Ramadhan Al-Khalifi",
+            "nis": 14753,
+            "nisn": 96885807,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "RAMADITYA AXELLE PRASETYA",
+            "nis": 14818,
+            "nisn": 101034553,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "RANGGA BAYU ARDIANSYAH",
+            "nis": 14761,
+            "nisn": 3091681361,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "REVITA NURFIANI",
+            "nis": 14768,
+            "nisn": 94738457,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "SOFIA AURYN SETIAWAN",
+            "nis": 14790,
+            "nisn": 91817716,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "SYAFIRA SEPTIANI PUTRI PRAYITNO",
+            "nis": 14794,
+            "nisn": 93335080,
+            "kelas": "XI - 6"
+        },
+        {
+            "nama": "AISYA PUTRI NOVIA SOFAR",
+            "nis": 14562,
+            "nisn": 94533458,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "AISYAH LIRING KARTIKA",
+            "nis": 14564,
+            "nisn": 92455519,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "ALMIRA ANANDHIYA RAMADHANI",
+            "nis": 14568,
+            "nisn": 91500906,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "ARCHIE ANDHARA ALETAVINO",
+            "nis": 14586,
+            "nisn": 92901807,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "ARYO BAGUS TIRTO MANIK KUSUMO",
+            "nis": 14593,
+            "nisn": 103512182,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "CAFREZA ANGELIC AZAM",
+            "nis": 14611,
+            "nisn": 107122478,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "DECO FAATHIRIANZA SUSANTO",
+            "nis": 14626,
+            "nisn": 99832036,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "DIMAS GERONIMO",
+            "nis": 14632,
+            "nisn": 93842814,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "DYAH AYUNDA CAHYA IRAWAN",
+            "nis": 14636,
+            "nisn": 101171398,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "FAKHRIZAL MAULANA AFIF",
+            "nis": 14650,
+            "nisn": 102126167,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "GHANI RAMDHAN HARTANTO",
+            "nis": 14659,
+            "nisn": 91960179,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "Hafizah Putri Aprilia Herik",
+            "nis": 14662,
+            "nisn": 108957499,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "HAFIZH DANAR RAHARJO",
+            "nis": 14663,
+            "nisn": 99510759,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "LIVIA KEISYA MAHARANI",
+            "nis": 14690,
+            "nisn": 98028746,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "MAHATMA FARREL GUNAWAN",
+            "nis": 14694,
+            "nisn": 93818440,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "Muhammad Farhan",
+            "nis": 14713,
+            "nisn": 105627167,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "MUMTAZAH RAHMALIA AMRIL",
+            "nis": 14720,
+            "nisn": 93065573,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "MUTHI`A ALTHAFMUNIIFA WAHYUDI",
+            "nis": 14721,
+            "nisn": 102530923,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "MUTIA ASLAM LAKEISHA",
+            "nis": 14722,
+            "nisn": 102314750,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "NABILA NAJWA NUR KHATIMAH",
+            "nis": 14726,
+            "nisn": 92099396,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "NABILA ZAHRA ARTHALIA",
+            "nis": 14728,
+            "nisn": 3106776818,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "QALESYA SASONGKO",
+            "nis": 14748,
+            "nisn": 107344765,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "QUEEN JASMINE AZKYA AL AMIN",
+            "nis": 14750,
+            "nisn": 95301955,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "QUINSHABELLA FARHAH FIKRIYAH MARZUQAH",
+            "nis": 14751,
+            "nisn": 96578428,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "RAHMA HIDAYATI",
+            "nis": 14756,
+            "nisn": 97404579,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "REYNANDA ALEA",
+            "nis": 14769,
+            "nisn": 97424901,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "RISMA OKTA TITISARI",
+            "nis": 14773,
+            "nisn": 99264075,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "RIZKI TEGAR SANTOSO",
+            "nis": 14774,
+            "nisn": 107031325,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "SHAFIRA PRIANTY ROSALINA",
+            "nis": 14783,
+            "nisn": 109115290,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "SILMI HANIFA",
+            "nis": 14789,
+            "nisn": 95206186,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "SYAFIRA AYU DIAN",
+            "nis": 14793,
+            "nisn": 104930877,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "Syifa Alena Putri",
+            "nis": 14798,
+            "nisn": 103508567,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "TALITHA NADHIFAH",
+            "nis": 14800,
+            "nisn": 3095468835,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "TALITHA ZADA ADITYA PUTRI",
+            "nis": 14801,
+            "nisn": 102217207,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "Verisca Amelia Sarwa Putri",
+            "nis": 14806,
+            "nisn": 3094279699,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "Wardatus Sa'adah Maulida",
+            "nis": 14808,
+            "nisn": 105391368,
+            "kelas": "XI - 7"
+        },
+        {
+            "nama": "AABIDAH AYU SYAFAQOH",
+            "nis": 14552,
+            "nisn": 101642377,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "ALVIN PRANIKO DARMA SAPUTRA",
+            "nis": 14571,
+            "nisn": 166239101,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "AMADEUS ANGELO BEN PASHA",
+            "nis": 14574,
+            "nisn": 103373902,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "AMIRA GILDA ANDRI AYUNINGCAHYA",
+            "nis": 14576,
+            "nisn": 95529634,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "ANASTASIA AJENG DINI",
+            "nis": 14579,
+            "nisn": 103799667,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "ANUGRAH INDAH RAMADHANI",
+            "nis": 14584,
+            "nisn": 92185368,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "Baby Camelya Kusuma Putri",
+            "nis": 14605,
+            "nisn": 105727753,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "DANDI WICAKSONO",
+            "nis": 14623,
+            "nisn": 95360110,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "DARLENE AUBERTA WASKITO",
+            "nis": 14624,
+            "nisn": 105117360,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "DINDA NUR HALIF",
+            "nis": 14633,
+            "nisn": 99310020,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "ELENA PRISCILLIA LIZAYU LARASATI",
+            "nis": 14642,
+            "nisn": 104171597,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "FATHIR ALCAESAR HIBRIZI ASH SHIDDIEQY",
+            "nis": 14653,
+            "nisn": 99188567,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "FELIX HARYO PANGESTU",
+            "nis": 14654,
+            "nisn": 97090385,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "FITRIA CAHYA CITRALOKA",
+            "nis": 14656,
+            "nisn": 95419705,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "GUSTI AYU TIFFANY ARTHALEA PUTRI",
+            "nis": 14661,
+            "nisn": 105137245,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "JHENY ZASKIA SURYANTI",
+            "nis": 14673,
+            "nisn": 104304935,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "KAYLA MARIA DEFATIMA PEREIRA",
+            "nis": 14675,
+            "nisn": 91598500,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "Kenanga Ayu Praeisty",
+            "nis": 14678,
+            "nisn": 96418160,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "KIARA CAHYANINGTYAS",
+            "nis": 14686,
+            "nisn": 3094898085,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "MALIHA SOFIANI",
+            "nis": 14695,
+            "nisn": 106411763,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "MOCH. FAIZ YANUAR ASHARI",
+            "nis": 14700,
+            "nisn": 105090609,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "MUHAMMAD FARREL NIZAR",
+            "nis": 14714,
+            "nisn": 98313376,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "NABILA NENAWATI",
+            "nis": 14727,
+            "nisn": 101952541,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "NAZWA PUTRI AULIA",
+            "nis": 14736,
+            "nisn": 108365066,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "Ni Komang Triasmitha Maharani",
+            "nis": 14738,
+            "nisn": 93593353,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "Nyoman Mahajana Sandya Rayqueena",
+            "nis": 14742,
+            "nisn": 95398022,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "PUTU NATA ADIPUTRA",
+            "nis": 14747,
+            "nisn": 102658361,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "QUEEN DIFA FEODORA CELESTA",
+            "nis": 14749,
+            "nisn": 105228780,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "ROSE ANGELITA PUTRI LUHUKAY",
+            "nis": 14775,
+            "nisn": 97031646,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "Sabrina Lana At'takia",
+            "nis": 14777,
+            "nisn": 109964664,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "TAMELLA TESYA KARLIN",
+            "nis": 14802,
+            "nisn": 98635254,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "VALENCIA BHAKTI SAHARA GUNAWAN",
+            "nis": 14805,
+            "nisn": 94265166,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "Vincentius Rafael Putra Indrawan",
+            "nis": 14807,
+            "nisn": 107108179,
+            "kelas": "XI - 8"
+        },
+        {
+            "nama": "ALIFIA APRODITA SAPUTRA",
+            "nis": 14265,
+            "nisn": 93988228,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "ALVIANO ATHA RAMADHAN",
+            "nis": 14270,
+            "nisn": 83047585,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "ALVINA LARISSA PUTRI",
+            "nis": 14272,
+            "nisn": 98766114,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "ARGA DIMAS PUTRA HERMAWAN",
+            "nis": 14285,
+            "nisn": 88744003,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "ARIL DWI ALFAUZAN",
+            "nis": 14288,
+            "nisn": 85305761,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "AURA JANNAH NASHIRAH MULYANA",
+            "nis": 14298,
+            "nisn": 99957461,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "AZAHRA CAHYA FITRI",
+            "nis": 14306,
+            "nisn": 82513207,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "BILQIS AIDHA SAFITRI PUTRI NASHIIR",
+            "nis": 14311,
+            "nisn": 83703082,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "CIARA VEDORA ARETA SARI",
+            "nis": 14327,
+            "nisn": 96369135,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "Dafa Maulana Shahputra",
+            "nis": 14330,
+            "nisn": 91516627,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "ELNINO SAKTI DEWANTARA",
+            "nis": 14344,
+            "nisn": 96217342,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "FADHIL ALDYTHIA PUTRA",
+            "nis": 14351,
+            "nisn": 85380333,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "FAHRIANSYAH NAZRIEL WAHAB",
+            "nis": 14353,
+            "nisn": 89096959,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "FAIRUZA SHAFHA TALITHA",
+            "nis": 14354,
+            "nisn": 83878904,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "FARREL DAFFA ABIGAIL",
+            "nis": 14359,
+            "nisn": 86717509,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "IMELDA RATU SHIVA RACHMADANTY",
+            "nis": 14377,
+            "nisn": 98174063,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "LUHUNG DHARMA ANDI PRIAMBADA",
+            "nis": 14398,
+            "nisn": 91610136,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "MUHAMMAD ALFINZA SYAHRI",
+            "nis": 14421,
+            "nisn": 86199403,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "MUHAMMAD ARYA PRAWIRA RANGKUDI",
+            "nis": 14424,
+            "nisn": 93735794,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "NABILA AMIRA AZZAHRA",
+            "nis": 14436,
+            "nisn": 3088937411,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "NADIA AYU LARASATI",
+            "nis": 14440,
+            "nisn": 91559033,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "NAILATUL PUTRI PEMBAYUN",
+            "nis": 14447,
+            "nisn": 88942668,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "Nasya Maulidya Santoso",
+            "nis": 14449,
+            "nisn": 92480793,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "NASYWA GAVRILLA AZALIA",
+            "nis": 14450,
+            "nisn": 88005603,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "Nazhira Nazwa Fauzi",
+            "nis": 14460,
+            "nisn": 89918567,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "NUANZA KASIH YURE TASAYDA",
+            "nis": 14468,
+            "nisn": 93598552,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "PANCA ADITYA PUTRI HARIYANI",
+            "nis": 14471,
+            "nisn": 91568559,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "PANJI SUKMA AGENG TURANGGA BAYU",
+            "nis": 14472,
+            "nisn": 84493792,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "REHAN BARRA QUBAMA",
+            "nis": 14486,
+            "nisn": 98624746,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "RIZKY DWI YULIANTO",
+            "nis": 14494,
+            "nisn": 85386833,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "RIZKY WAHYU SANTOSO",
+            "nis": 14495,
+            "nisn": 98528971,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "SARISHA PUTRI",
+            "nis": 14504,
+            "nisn": 98103402,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "SASI KIRANA ASTA DEWI",
+            "nis": 14505,
+            "nisn": 97168236,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "SEVIANO AGNA NIRWASITHA",
+            "nis": 14510,
+            "nisn": 87779056,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "TAMPAN SIEDA PRAISAN SAHRI",
+            "nis": 14524,
+            "nisn": 81967739,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "WAHYU MAHENDRO LOKA",
+            "nis": 14531,
+            "nisn": 88472029,
+            "kelas": "XII - 1"
+        },
+        {
+            "nama": "ACHMAD FADHIL AFRIANSYAH",
+            "nis": 14253,
+            "nisn": 94260918,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "ACHMAD VARICK ASWANTA",
+            "nis": 14256,
+            "nisn": 91440391,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "AGNIERA JULIE BRILLIANCA",
+            "nis": 14259,
+            "nisn": 92623255,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "ALVIANSYAH MAULANA PUTRA HIDAYAT",
+            "nis": 14271,
+            "nisn": 92731555,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "Amilia",
+            "nis": 14277,
+            "nisn": 3099133224,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "ANINDYA WAHYU PRIHARINI",
+            "nis": 14282,
+            "nisn": 94331251,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "AURA AZZALIA ABDIEL PRAYITNO",
+            "nis": 14297,
+            "nisn": 3099868130,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "CAHAYA OKTA SABRINA",
+            "nis": 14319,
+            "nisn": 82437499,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "CHARISSA NADHINE EFENDI",
+            "nis": 14324,
+            "nisn": 93668512,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "DEVINA MELLYNDA PUTRI FAUZAN",
+            "nis": 14338,
+            "nisn": 81242813,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "DIMAS FERDIANSYAH",
+            "nis": 14340,
+            "nisn": 81583768,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "Farel Adi Fernando",
+            "nis": 14357,
+            "nisn": 81501766,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "GENDHIS SHAFIRA",
+            "nis": 14364,
+            "nisn": 94182270,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "GHANIA PUTRI SHOLIQ",
+            "nis": 14365,
+            "nisn": 81909376,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "HANSEL HUGO HERDIAWAN",
+            "nis": 14371,
+            "nisn": 97796477,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "HERLIS CHELSY PUTERI NADYA",
+            "nis": 14374,
+            "nisn": 87585840,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "IRIENE CHINTYA WIJAYANTO",
+            "nis": 14381,
+            "nisn": 84519151,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "KEIZA AILEEN TALITA SYAWAL",
+            "nis": 14387,
+            "nisn": 85466694,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "LUFTHALUNA MAKRIFATUL SIRA",
+            "nis": 14397,
+            "nisn": 91638229,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "MARZHA SHEFA AYUDYA",
+            "nis": 14403,
+            "nisn": 96226308,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "MAULID FAREL BAHRIANSYAH",
+            "nis": 14405,
+            "nisn": 95390595,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "Moch. Maliq Akbar Athaillah",
+            "nis": 14412,
+            "nisn": 3088660652,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "MOCHAMMAD ADAM ROBIANSYAH",
+            "nis": 14399,
+            "nisn": 81109038,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "MOCHAMMAD RAFLY ALI MAULANA",
+            "nis": 14413,
+            "nisn": 81314643,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "MUHAMAD NUROKHIM MULYONO",
+            "nis": 14419,
+            "nisn": 87660590,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "MUHAMMAD FAREL ALVIANTO",
+            "nis": 14425,
+            "nisn": 88989427,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "Muhammad Ja'far Dzuljinahain",
+            "nis": 14426,
+            "nisn": 97782201,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "MUHAMMAD REZA PUTRA PRATAMA",
+            "nis": 14432,
+            "nisn": 89567396,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "NABILA ARIELLA",
+            "nis": 14437,
+            "nisn": 88470187,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "Nadhifa Salsabila",
+            "nis": 14439,
+            "nisn": 88558001,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "RISMA PUTRI ASTUTI",
+            "nis": 14491,
+            "nisn": 83512990,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "RIZKY ADHA DESTRI CHANDRA",
+            "nis": 14492,
+            "nisn": 89922030,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "ROSSI KURNIA PRASETYO",
+            "nis": 14497,
+            "nisn": 87074767,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "Senorita Jolie Al Ali",
+            "nis": 14508,
+            "nisn": 91361621,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "VEAN NICHA CINTA LARASATI",
+            "nis": 14528,
+            "nisn": 98845891,
+            "kelas": "XII - 2"
+        },
+        {
+            "nama": "AILEEN ZORA ELVARETTA",
+            "nis": 14546,
+            "nisn": 98885637,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "Aldi Nurrachmawan",
+            "nis": 14261,
+            "nisn": 92523154,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "Ari Argani Saputra",
+            "nis": 14286,
+            "nisn": 84875260,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "Arjune Rubben Trisna Valencia Yappo",
+            "nis": 14289,
+            "nisn": 98390362,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "DAFFI ALFARIZY HARAHAP",
+            "nis": 14332,
+            "nisn": 82583893,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "DARRYL HARUNDRA FAREEDO",
+            "nis": 14333,
+            "nisn": 99793383,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "DZUBYAN BIMA SAKHA BHAMAKERTI MEIDIANTO",
+            "nis": 14342,
+            "nisn": 93528360,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "EVAN FULVIAN RAFIF PRAYOGI",
+            "nis": 14348,
+            "nisn": 93499054,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "FINA AURILLAH BALQIS",
+            "nis": 14361,
+            "nisn": 92115021,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "GHATHFAAN MAULANA WICAKSANA",
+            "nis": 14366,
+            "nisn": 98050687,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "Giovano Beny Hagai Moka",
+            "nis": 14367,
+            "nisn": 93621121,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "HANSEL KRISTIAWAN",
+            "nis": 14372,
+            "nisn": 85472248,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "INTAN NUR AFIAH OCTARINA",
+            "nis": 14380,
+            "nisn": 82777222,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "JESSICA BETSEDA ROTUA M",
+            "nis": 14382,
+            "nisn": 98145845,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "KAYLA PUTRI RAHMAWATI",
+            "nis": 14386,
+            "nisn": 97502230,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "MAHESWARA HABIBUROCHMAN",
+            "nis": 14401,
+            "nisn": 83157766,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "MARVEL FERNANDO TANJIRO",
+            "nis": 14402,
+            "nisn": 99380768,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "MAS KAREBET WIBISONO",
+            "nis": 14404,
+            "nisn": 99366538,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "MEZALUNA DIAZURIE DJALIL",
+            "nis": 14408,
+            "nisn": 92356546,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "MUHAMMAD RASYID AL HAKIM",
+            "nis": 14430,
+            "nisn": 85664257,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "MUHAMMAD ROBETH AL AUTHON",
+            "nis": 14433,
+            "nisn": 3095773052,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "NAYSHILA PUTRI PANGESTU",
+            "nis": 14458,
+            "nisn": 89540612,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "NAZWA MELVY WIDYADHANA",
+            "nis": 14462,
+            "nisn": 3080030204,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "OMAR FARIS MURTAZA",
+            "nis": 14470,
+            "nisn": 99344160,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "PUTU SAUJANA SANDYA RAYMOZZA",
+            "nis": 14475,
+            "nisn": 87268046,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "QUEENA NEYSHA HIMMATANA",
+            "nis": 14476,
+            "nisn": 88261908,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "RANIA DAYANA MAHARDIKA",
+            "nis": 14483,
+            "nisn": 88601317,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "SEPTIAFITRI ANGELY NARNIA",
+            "nis": 14509,
+            "nisn": 88235024,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "SINTYA SAHARANI",
+            "nis": 14517,
+            "nisn": 3092385580,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "SOFIA MOZZA KIRANI",
+            "nis": 14520,
+            "nisn": 91866669,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "YEEVA AMELIA PUTRI WIRAWAN",
+            "nis": 14533,
+            "nisn": 94090675,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "ZAHRA LOVELY MAHARANI",
+            "nis": 14535,
+            "nisn": 99565972,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "Zahra Talitha Budi Agustin",
+            "nis": 14537,
+            "nisn": 98762953,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "ZENA IMAKULATA TABITHA",
+            "nis": 14538,
+            "nisn": 87008880,
+            "kelas": "XII - 3"
+        },
+        {
+            "nama": "ABIYYU RAHMAN AL-AZZAM",
+            "nis": 14252,
+            "nisn": 3080381580,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "ACHMAD RIZAL CHASAN",
+            "nis": 14255,
+            "nisn": 84206521,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "ALFARIDZI ADILLA FITRAH",
+            "nis": 14262,
+            "nisn": 81552418,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "AMIRAH RAEHANAH NAFISHA",
+            "nis": 14278,
+            "nisn": 96658755,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "ARIFI MUHAMMAD ISNAN",
+            "nis": 14287,
+            "nisn": 85068785,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "BRAHMASTA ABIMANYU",
+            "nis": 14317,
+            "nisn": 96101794,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "CHELSEA AULIA SHINTA SALSABELLA",
+            "nis": 14325,
+            "nisn": 82430450,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "CHRISNA WAHYU PRATAMA",
+            "nis": 14326,
+            "nisn": 86791624,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "DAFFA AMIRAH AULIA ZHAFIRA",
+            "nis": 14331,
+            "nisn": 98524275,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "DENADA ANDREA PUTRI DEWANTARI",
+            "nis": 14335,
+            "nisn": 73287409,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "EKO WAHYU SAPUTRO",
+            "nis": 14343,
+            "nisn": 94033317,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "Gladys Queisha Azahra",
+            "nis": 14369,
+            "nisn": 97136818,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "IBRAR ARRAFI RAHMANDIVA",
+            "nis": 14375,
+            "nisn": 84717731,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "KEYLA SAFIRA MACHDI",
+            "nis": 14388,
+            "nisn": 96843043,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "KHUMAIROTUL AULIA",
+            "nis": 14390,
+            "nisn": 3088643247,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "Lady Hawa El Hasna",
+            "nis": 14393,
+            "nisn": 89332483,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "MIKAILA NATASYA PUTRI",
+            "nis": 14410,
+            "nisn": 81926862,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "MIKAYLA AINNUR YAHYA",
+            "nis": 14411,
+            "nisn": 94935532,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "MUHAMMAD ARSYA RAE AHNAF",
+            "nis": 14423,
+            "nisn": 89387009,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "Muhammad Reyhanz Leonel Mardino",
+            "nis": 14431,
+            "nisn": 87958517,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "MUHAMMAD VICKO WINNO ARMANDO",
+            "nis": 14435,
+            "nisn": 82261905,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "MUHAMMAD YUSUF ALDYANSYAH",
+            "nis": 14420,
+            "nisn": 99663245,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "NADIA YUSTIRA",
+            "nis": 14442,
+            "nisn": 3080797867,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "NAYLA AZKIYAH MAULANA",
+            "nis": 14456,
+            "nisn": 96648922,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "NAYRA RIZKA ANDINI",
+            "nis": 14457,
+            "nisn": 94891254,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "NAYYA PUTRI NURFADHILA",
+            "nis": 14459,
+            "nisn": 83222639,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "Putri Auliya Rahma",
+            "nis": 14474,
+            "nisn": 89749447,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "Raden Luthfi Hoesein",
+            "nis": 14478,
+            "nisn": 89377992,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "RADITA PUTRI RIANTI",
+            "nis": 14479,
+            "nisn": 91413703,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "RIFFAT AULIA IBRAHIM",
+            "nis": 14489,
+            "nisn": 84154367,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "SABRINA AZ-ZAHRA",
+            "nis": 14499,
+            "nisn": 99106607,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "SHESA ALMIRA DESVI SONIKA",
+            "nis": 14513,
+            "nisn": 89624526,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "SYAFINA NUR MUDAWAMAH",
+            "nis": 14522,
+            "nisn": 84885238,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "TIARA DWI FATIKHASARI",
+            "nis": 14526,
+            "nisn": 88750515,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "ZICO ALVIANZA",
+            "nis": 14539,
+            "nisn": 93595007,
+            "kelas": "XII - 4"
+        },
+        {
+            "nama": "ACHMAD REIFAN MAULIDIO",
+            "nis": 14254,
+            "nisn": 89963669,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "ADRIAN CLEMENTINUS EMMANUEL",
+            "nis": 14257,
+            "nisn": 84828636,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "AFIFA SALSABILLAH",
+            "nis": 14258,
+            "nisn": 98824856,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "AISYAH RESKYTA PUTRI ALAMSYAH",
+            "nis": 14260,
+            "nisn": 81272447,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "Almira Yulia Rahayu",
+            "nis": 14269,
+            "nisn": 3098801143,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "ALVINO RAFA DIMITRI",
+            "nis": 14273,
+            "nisn": 92577190,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "Arsy Rhea Amerta",
+            "nis": 14291,
+            "nisn": 82452525,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "ATHAILLAH THARIQ SUPRIJANTO",
+            "nis": 14292,
+            "nisn": 98356274,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "AUDILA FORENJA",
+            "nis": 14295,
+            "nisn": 92247928,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "AVELIA RASYHA CLEOVA",
+            "nis": 14302,
+            "nisn": 82969750,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "AVRIL ADIMULYA VIERNADI",
+            "nis": 14303,
+            "nisn": 97350803,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "AYESHA ZAHRA SUSANTO",
+            "nis": 14305,
+            "nisn": 86799210,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "BELLA SALSABILA RAHMALINA",
+            "nis": 14310,
+            "nisn": 94578537,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "Bilqis Syifa Kumala Firdausi",
+            "nis": 14314,
+            "nisn": 83133484,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "CALEA LOVELYTA DECANDRA",
+            "nis": 14320,
+            "nisn": 87153693,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "Desak Putu Queenza Kayra Devianti",
+            "nis": 14336,
+            "nisn": 91625967,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "EKA YOVIE PRADITYA",
+            "nis": 14548,
+            "nisn": 91284087,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "ERRYO RIZKY PRASETYO",
+            "nis": 14346,
+            "nisn": 83946755,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "FAITH ARDISTYARAFI PRATAMA",
+            "nis": 14355,
+            "nisn": 88062872,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "INDRASWARI DEVIANTI",
+            "nis": 14379,
+            "nisn": 97798222,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "LIONEL DAFA SAPUTRA",
+            "nis": 14395,
+            "nisn": 84908727,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "MEYSA TRI ANDARA DAHAYU",
+            "nis": 14407,
+            "nisn": 92256203,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "MOCH. RYFANDI ARDIANSYAH",
+            "nis": 14543,
+            "nisn": 99061724,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "MUCHAMAD ALFIN FRANCA UTAMA",
+            "nis": 14415,
+            "nisn": 95621748,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "Muh. Fathan Arbiansyah",
+            "nis": 14417,
+            "nisn": 72660790,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "MUHAMMAD JAMALLUDIN IKMAL HAMID",
+            "nis": 14427,
+            "nisn": 88951195,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "MUHAMMAD SYADIDUL FACHRI",
+            "nis": 14434,
+            "nisn": 97242768,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "Nadia Salwa Aufa",
+            "nis": 14441,
+            "nisn": 92953072,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "NAFLA FIDYA SAPUTRI",
+            "nis": 14446,
+            "nisn": 82408738,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "NOURA SYAKILAH NAJLA",
+            "nis": 14467,
+            "nisn": 94255348,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "RAIHAN PUTRA LESMANA",
+            "nis": 14481,
+            "nisn": 54372688,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "RAYHAN SINATRIA NUR ALIF",
+            "nis": 14485,
+            "nisn": 89383709,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "Sabrina Hamida Sifa",
+            "nis": 14500,
+            "nisn": 82203283,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "SALSABILA AURELIA ZAHRA",
+            "nis": 14502,
+            "nisn": 88137547,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "SASKIA NURSYIFA PUTRI",
+            "nis": 14506,
+            "nisn": 93105108,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "SOFIANI ANNISA NUR FADILLA",
+            "nis": 14521,
+            "nisn": 85797872,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "WIDI ERVANITA",
+            "nis": 14532,
+            "nisn": 84636000,
+            "kelas": "XII - 5"
+        },
+        {
+            "nama": "Almeira Galih Rendra Putri",
+            "nis": 14268,
+            "nisn": 95502915,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "AMAY ZAZKIA JOAN",
+            "nis": 14276,
+            "nisn": 82007789,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "ANDHIKA WILDAN IRSYANTO",
+            "nis": 14279,
+            "nisn": 82514476,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "ANDRIANO YAHYA WIDJAKSONO",
+            "nis": 14280,
+            "nisn": 95345165,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "ANIISA TIRTA RANI",
+            "nis": 14281,
+            "nisn": 94414399,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "ARMITA SYAWALINA WIDJAYA",
+            "nis": 14290,
+            "nisn": 85464615,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "AURELLIA TALITHA CLARESTA AZIEZ",
+            "nis": 14301,
+            "nisn": 83746966,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "AXELINO VIRIYA DHARMADI",
+            "nis": 14304,
+            "nisn": 82049017,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "BILQIS FORTUNELA WIBISONO",
+            "nis": 14312,
+            "nisn": 3095645127,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "BOBBY MARCELL CHRISTIAN",
+            "nis": 14316,
+            "nisn": 81418179,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "CALVARIN AUDINA SETYO PUTRI",
+            "nis": 14321,
+            "nisn": 93357981,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "CORNELIUS LEONELL ROLE KIA",
+            "nis": 14328,
+            "nisn": 82032356,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "CORNELIUS SATYA DHARMA",
+            "nis": 14329,
+            "nisn": 96060249,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "DINDA LOVELY VIOLITA PUTRI",
+            "nis": 14550,
+            "nisn": 84076522,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "FACHRI AGMA IBRAHIM",
+            "nis": 14350,
+            "nisn": 96573202,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "FRENO TRIO CORNELIUS HABAJAHAN",
+            "nis": 14363,
+            "nisn": 89905487,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "HAIKAL AL HAFIT RUSMAN",
+            "nis": 14370,
+            "nisn": 3087214049,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "LOVENA WINDY OKTAVIONA",
+            "nis": 14396,
+            "nisn": 99044085,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "MELIZA PERMATA ADRIANUS",
+            "nis": 14406,
+            "nisn": 82671017,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "MIGUEEL YOHANES RUNTUWENE",
+            "nis": 14409,
+            "nisn": 82977290,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "MUHAMAD FAIRUZ RAMADHAN",
+            "nis": 14418,
+            "nisn": 79428589,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "NABILLYO ATHALLA PASYA ALDYNO",
+            "nis": 14438,
+            "nisn": 93228532,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "NAURELIA RAMADHANI PUTRI TRISNA",
+            "nis": 14455,
+            "nisn": 84737703,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "NEYZA FAURA BILLAH",
+            "nis": 14464,
+            "nisn": 85574295,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "NI KOMANG SANTHI DEWI",
+            "nis": 14465,
+            "nisn": 83978279,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "NUEKE IMANUEL DESFLANO",
+            "nis": 14469,
+            "nisn": 96605719,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "REVALINA NARESWARI DHANAPUTRI",
+            "nis": 14488,
+            "nisn": 94243355,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "RIZMA DHINY ENDARDY",
+            "nis": 14496,
+            "nisn": 3088480244,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "SABIAN FARAHNISA",
+            "nis": 14498,
+            "nisn": 86530283,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "SAMUEL DHEVARA ANGGARA",
+            "nis": 14503,
+            "nisn": 88668328,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "Sausan Zahrani",
+            "nis": 14507,
+            "nisn": 88461005,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "SITI KHADIJAH MUTHIAH",
+            "nis": 14518,
+            "nisn": 88609118,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "SYALWA SASIKIRANA RIDWAN",
+            "nis": 14523,
+            "nisn": 83848266,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "YUSHI GALANG PERMATA",
+            "nis": 14534,
+            "nisn": 98974940,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "ZAHRA ROBBIATUL BADRIYAH",
+            "nis": 14536,
+            "nisn": 82613187,
+            "kelas": "XII - 6"
+        },
+        {
+            "nama": "A. BILL HARVY ZIDNY ILMAN HALIM",
+            "nis": 14251,
+            "nisn": 3085784360,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "AJENG CHILA SALSABILA",
+            "nis": 14822,
+            "nisn": 93469914,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "ALLYSHA RISKY SALSABILA",
+            "nis": 14267,
+            "nisn": 102467580,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "ALYA MUKHBITA",
+            "nis": 14274,
+            "nisn": 91440643,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "AMANDHA LAILLA RAHMA",
+            "nis": 14275,
+            "nisn": 82742472,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "AQIILAH JAUZA IZDIHAAR",
+            "nis": 14284,
+            "nisn": 83327386,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "AUREL ADNA PUTRA NAHASON",
+            "nis": 14299,
+            "nisn": 97923907,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "BEATRIX ERVINE ARIYANTI",
+            "nis": 14308,
+            "nisn": 88366361,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "BEBY HAPPY PAMELA PUTRY",
+            "nis": 14309,
+            "nisn": 3098214988,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "Bilqis Laisya Azzahra",
+            "nis": 14313,
+            "nisn": 91460247,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "BIMO YOGA PRAKOSO",
+            "nis": 14315,
+            "nisn": 3084702569,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "CELINE SHABITA MAYNAQI UTOMO",
+            "nis": 14323,
+            "nisn": 96373194,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "Diah Kurnia Salwa",
+            "nis": 14339,
+            "nisn": 94780376,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "DIMAS WAHYU NUGROHO",
+            "nis": 14341,
+            "nisn": 84352865,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "ELVINA NADYA NOZA",
+            "nis": 14345,
+            "nisn": 81839675,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "ESTI NOVYA SARI",
+            "nis": 14347,
+            "nisn": 81072438,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "EXCEL NANDA PRATAMA",
+            "nis": 14349,
+            "nisn": 97512271,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "FARAH AURA ALZETTA",
+            "nis": 14356,
+            "nisn": 95170681,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "FATHYA SALMA AININDYAR SUTJIPTO",
+            "nis": 14544,
+            "nisn": 72755805,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "FINO ILHAM FIRMANSYAH",
+            "nis": 14362,
+            "nisn": 95455958,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "ICHA LAILAM KHUSHUSIYAH IRWAN",
+            "nis": 14376,
+            "nisn": 86004760,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "IMMANUELA SUDANITA SIAGIAN",
+            "nis": 14378,
+            "nisn": 85376189,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "JIZA MASFUFAH",
+            "nis": 14383,
+            "nisn": 3080231739,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "KALILAH SERILDA",
+            "nis": 14385,
+            "nisn": 84230761,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "KALLULA AZZA NAFIS SALWA",
+            "nis": 14545,
+            "nisn": 83531919,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "KHANZA CALLISTA RAIHANATA",
+            "nis": 14389,
+            "nisn": 86525115,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "MAHESA DEWA ARIANTO",
+            "nis": 14400,
+            "nisn": 96405580,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "Muchamad Fachry Fahreza",
+            "nis": 14416,
+            "nisn": 94255482,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "MUHAMMAD KHALIFAH AJNA SANTOSO",
+            "nis": 14428,
+            "nisn": 92578052,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "NAFIDZA REVALINE PUTRI HASNA",
+            "nis": 14444,
+            "nisn": 98662357,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "NAURA AIRA NAZHIFA",
+            "nis": 14454,
+            "nisn": 3098076222,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "RAKHA ARDIAWAN DIANTO",
+            "nis": 14482,
+            "nisn": 93453945,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "RESTU FAIRUZ ANGELI",
+            "nis": 14487,
+            "nisn": 81282200,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "RIZKY ATIKA CHINTYA DEWI",
+            "nis": 14493,
+            "nisn": 81744427,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "SAFFIYA JASEENA WIBOWO",
+            "nis": 14501,
+            "nisn": 3079590504,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "SHEYRIN DWI MEILANI",
+            "nis": 14514,
+            "nisn": 88908424,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "SHIVA ADELIA PUTRI ARIFIN",
+            "nis": 14516,
+            "nisn": 85124620,
+            "kelas": "XII - 7"
+        },
+        {
+            "nama": "ALICIA CARLA SARI HARIYANTO",
+            "nis": 14264,
+            "nisn": 95837428,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "ALISYA ZAHRA RAMADHANI",
+            "nis": 14266,
+            "nisn": 87915563,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "ANUGERAH PUTRA DEWANTO",
+            "nis": 14283,
+            "nisn": 95315127,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "AUDEA FORENJA",
+            "nis": 14294,
+            "nisn": 97653952,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "Aullya Suryono",
+            "nis": 14296,
+            "nisn": 92823597,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "AURELLI MICEL CARINATA",
+            "nis": 14300,
+            "nisn": 3082757025,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "BABY AZQIA ZAHRATUSSYITA",
+            "nis": 14307,
+            "nisn": 3085655361,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "DEA MARGIYANTI",
+            "nis": 14334,
+            "nisn": 97937646,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "Dealova Donandsie Saputro",
+            "nis": 14551,
+            "nisn": 99283741,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "FAHRANI FITRI DAVINA",
+            "nis": 14352,
+            "nisn": 81509490,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "FAREL NAUFAL ALDIANTO",
+            "nis": 14358,
+            "nisn": 97213238,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "FELICIA AURELIA ANG WIJAYA",
+            "nis": 14360,
+            "nisn": 82396080,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "Hanum Nadya Azahra",
+            "nis": 14373,
+            "nisn": 86375749,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "KINANTI ASHA NEVYETA",
+            "nis": 14391,
+            "nisn": 91612323,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "KIRANA CHYNTIA DANTI",
+            "nis": 14392,
+            "nisn": 81254129,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "LENITA ANINDITA",
+            "nis": 14394,
+            "nisn": 94276626,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "MOHAMMAD ALIEF ADIBTHA",
+            "nis": 14414,
+            "nisn": 91130751,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "Muhammad Rafif Zafran Aziz",
+            "nis": 14429,
+            "nisn": 89169274,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "Nadine Cecylia Putri",
+            "nis": 14443,
+            "nisn": 92528104,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "NAFISA WIRITANAYA DEWANTO",
+            "nis": 14445,
+            "nisn": 97953057,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "NAOMI ELIZABETH D'LUSMANA",
+            "nis": 14821,
+            "nisn": 95692679,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "NARADI RIZQI JAMALLUDIN",
+            "nis": 14448,
+            "nisn": 99575733,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "Natan Prima Nadapdap",
+            "nis": 14451,
+            "nisn": 86794068,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "NATASYA PUTRI ANGGRAINI",
+            "nis": 14452,
+            "nisn": 81887505,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "NATHANIA AZARINE FAUSTINA",
+            "nis": 14828,
+            "nisn": 3081439923,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "NAZILA RAMADHANI",
+            "nis": 14461,
+            "nisn": 86175508,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "NISA TRUE UFAIRAKASIH",
+            "nis": 14466,
+            "nisn": 3091731620,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "PUTRA SYAILENDRA RAMADHAN SUMITRA",
+            "nis": 14473,
+            "nisn": 84162669,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "QUININA GRACIA VERONIKA",
+            "nis": 14477,
+            "nisn": 86404539,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "RAYHAN RADITHYA PRATAMA",
+            "nis": 14484,
+            "nisn": 96158766,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "RISKI DWI RAHMAD SUWITO",
+            "nis": 14490,
+            "nisn": 85818790,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "SHAFIRA AMELIA APTA NURANI",
+            "nis": 14511,
+            "nisn": 3091433273,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "SHELYN DIVA AGUSTINE",
+            "nis": 14512,
+            "nisn": 88360338,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "SITI SYARAH SUGANTI",
+            "nis": 14519,
+            "nisn": 84691800,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "THASTIA AMALIA FAJRIN",
+            "nis": 14525,
+            "nisn": 97713952,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "TRIA HANUM LAILATUS SHOLEKHA",
+            "nis": 14527,
+            "nisn": 92815386,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "Vinsya Aurel Rifani",
+            "nis": 14529,
+            "nisn": 94881094,
+            "kelas": "XII - 8"
+        },
+        {
+            "nama": "WAHYU FAHRIANSYAH PUTRA",
+            "nis": 14530,
+            "nisn": 81523126,
+            "kelas": "XII - 8"
+        }
+    ]
 }

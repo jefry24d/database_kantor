@@ -6,6 +6,7 @@ from routes.auth_routes import auth_bp
 from routes.surat_masuk_routes import surat_masuk_bp
 from routes.surat_keluar_routes import surat_keluar_bp
 from routes.common_routes import common_bp
+from routes.telepon_routes import telepon_bp
 
 app = Flask(__name__)
 app.secret_key = 'arsip_kantor_rahasia_nyot'
@@ -15,6 +16,7 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(surat_masuk_bp)
 app.register_blueprint(surat_keluar_bp)
 app.register_blueprint(common_bp)
+app.register_blueprint(telepon_bp)
 
 # INITIALIZE DATABASE UTAMA
 def init_db():

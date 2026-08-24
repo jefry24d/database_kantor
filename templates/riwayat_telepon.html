@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Buku Catatan Telepon Masuk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .container { padding: 30px; font-family: sans-serif; }
+        .card { background: #181818; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 8px; box-sizing: border-box; }
+        .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; color: white; }
+        .btn-primary { background-color: #008080; }
+        .btn-danger { background-color: #d9534f; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #008080; color: white; }
+        .badge { padding: 4px 8px; border-radius: 4px; color: white; font-size: 12px; }
+        .bg-success { background: #28a745; }
+        .bg-warning { background: #ffc107; color: #333; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2><i class="fas fa-phone-alt"></i> Buku Catatan & Riwayat Telepon Masuk</h2>
+    <a href="/dashboard.html" class="btn btn-primary" style="text-decoration:none; display:inline-block; margin-bottom:15px;">← Kembali ke Dashboard</a>
+
+    <!-- Form Input Telepon Baru -->
+    <div class="card">
+        <h3><i class="fas fa-plus-circle"></i> Catat Telepon Masuk</h3>
+        <form action="/telepon/tambah" method="POST">
+            <div style="display: flex; gap: 15px;">
+                <div class="form-group" style="flex:1;">
+                    <label>Tanggal & Waktu</label>
+                    <input type="datetime-local" name="tanggal">
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>Nama Penelepon</label>
+                    <input type="text" name="nama_penelepon" placeholder="Contoh: Pak Budi" required>
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>Nama Instansi / Perusahaan</label>
+                    <input type="text" name="nama_instansi" placeholder="Contoh: Dinas Pendidikan" required>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+                <div class="form-group" style="flex:1;">
+                    <label>No. Telepon / WhatsApp</label>
+                    <input type="text" name="no_telepon" placeholder="0812xxxxxxx" required>
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>Status / Tindak Lanjut</label>
+                    <select name="status" required>
+                        <option value="Selesai">Selesai / Terjawab</option>
+                        <option value="Perlu Tindak Lanjut">Perlu Tindak Lanjut</option>
+                        <option value="Menunggu Disposisi">Menunggu Disposisi Pimpinan</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Keperluan / Perihal</label>
+                <textarea name="keperluan" rows="3" placeholder="Isi pesan / maksud penelepon..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan Catatan</button>
+        </form>
+    </div>
+
+    <!-- Tabel Riwayat Telepon -->
+    <div class="card" style="margin-top: 20px;">
+        <h3><i class="fas fa-history"></i> Daftar Riwayat Penelepon</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Nama Penelepon</th>
+                    <th>Instansi</th>
+                    <th>No. Telepon</th>
+                    <th>Keperluan</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ log.tanggal }}</td>
+                    <td><b>{{ log.nama_penelepon }}</b></td>
+                    <td>{{ log.nama_instansi }}</td>
+                    <td><a href="https://wa.me/{{ log.no_telepon }}" target="_blank">{{ log.no_telepon }}</a></td>
+                    <td>{{ log.keperluan }}</td>
+                    <td>
+                        {% if log.status == 'Selesai' %}
+                            <span class="badge bg-success">{{ log.status }}</span>
+                        {% else %}
+                            <span class="badge bg-warning">{{ log.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form action="/telepon/hapus/{{ log.id }}" method="POST" onsubmit="return confirm('Yakin hapus data ini?')">
+                            <button class="btn btn-danger" style="padding: 5px 10px;"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" style="text-align: center;">Belum ada riwayat telepon masuk bwuosss!</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

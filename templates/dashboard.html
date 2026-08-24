@@ -6,6 +6,23 @@
     <title>TAS SMABHY - Agenda Surat</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
+<!-- Floating Button Telepon (Kiri Layar) -->
+<button id="btn-phone-drawer" class="phone-float-btn">
+  <i class="fas fa-phone"></i>
+</button>
+
+<!-- Sliding Side Panel ala Cambridge -->
+<div id="phone-drawer" class="side-drawer">
+  <button id="close-drawer" class="close-btn">&times;</button>
+  <h3>Buku Telepon & Layanan</h3>
+  <ul class="drawer-menu">
+    <li><a href="/telepon"><i class="fas fa-history"></i> Riwayat Telepon</a></li>
+    <li><a href="#" onclick="openModalTambahTelepon()"><i class="fas fa-plus-circle"></i> Catat Telepon Masuk</a></li>
+  </ul>
+</div>
+<div id="drawer-overlay" class="drawer-overlay"></div>
+
 <body>
 
     <nav class="navbar-floating">

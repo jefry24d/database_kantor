@@ -241,7 +241,7 @@ def approve_surat(surat_id):
             conn.close()
             return jsonify({"success": False, "message": "Surat tidak ditemukan!"}), 404
 
-        if row['jenis_surat'] == 'CUSTOM':
+        if row['jenis_surat'] == 'CUSTOM_EDITOR':
             conn.close()
             return jsonify({"success": False, "message": "Surat Custom tidak memerlukan approval!"}), 400
 
