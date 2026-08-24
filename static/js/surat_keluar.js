@@ -89,7 +89,7 @@ function updateOptionsKelas() {
             elKelas.innerHTML = `<option value="" style="color:#000;">-- Pilih Kelas Siswa --</option>`;
             const kelases = [...new Set(master.siswa.map(s => s.kelas).filter(Boolean))];
             kelases.forEach(k => {
-                elKelas.innerHTML += `<option value="${k}" style="color:#000;">🏫 ${k}</option>`;
+                elKelas.innerHTML += `<option value="${k}" style="color:#000;"> ${k}</option>`;
             });
         }
     }

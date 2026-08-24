@@ -50,7 +50,7 @@ export function renderFormSuratMasuk(content) {
                         <option value="DP" style="color:black;">DP (Disposisi Pimpinan)</option>
                         <option value="S" style="color:black;">S (Biasa/Sangat)</option>
                         <option value="P" style="color:black;">P (Penting)</option>
-                        <option value="SR" style="color:black;">SR (Sangat Rahasia)</option>
+                        <option value="SR" style="color:black;">SR (Sarana Prasarana)</option>
                     </select>
 
                     <label style="margin-top:10px; display:block;">No. Urut / No. Disposisi:</label>

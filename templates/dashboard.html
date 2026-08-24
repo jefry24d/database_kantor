@@ -4,30 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAS SMABHY - Agenda Surat</title>
+    
+    <!-- CSS Utama Dribbble -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- FontAwesome buat Icon Telepon & Menu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
-<!-- Floating Button Telepon (Kiri Layar) -->
-<button id="btn-phone-drawer" class="phone-float-btn">
-  <i class="fas fa-phone"></i>
-</button>
-
-<!-- Sliding Side Panel ala Cambridge -->
-<div id="phone-drawer" class="side-drawer">
-  <button id="close-drawer" class="close-btn">&times;</button>
-  <h3>Buku Telepon & Layanan</h3>
-  <ul class="drawer-menu">
-    <li><a href="/telepon"><i class="fas fa-history"></i> Riwayat Telepon</a></li>
-    <li><a href="#" onclick="openModalTambahTelepon()"><i class="fas fa-plus-circle"></i> Catat Telepon Masuk</a></li>
-  </ul>
-</div>
-<div id="drawer-overlay" class="drawer-overlay"></div>
 
 <body>
 
+    <!-- 🧭 FLOATING NAVBAR DRIBBLE -->
     <nav class="navbar-floating">
-        <div class="nav-brand">SMABHAONE<br><small>SURABAYA</small></span>
-            <img src="{{ url_for('static', filename='css/icon-school.png') }}" alt="Logo SMABHAONE" class="harvard-logo" style="filter: brightness(0) invert(1);">
+        <div class="nav-brand">
+            SMABHAONE<br><small>SURABAYA</small>
+            <img src="{{ url_for('static', filename='css/icon-school.png') }}" 
+                 alt="Logo SMABHAONE" 
+                style="height: 68px; width: auto; object-fit: contain; vertical-align: middle; filter: brightness(0);">
         </div>
         
         <ul class="nav-menu">
@@ -35,14 +28,14 @@
             <li onclick="loadPage('audit-log')">AKTIVITAS PENGGUNA</li>
 
             <li class="dropdown">
-                <span>SURAT MENYURAT</span>
+                <span>SURAT MENYURAT ▾</span>
                 <ul class="dropdown-menu">
                     <li onclick="loadPage('input-masuk')">SURAT MASUK</li>
 
                     <li class="dropdown-sub">
-                        <span>Surat Keluar ▾</span>
+                        <span>SURAT KELUAR ▾</span>
                         <ul class="dropdown-sub-menu">
-                            <li onclick="loadPage('input', 'rekomendasi')">Surat Rekomendasi (individu)</li>
+                            <li onclick="loadPage('input', 'rekomendasi')">Surat Rekomendasi (Individu)</li>
                             <li onclick="loadPage('input', 'rekomendasi_kolektif')">Surat Rekomendasi Kolektif</li>
                             <li onclick="loadPage('input', 'keterangan')">Surat Keterangan</li>
                             <li onclick="loadPage('input', 'tugas')">Surat Tugas</li>
@@ -65,8 +58,8 @@
                     <li onclick="loadPage('profile-password')">UBAH PASSWORD</li>
                     
                     {% if session.get('role') and session.get('role')|lower == 'admin' %}
-                        <hr style="border-color: rgba(255,255,255,0.1); margin: 5px 0;">
-                        <li onclick="loadPage('admin-users')" style="color: #fffa65; font-weight: bold;">KELOLA AKUN</li>
+                        <hr style="border-color: #e2e8f0; margin: 5px 0;">
+                        <li onclick="loadPage('admin-users')" style="color: #ea4c89; font-weight: bold;">KELOLA AKUN</li>
                     {% endif %}
                 </ul>
             </li>
@@ -78,25 +71,52 @@
         </div>
     </nav>
 
-    <!-- 📦 AREA KONTEN UTAMA DENGAN OVERLAY MURAL -->
+    <!-- 📦 AREA KONTEN UTAMA DASHBOARD -->
     <div class="main-container">
         <div id="contentArea" class="glass-card">
-            <h1 style="color: #ec4d7a; margin-bottom: 10px;">Selamat Datang di SMA Kemala Bhayangkari 1 Surabaya! 🚀</h1>
-            <p style="color: #ccc; font-size: 1.1rem;">
+            <h1 style="color: #0f172a; margin-bottom: 10px; font-weight: 800;">Selamat Datang di SMA Kemala Bhayangkari 1 Surabaya! 🚀</h1>
+            <p style="color: #64748b; font-size: 1.05rem;">
                 Pilih menu di navigasi melayang di atas untuk mulai menjelajahi dan mengelola arsip surat kantor.
             </p>
         </div>
     </div>
 
+    <!-- 📞 FLOATING ACTION BUTTON (KANAN BAWAH) -->
+    <button id="btn-phone-drawer" class="phone-float-btn" title="Layanan Telepon">
+        <i class="fas fa-phone-alt"></i>
+    </button>
 
+    <!-- 🌑 OVERLAY GELAP TRANSFARAN -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+
+    <!-- 📱 SIDE DRAWER CAMBRIDGE (SLIDING RIGHT) -->
+    <div id="phone-drawer" class="side-drawer">
+        <div class="drawer-header">
+            <h3><i class="fas fa-phone-square-alt" style="color: #ea4c89;"></i> Layanan Telepon</h3>
+            <button id="close-drawer" class="close-btn">&times;</button>
+        </div>
+        
+        <ul class="drawer-menu">
+            <li>
+                <a href="/telepon">
+                    <i class="fas fa-history"></i> Riwayat Telepon
+                </a>
+            </li>
+            <li>
+                <a href="/telepon">
+                    <i class="fas fa-plus-circle"></i> Catat Telepon Masuk
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ⚙️ SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
-
     <script>
         const CURRENT_USER = "{{ username }}";
     </script>
-
-    <!-- Panggil main_2.js (atau main.js) sebagai MODULE -->
     <script type="module" src="{{ url_for('static', filename='js/main_2.js') }}"></script>
     <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
 </body>
 </html>
