@@ -192,6 +192,44 @@ def admin_add_user():
         conn.close()
         return jsonify({'success': False, 'message': 'Username sudah terpakai!'})
 
+# 🗑️ ADMIN API: DELETE USER
+@auth_bp.route('/api/admin/user/delete/<int:user_id>', methods=['DELETE'])
+def admin_delete_user(user_id):
+    # Cek hak akses admin godmode
+    if 'username' not in session or session.get('role') != 'admin':
+        log_activity(session.get('nama_lengkap', 'ANONYMOUS'), 'UNAUTHORIZED_ACCESS', 'Mencoba hapus user via Admin API')
+        return jsonify({'success': False, 'message': 'Akses khusus Admin Godmode!'}), 403
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    # 1. Cek apakah user yang mau dihapus itu diri sendiri
+    cursor.execute("SELECT username, nama_lengkap FROM users WHERE id = ?", (user_id,))
+    target_user = cursor.fetchone()
+
+    if not target_user:
+        conn.close()
+        return jsonify({'success': False, 'message': 'User tidak ditemukan!'}), 404
+
+    if target_user['username'] == session.get('username'):
+        conn.close()
+        return jsonify({'success': False, 'message': '⚠️ Waduh bro! Lu gak bisa nge-hapus akun lu sendiri yang lagi login!'}), 400
+
+    target_nama = target_user['nama_lengkap'] or target_user['username']
+
+    # 2. Eksekusi Hapus Akun
+    try:
+        cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
+        conn.commit()
+        conn.close()
+
+        # Catat ke Audit Log
+        log_activity(session.get('nama_lengkap', 'Admin'), 'ADMIN_DELETE_USER', f"Menghapus akun Member: {target_nama} (ID: {user_id})")
+        return jsonify({'success': True, 'message': f'✅ Akun {target_nama} berhasil dibantai!'})
+    except Exception as e:
+        conn.close()
+        return jsonify({'success': False, 'message': f'❌ Gagal menghapus user: {str(e)}'})
+
 @auth_bp.route('/api/user/me', methods=['GET'])
 def get_current_user():
     if 'username' not in session:

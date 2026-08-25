@@ -178,8 +178,9 @@ async function loadAdminUserTable() {
                             <option value="guru" ${roleLower === 'guru' ? 'selected' : ''}>👨‍🏫 Guru</option>
                         </select>
                     </td>
-                    <td style="text-align:center;">
-                        <button onclick="adminSimpanUser(${u.id})" class="btn-primary" style="padding: 4px 10px; font-size: 0.8rem; background:#0984e3; border:none; border-radius:4px; cursor:pointer;">💾 Update</button>
+                    <td style="text-align:center; display:flex; gap:5px; justify-content:center; padding: 10px 0;">
+                        <button onclick="adminSimpanUser(${u.id})" class="btn-primary" style="padding: 4px 8px; font-size: 0.8rem; background:#0984e3; border:none; border-radius:4px; cursor:pointer;">💾 Update</button>
+                        <button onclick="adminHapusUser(${u.id}, '${u.nama_lengkap || u.username}')" style="padding: 4px 8px; font-size: 0.8rem; background:#ff4757; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">🗑️ Hapus</button>
                     </td>
                 </tr>
             `;
@@ -240,6 +241,29 @@ async function adminSimpanUser(id) {
     }
 }
 
+async function adminHapusUser(id, nama) {
+    const yakin = confirm(`⚠️ YAKIN MAU HAJAR/HAPUS AKUN INI?\n\nAkun: ${nama} (ID: ${id})\nAksi ini tidak bisa dibatalkan dan akan dicatat di Audit Log!`);
+    
+    if (!yakin) return;
+
+    try {
+        const res = await fetch(`/api/admin/user/delete/${id}`, {
+            method: 'DELETE'
+        });
+        const data = await res.json();
+
+        if (data.success) {
+            alert(data.message);
+            loadAdminUserTable(); // Reload tabel otomatis
+        } else {
+            alert(data.message);
+        }
+    } catch (err) {
+        console.error(err);
+        alert("❌ Terjadi kesalahan koneksi server!");
+    }
+}
+
 // Global Export
 window.renderProfileView = renderProfileView;
 window.renderProfileEdit = renderProfileEdit;
@@ -249,3 +273,4 @@ window.simpanInfoProfil = simpanInfoProfil;
 window.simpanPasswordBaru = simpanPasswordBaru;
 window.adminTambahMember = adminTambahMember;
 window.adminSimpanUser = adminSimpanUser;
+window.adminHapusUser = adminHapusUser;

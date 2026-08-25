@@ -113,10 +113,12 @@
     <!-- ⚙️ SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
     <script>
-        const CURRENT_USER = "{{ username }}";
+        window.CURRENT_USER = "{{ session.get('nama_lengkap') or session.get('nama') or session.get('username', 'Petugas') }}";
     </script>
     <script type="module" src="{{ url_for('static', filename='js/main_2.js') }}"></script>
     <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+    <!-- Load Socket.IO Library -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
 </body>
 </html>

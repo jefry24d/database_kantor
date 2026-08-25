@@ -3,6 +3,10 @@ import { initMasterData, setupAutocompleteNama, getMasterData } from './autocomp
 
 initMasterData();
 
+// Connect Socket.IO untuk Live Presence Typing
+const socket = (typeof io !== 'undefined') ? io() : null;
+let typingTimer;
+
 const getValue = (id) => {
     const el = document.getElementById(id);
     return el ? el.value : '';
@@ -10,7 +14,7 @@ const getValue = (id) => {
 
 function generateNomorSurat() {
     const kode = getValue('kodeKlasifikasi') || '421.7';
-    const noUrut = getValue('noUrutSurat').trim() || '001';
+    const noUrut = getValue('noUrutSurat').trim() || 'AUTO';
     const tipe = getValue('tipeSubjek') || 'S';
     const tglInput = getValue('tglSurat');
     const tahun = tglInput ? new Date(tglInput).getFullYear() : new Date().getFullYear();
@@ -45,7 +49,6 @@ export async function updateInfoNomorTerakhir() {
     }
 }
 
-
 function updateOptionsKelas() {
     const selectTipe = document.getElementById('tipeSubjek');
     let elKelas = document.getElementById('kelas');
@@ -65,16 +68,14 @@ function updateOptionsKelas() {
             
             parentContainer.replaceChild(newInput, elKelas);
         }
-    } 
-    // Kalo tipe S atau P, kembalikan ke Dropdown Select
-    else {
+    } else {
         if (elKelas.tagName === 'INPUT') {
             const newSelect = document.createElement('select');
             newSelect.id = 'kelas';
             newSelect.style.cssText = 'background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px; width: 100%;';
             
             parentContainer.replaceChild(newSelect, elKelas);
-            elKelas = newSelect; // Re-assign acuan elemen
+            elKelas = newSelect;
         }
 
         elKelas.innerHTML = '';
@@ -85,7 +86,7 @@ function updateOptionsKelas() {
             units.forEach(u => {
                 elKelas.innerHTML += `<option value="${u}" style="color:#000;">👨‍🏫 ${u}</option>`;
             });
-        } else { // Tipe 'S' (Siswa)
+        } else {
             elKelas.innerHTML = `<option value="" style="color:#000;">-- Pilih Kelas Siswa --</option>`;
             const kelases = [...new Set(master.siswa.map(s => s.kelas).filter(Boolean))];
             kelases.forEach(k => {
@@ -93,6 +94,107 @@ function updateOptionsKelas() {
             });
         }
     }
+}
+
+// State global untuk menampung siapa aja yang lagi ngetik
+window.activeTypingUsers = window.activeTypingUsers || {};
+
+// 1. UPDATE LISTENER SOCKET BIAR TERIMA JUDUL SURAT & PENERIMA
+if (socket) {
+    socket.on('user_is_typing', (data) => {
+        // Tampilkan kalau yang ngetik BUKAN user yang sedang aktif di tab ini
+        if (data && data.admin && data.admin !== window.CURRENT_USER) {
+            window.activeTypingUsers[data.admin] = {
+                surat: data.jenis_surat || 'Surat Keluar',
+                penerima: data.penerima ? `(${data.penerima})` : ''
+            };
+            updateTypingBannerUI();
+        }
+    });
+
+    socket.on('user_stopped_typing', (data) => {
+        if (data && data.admin) {
+            delete window.activeTypingUsers[data.admin];
+        } else {
+            window.activeTypingUsers = {};
+        }
+        updateTypingBannerUI();
+    });
+}
+
+// 2. UPDATE TAMPILAN BANNER MELAYANG
+function updateTypingBannerUI() {
+    let banner = document.getElementById('typingAlertBanner');
+    const users = Object.keys(window.activeTypingUsers);
+
+    if (users.length === 0) {
+        if (banner) banner.style.display = 'none';
+        return;
+    }
+
+    if (!banner) {
+        banner = document.createElement('div');
+        banner.id = 'typingAlertBanner';
+        banner.style.cssText = `
+            position: fixed; 
+            top: 85px; 
+            left: 50%; 
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #ff4757, #ff6b81);
+            color: white; 
+            padding: 10px 22px; 
+            border-radius: 30px;
+            font-weight: bold; 
+            font-size: 0.9rem; 
+            z-index: 99999;
+            box-shadow: 0 5px 20px rgba(255,71,87,0.5); 
+            display: flex;
+            align-items: center; 
+            gap: 10px; 
+            transition: all 0.3s ease;
+        `;
+        document.body.appendChild(banner);
+    }
+
+    // Format Teks Dynamic: "Naili Mufaroh sedang ngetik Surat Keterangan (Budi)"
+    const textList = users.map(admin => {
+        const info = window.activeTypingUsers[admin];
+        return `<b style="color: #ffeaa7;">${admin}</b> ngetik <u>${info.surat}</u> <small>${info.penerima}</small>`;
+    }).join(' | ');
+
+    banner.innerHTML = `🔥 <span>${textList}</span> <span style="font-size: 0.75rem; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 10px;">Awas Duplikasi!</span>`;
+    banner.style.display = 'flex';
+}
+
+// 3. UPDATE PEMANCAR EMIT ATTACH LISTENER
+function attachSocketTypingListener() {
+    const inputNama = document.getElementById('namaPenerima') || document.querySelector('input[name="nama_penerima"]');
+    
+    // Ambil Judul Surat dari H2 Form
+    const formTitleElement = document.querySelector('#contentArea h2, .glass-card h2');
+    const jenisSurat = formTitleElement ? formTitleElement.innerText.replace('INPUT ', '').trim() : 'Surat Keluar';
+
+    if (!inputNama || !socket) return;
+
+    const sendActivePresence = () => {
+        let val = inputNama.value.trim();
+        const namaUser = window.CURRENT_USER || 'Petugas';
+
+        socket.emit('typing_surat', {
+            admin: namaUser,
+            penerima: val,
+            jenis_surat: jenisSurat
+        });
+    };
+
+    inputNama.addEventListener('input', sendActivePresence);
+    inputNama.addEventListener('focus', sendActivePresence);
+
+    inputNama.addEventListener('blur', function() {
+        if (this.value.trim() === '') {
+            socket.emit('stop_typing_surat', { admin: window.CURRENT_USER || 'Petugas' });
+        }
+    });
 }
 
 export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
@@ -171,7 +273,6 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
         selectKode.addEventListener('change', updateInfoNomorTerakhir);
     }
 
-    // Event listener perpindahan S / P
     const selectTipe = document.getElementById('tipeSubjek');
     if (selectTipe) {
         selectTipe.addEventListener('change', () => {
@@ -183,9 +284,11 @@ export async function renderFormSuratKeluar(content, subType = 'rekomendasi') {
         });
     }
 
-    // Inisialisasi awal dropdown Kelas/Unit
     updateOptionsKelas();
     setupAutocompleteNama();
+    
+    // AKTIFKAN LISTENER LIVE PRESENCE ANTI-RUDI!
+    attachSocketTypingListener();
 }
 
 export async function simpanDanCetak() {
@@ -197,7 +300,6 @@ export async function simpanDanCetak() {
     const nomorSuratLengkap = getValue('noSurat') || generateNomorSurat();
     const tipe = getValue('tipeSubjek') || 'S';
 
-    // AUTO-FILL PERIHAL KALO SURAT KETERANGAN (BIAR KAGAK ERROR DIBLOCK SERVER)
     let perihalVal = getValue('perihal');
     if (!perihalVal) {
         const namaPenerima = getValue('namaPenerima') || 'Siswa/Pegawai';
@@ -217,18 +319,14 @@ export async function simpanDanCetak() {
         bulan: getValue('bulan') || 'Januari',
         tgl_surat: getValue('tglSurat'),
         nama_penerima: getValue('namaPenerima'),
-
         nama_event: getValue('namaEvent'),
-        
         nama_bank: getValue('namaBank'),
         no_rekening: getValue('noRekening'),
         virtual_account: getValue('virtualAccount'),
-
         kelas: getValue('kelas'),
         no_induk_siswa: getValue('noIndukSiswa'),
         unit: (tipe === 'P' || tipe === 'M') ? getValue('kelas') : '-',
         no_pegawai: (tipe === 'P' || tipe === 'M') ? getValue('noIndukSiswa') : '-',
-
         ttl: getValue('ttl'),
         alamat: getValue('alamat'),
         isi_keterangan: getValue('isiKeterangan'),
@@ -247,6 +345,9 @@ export async function simpanDanCetak() {
         });
         const data = await res.json();
 
+        // MATIKAN BANNER SOCKET PAS SELESAI SIMPAN
+        if (socket) socket.emit('stop_typing_surat', { admin: window.CURRENT_USER });
+
         if (data.success) {
             msg.innerText = "✅ " + data.message;
             msg.style.color = "#00ff88";
@@ -263,7 +364,6 @@ export async function simpanDanCetak() {
     }
 }
 
-// Render Form Khusus Custom File (BISA AUTO GENERATE NO SURAT + AUDIT LOG)
 export function renderCustomSuratHybrid(content) {
     content.innerHTML = `
         <h2>📤 UPLOAD SURAT CUSTOM / ARSIP DOKUMEN</h2>
@@ -308,13 +408,14 @@ export function renderCustomSuratHybrid(content) {
         <p id="msgCustom" style="margin-top: 10px;"></p>
     `;
 
-    // Ambil nomor urut saran paling baru
     updateInfoNomorTerakhir();
 
     const selectKode = document.getElementById('kodeKlasifikasi');
     if (selectKode) {
         selectKode.addEventListener('change', updateInfoNomorTerakhir);
     }
+
+    attachSocketTypingListener();
 
     document.getElementById('btnUploadCustom').addEventListener('click', async () => {
         const msg = document.getElementById('msgCustom');
@@ -336,6 +437,9 @@ export function renderCustomSuratHybrid(content) {
         try {
             const res = await fetch('/surat/add', { method: 'POST', body: formData });
             const data = await res.json();
+            
+            if (socket) socket.emit('stop_typing_surat', { admin: window.CURRENT_USER });
+
             if (data.success) {
                 msg.innerText = "✅ " + data.message;
                 msg.style.color = "#00ff88";
@@ -361,11 +465,11 @@ export async function loadTabelSuratKeluar() {
             const dataUser = await resUser.json();
             if (dataUser.logged_in) {
                 userRole = String(dataUser.role).toLowerCase();
+                window.CURRENT_USER = dataUser.username;
             }
         } catch (e) {
             console.error("Gagal mengambil info user role", e);
         }
-        
 
         const res = await fetch('/api/surat-keluar');
         const data = await res.json();
@@ -391,7 +495,6 @@ export async function loadTabelSuratKeluar() {
             html += `<tr><td colspan="8" style="text-align:center; padding:20px;">Belum ada arsip surat keluar.</td></tr>`;
         } else {
             data.forEach((d, index) => {
-                // Tombol Approve hanya muncul jika BUKAN Surat Custom
                 let btnApprove = '';
                 if (d.jenis_surat !== 'CUSTOM') {
                     if (d.is_approved == 1) {
@@ -424,7 +527,7 @@ export async function loadTabelSuratKeluar() {
                         <td style="text-align:center; display:flex; gap:5px; justify-content:center; align-items:center;">
                             ${btnApprove}
                             <button onclick="window.open('/surat/cetak/${d.id}', '_blank')" style="padding:5px 10px; font-size:0.75rem; background:#0984e3; color:white; border:none; border-radius:4px; cursor:pointer;">🖨️ Cetak</button>
-                            ${btnHapus} <!-- 👈 PAKE VARIABEL btnHapus DI SINI! -->
+                            ${btnHapus}
                         </td>
                     </tr>
                 `;
@@ -434,7 +537,6 @@ export async function loadTabelSuratKeluar() {
         html += `</tbody></table>`;
         area.innerHTML = html;
 
-        // Event Listener Tombol Approve
         document.querySelectorAll('.btn-approve-sk').forEach(btn => {
             btn.addEventListener('click', async (e) => {
                 const id = e.target.dataset.id;
@@ -459,7 +561,6 @@ export async function loadTabelSuratKeluar() {
     }
 }
 
-// Add fungsi hapusSuratKeluar & pasang ke window scope
 export async function hapusSuratKeluar(id) {
     if (!confirm("Apakah Anda yakin ingin menghapus surat keluar ini?")) return;
 
@@ -471,7 +572,7 @@ export async function hapusSuratKeluar(id) {
 
         if (res.ok && (data.status === 'success' || data.success)) {
             alert("✅ " + (data.message || "Surat berhasil dihapus!"));
-            loadTabelSuratKeluar(); // Reload tabel
+            loadTabelSuratKeluar();
         } else {
             alert("❌ " + (data.message || "Gagal menghapus surat!"));
         }
@@ -481,5 +582,4 @@ export async function hapusSuratKeluar(id) {
     }
 }
 
-// WAJIB KARENA DIPANGGIL VIA ONCLICK="" DI HTML
 window.hapusSuratKeluar = hapusSuratKeluar;

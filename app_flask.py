@@ -11,7 +11,6 @@ from routes.telepon_routes import telepon_bp
 
 app = Flask(__name__)
 app.secret_key = 'arsip_kantor_rahasia_nyot'
-
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 # 2. REGISTER BLUEPRINTS
@@ -93,7 +92,19 @@ def index():
         return redirect(url_for('auth_bp.login_page'))
     return render_template('dashboard.html', username=session['username'], role=session['role'])
 
-@socketio.on
+@socketio.on('typing_surat')
+def handle_typing(data):
+    emit('user_is_typing', data, broadcast=True, include_self=False)
+
+@socketio.on('stop_typing_surat')
+def handle_stop_typing(data):
+    emit('user_stopped_typing', data, broadcast=True, include_self=False)
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    pembuat = session.get('username') or session.get('nama_lengkap')
+    if pembuat:
+        emit('user_stopped_typing', {'admin': pembuat}, broadcast=True, include_self=False)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+     socketio.run(app, debug=True, host='0.0.0.0', port=5000)

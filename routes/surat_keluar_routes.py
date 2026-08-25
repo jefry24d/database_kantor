@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, session, render_template, redirec
 import os
 import time
 import re
+import uuid
 from werkzeug.utils import secure_filename
 from .utils import get_db, allowed_file, format_tanggal_indo, log_activity
 
@@ -76,8 +77,9 @@ def add_surat():
 
         if file and file.filename != '':
             if allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                filename_saved = f"custom_{int(time.time())}_{filename}"
+                ext = file.filename.rsplit('.', 1)[1].lower()
+                clean_name = secure_filename(file.filename.rsplit('.', 1)[0])
+                filename_saved = f"custom_{int(time.time())}_{uuid.uuid4().hex[:6]}_{clean_name}.{ext}"
                 upload_folder = os.path.join(current_app.root_path, 'static', 'uploads')
                 os.makedirs(upload_folder, exist_ok=True)
                 file.save(os.path.join(upload_folder, filename_saved))
@@ -99,7 +101,7 @@ def add_surat():
         return jsonify({'success': True, 'message': 'File Custom Surat berhasil diupload!', 'surat_id': new_id})
 
     else:
-        data = request.json
+        data = request.json or {}
         jenis = data.get('jenis')
         no_surat = data.get('nomor_surat', '').strip()
         perihal = data.get('perihal', '').strip()
@@ -133,6 +135,23 @@ def add_surat():
         if not no_surat or not perihal:
             return jsonify({'success': False, 'message': 'Nomor Surat & Perihal kagak boleh kosong!'})
 
+        # SAFE AUTO-INCREMENT REPLACEMENT UNTUK PENCEGAHAN RACE CONDITION
+        if 'AUTO' in no_surat:
+            conn = get_db()
+            cursor = conn.cursor()
+            cursor.execute("SELECT nomor_surat FROM surat WHERE nomor_surat LIKE '%/%' ORDER BY id DESC LIMIT 1")
+            last_row = cursor.fetchone()
+            
+            suggested = "001"
+            if last_row and last_row[0]:
+                match = re.search(r'/(\d+)\.', last_row[0])
+                if match:
+                    last_no = match.group(1)
+                    suggested = str(int(last_no) + 1).zfill(len(last_no))
+            
+            no_surat = no_surat.replace('AUTO', suggested)
+            conn.close()
+
         conn = get_db()
         cursor = conn.cursor()
         cursor.execute("""
@@ -164,6 +183,7 @@ def add_surat():
 def get_eksplorasi():
     conn = get_db()
     cursor = conn.cursor()
+    # FIX: MENAMBAHKAN s.is_approved DI QUERY SELECT
     cursor.execute("""
         SELECT 
             s.id,
@@ -171,16 +191,15 @@ def get_eksplorasi():
             s.nomor_surat,
             s.perihal,
             s.bulan,
-
             COALESCE(u.nama_lengkap, s.uploaded_by) AS uploaded_by,
-
             s.nama_penerima,
             s.unit,
             s.no_pegawai,
             s.hari_tanggal,
             s.tempat,
             s.file_custom_path,
-            s.tgl_surat
+            s.tgl_surat,
+            s.is_approved
         FROM surat s
         LEFT JOIN users u
             ON u.username = s.uploaded_by
@@ -196,7 +215,8 @@ def get_last_number():
         conn = get_db()
         cursor = conn.cursor()
 
-        cursor.execute("SELECT nomor_surat FROM surat ORDER BY id DESC LIMIT 1")
+        # FIX: HANYA PILIH NOMOR BERFORMAT RESMI DENGAN FILTER LIKE '%/%'
+        cursor.execute("SELECT nomor_surat FROM surat WHERE nomor_surat LIKE '%/%' ORDER BY id DESC LIMIT 1")
         row = cursor.fetchone()
         conn.close()
 

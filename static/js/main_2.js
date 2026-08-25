@@ -29,6 +29,10 @@ async function loadPage(page, subType = '') {
     const content = document.getElementById('contentArea');
     if (!content) return;
 
+    if (typeof io !== 'undefined' && window.socket) {
+        window.socket.emit('stop_typing_surat', { admin: window.CURRENT_USER });
+    }
+
     try {
         if (page === 'audit-log') {
             renderAuditLogPage(content);
