@@ -1,5 +1,6 @@
 from flask import Flask, render_template, session, redirect, url_for
 import sqlite3
+from flask_socketio import SocketIO, emit
 
 # 1. IMPORT BLUEPRINT TERPISAH
 from routes.auth_routes import auth_bp
@@ -10,6 +11,8 @@ from routes.telepon_routes import telepon_bp
 
 app = Flask(__name__)
 app.secret_key = 'arsip_kantor_rahasia_nyot'
+
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 # 2. REGISTER BLUEPRINTS
 app.register_blueprint(auth_bp)
@@ -89,6 +92,8 @@ def index():
     if 'username' not in session:
         return redirect(url_for('auth_bp.login_page'))
     return render_template('dashboard.html', username=session['username'], role=session['role'])
+
+@socketio.on
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
