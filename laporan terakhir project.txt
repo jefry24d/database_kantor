@@ -1,1 +1,214 @@
-sedang mengupdate surat keterangan dan mencoba membuatnya seperti surat rekomendasi, namun tetap berdasarkan form surat keterangan asli, hanya saja dapat digunakan untuk 3 penerima "Guru/Siswa/Mahasiswa". dan menyediakan dropdown pilihan berisi template teks default namun tetap menyediakan ruang kosong untuk diisi sesuai keinginan USER
+==================================================
+BUG REPORT - LOG CETAK SURAT PEMBERITAHUAN / PINJAM SARPRAS
+==================================================
+
+[Jenis Surat]
+Surat Pemberitahuan Pemakaian Sarana dan Prasarana Sekolah (Kode 422/021.SMABHY.SR/402.4.9.24/2026)
+
+[Detail Bug]
+1. CSS Alignment / Layout Overlap (Bagian TTD & Stempel)
+   - Stempel dan gambar TTD posisinya offset ke kiri-atas.
+   - Mengakibatkan stempel menimpa teks "Kepala Sekolah" dan TTD menimpa nama "Dwi Adhika Mintardi, S.Pd.".
+   - Penyebab: Position element (absolute/relative) atau margin/padding CSS pada blok tanda tangan kurang pas.
+
+2. Print Page Break Overflow (Layout Terpotong Jadi 2 Halaman)
+   - Pada Print Preview (Chrome/Edge), dokumen terdeteksi menjadi "2 sheets of paper".
+   - Penyebab: Margin container terlalu besar atau CSS @media print belum dikunci dengan `page-break-inside: avoid;` / `height: 100vh`.
+
+[Saran Perbaikan CSS]
+- Bungkus area TTD dengan div `position: relative;` lalu atur z-index & positioning stempel/TTD dengan `transform: translate()` atau margin yang tepat.
+- Tambahkan CSS print:
+  @media print {
+    body { margin: 0; }
+    .surat-container { page-break-inside: avoid; }
+  }
+
+  ==================================================
+BUG REPORT - SURAT KETERANGAN AKTIVASI REKENING PIP
+==================================================
+
+[Jenis Surat]
+Surat Keterangan Aktivasi Rekening Simple PIP (Kode 422.5/020.SMABHY.S/402.4.9.24/2026)
+
+[Detail Bug]
+- Isu 1 (Layout Misalignment): Stempel dan TTD offset ke atas, menimpa teks "Kepala Sekolah" & nama "Dwi Adhika Mintardi, S.Pd.".
+- Isu 2 (Page Overflow): Print preview terdeteksi "2 sheets of paper" padahal kontenmu muat dalam 1 halaman.
+
+[Status Bug]
+Sama dengan bug sebelumnya (Perlu perbaikan CSS positioning & media print global di semua template cetak surat).
+
+==================================================
+BUG REPORT - SURAT UNDANGAN RAPAT
+==================================================
+
+[Jenis Surat]
+Surat Undangan Rapat (Kode 421.7/019.SMABHY.S/402.4.9.24/2026)
+
+[Detail Bug]
+- Isu 1 (TTD/Stempel Overlap): Posisi stempel & TTD nembus ke atas menimpa teks "Kepala Sekolah" dan nama penandatangan.
+- Isu 2 (Page Overflow): Print preview tetap kebaca "2 sheets of paper".
+
+[Status Bug]
+Sama (Bug CSS Global).
+
+
+
+==================================================
+BUG REPORT - SURAT TUGAS GURU / PEGAWAI
+==================================================
+
+[Jenis Surat]
+Surat Tugas (Kode 424/018.SMABHY.P/402.4.9.24/2026)
+
+[Detail Bug]
+1. Logic Error / Dynamic Labeling (Data Guru vs Siswa):
+   - Jika penerima surat adalah Guru/Pegawai (misal: Kharis Matul Muarifah, S.Pd.), label yang muncul HARUSNYA:
+     * "NIP / NIPY" (Bukan "NIS / NISN")
+     * "Jabatan / Unit Kerja" (Bukan "kelas")
+   - Penyebab: Template cetak surat belum ada kondisi pengecekan `if (tipe_penerima === 'Guru')` untuk mengubah label field secara dinamis.
+
+2. UI Layout Misalignment (Stempel & TTD):
+   - Posisi stempel dan TTD masih offset/menimpa teks "Kepala Sekolah" dan nama penandatangan.
+
+[Saran Perbaikan Logic]
+Di file template Blade/EJS/JSX cetak surat tugas, ganti label dengan kondisional:
+- Label 1: {{ tipe == 'Guru' ? 'Jabatan / Unit Kerja' : 'Kelas' }}
+- Label 2: {{ tipe == 'Guru' ? 'NIP / NIPY' : 'NIS / NISN' }}
+
+==================================================
+BUG REPORT - SURAT KETERANGAN SISWA AKTIF
+==================================================
+
+[Jenis Surat]
+Surat Keterangan Siswa (Kode 421.7/017.SMABHY.S/402.4.9.24/2026)
+
+[Detail Bug]
+1. UI Layout Misalignment (Stempel & TTD):
+   - Gambar stempel & TTD posisinya terlalu naik ke atas, menimpa teks "Kepala Sekolah" dan nama penandatangan.
+
+2. Print Page Overflow (Bocor 2 Halaman):
+   - Print preview terdeteksi "2 sheets of paper", padahal konten sangat pendek. 
+   - Halaman kedua kosong/bocor karena sisa margin bawah atau padding container terlalu longgar.
+
+[Status Bug]
+Sama (Butuh perbaikan CSS Global untuk positioning TTD & media print).
+
+==================================================
+BUG REPORT - SURAT REKOMENDASI (FATAL LAYOUT BUG)
+==================================================
+
+[Jenis Surat]
+Surat Rekomendasi (Kode 421.7/015.SMABHY.S/402.4.9.24/2026)
+
+[Detail Bug]
+1. Out of Bounds / Layout Truncation (Elemen Melayang Keluar Kertas):
+   - Teks tanggal ("Surabaya, 26 Agustus 2026") dan "Kepala Sekolah," terlempar keluar dari margin kertas/container (terpotong di bagian bawah).
+   - Penyebab: Margin/padding container utama terlalu tinggi atau CSS height tidak terkunci (overflow: visible), sehingga elemen footer terdorong melampaui batas Halaman 1.
+
+2. Duplicate Footer Element (Elemen Ganda):
+   - Teks tanggal & jabatan muncul 2 kali (satu menimpa stempel, satu lagi melayang di luar kertas bawah).
+   - Penyebab: Kemungkinan ada duplikasi tag HTML di template atau bentrokan styling antara print CSS dan display biasa.
+
+3. UI Layout Misalignment (Stempel & TTD):
+   - Stempel dan TTD masih offset menimpa teks nama penandatangan secara acak.
+
+[Solusi Cepat CSS]
+Bungkus seluruh surat dalam satu wrapper:
+.halaman-surat {
+  width: 210mm;
+  height: 297mm; /* Ukuran A4 */
+  padding: 20mm;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden; /* Biar gak ada elemen keluar kertas */
+}
+
+Atur footer TTD pakai posisi absolut dari bawah container:
+.footer-ttd {
+  position: absolute;
+  bottom: 25mm;
+  right: 20mm;
+}
+
+
+
+
+==================================================
+FEATURE REQUEST - INTEGRASI MASTER DATA SISWA (FORM INPUT SURAT)
+==================================================
+
+[Halaman Form]
+INPUT SURAT REKOMENDASI KOLEKTIF
+
+[Deskripsi Usulan]
+Saat ini inputan "Daftar Siswa" masih menggunakan Textarea manual (format string pisah enter). 
+Disarankan untuk di-upgrade menggunakan Auto-complete / Search Selection yang terintegrasi langsung dengan Master Data Siswa atau JS Auto-helper.
+
+[Manfaat & Objective]
+1. Efisiensi waktu (tidak perlu input manual Nama, Kelas, NISN satu-satu).
+2. Meminimalisir human error (salah ketik nama, NISN, atau format koma/enter).
+
+[Gambaran Opsi Implementasi Technical]
+- Opsi 1: Ganti Textarea dengan Multi-Select Component (misal: Select2 / Choices.js / TomSelect) yang me-render data siswa dari API Master Data.
+- Opsi 2: Tetap pakai Textarea, tapi sediakan Tombol / Dropdown "Pilih Siswa dari Master Data" + JS Auto-helper yang otomatis nge-fill format teks ke dalam Textarea saat siswa dipilih.
+
+
+
+
+==================================================
+FEATURE REQUEST - MULTI-PENERIMA SURAT TUGAS (DYNAMIC FIELD / KOLEKTIF)
+==================================================
+
+[Halaman Form]
+INPUT SURAT TUGAS
+
+[Problem Statement]
+Form Surat Tugas saat ini hanya mendukung 1 penerima tugas (Single Input). 
+Jika tugas diberikan ke 2 orang atau lebih (kelompok/kolektif), form tidak bisa menampung data tersebut.
+
+[Usulan Solusi UI/UX]
+Disarankan membuat 2 Mode Input untuk Surat Tugas:
+
+1. Dynamic Repeater Form (Cocok untuk 2-5 Orang):
+   - Sediakan tombol "+ Tambah Petugas/Siswa".
+   - Saat diklik, JS akan memunculkan row input baru (Nama, Kelas/Unit, NIS/NIP).
+   - Efek di Hasil Cetak: Jika hanya 2-3 orang, data tetap tampil berurutan dalam bentuk list poin di dalam surat.
+
+2. Mode Bulk / Textarea Kolektif (Cocok untuk >5 Orang / Rombongan):
+   - Sediakan Toggle/Switch: "Input Perorangan" VS "Input Kolektif (Banyak)".
+   - Jika Mode Kolektif aktif, field single berubah jadi Textarea (atau Auto-helper Master Data).
+   - Efek di Hasil Cetak: Jika penerima banyak, layout otomatis dirender menjadi TABEL DAFTAR PENERIMA TUGAS di dalam surat.
+
+[Implementasi Template Cetak (Backend/Frontend View)]
+- Tambahkan logika kondisional pada template cetak:
+  * Jika count(penerima) == 1 -> Tampilan Format Single.
+  * Jika count(penerima) > 1 -> Tampilan Format Tabel / Multiple List.
+
+  ==================================================
+BUG REPORT - JS AUTOFILL HELPER STRICT VALIDATION BUG
+==================================================
+
+[Halaman Form]
+INPUT SURAT UNDANGAN (dan Form dengan Penerima Custom/Eksternal)
+
+[Detail Bug]
+1. Rigid Validation / Hardcoded Autofill Scope:
+   - Function JS Auto-helper mewajibkan teks yang diketik di field "Yth. / Penerima Undangan" harus cocok dengan database (Siswa/Guru).
+   - Jika diisi teks bebas/eksternal (contoh: "Bapak/Ibu Orang Tua / Wali Murid Kelas X"), script melempar error "Data tidak ditemukan..." dan menolak/memblokir input.
+   - Penyebab: Validasi event listener (`oninput` / `onchange` / `blur`) tidak memiliki fallback option untuk "Custom / Free-text Input".
+
+[Solusi Fix Code (JavaScript)]
+Tambahkan pengkondisian agar user tetap bisa memilih opsi "Gunakan teks kustom" atau matikan auto-search jika input tidak menemukan match di DB:
+
+// Contoh Logic JS Fix:
+function handleAutofill(inputVal) {
+    let result = searchDatabase(inputVal);
+    
+    if (result.length === 0) {
+        // Jangan dikunci/error! Biarkan jadi teks bebas (Free-text mode)
+        hideErrorMessage();
+        allowCustomInput(inputVal); 
+    } else {
+        showDropdownSuggestions(result);
+    }
+}

@@ -8,15 +8,17 @@
         @page {
         /* Ukuran Kertas F4 / Folio Standar Indonesia */
         size: 215.9mm 330mm; 
-        
-        /* Margin presisi surat Chikita */
-        margin: 20mm 20mm 15mm 20mm; 
+        margin: 15mm 20mm 15mm 20mm; 
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 12pt;
-            line-height: 1.5;
+            line-height: 1.4;
             color: #000;
             background: #333;
             margin: 0;
@@ -25,13 +27,15 @@
 
         /* CONTAINER PAPER SIMULASI */
         .paper {
-            width: 210mm;
+            width: 215.9mm;
             min-height: 330mm;
-            padding: 15mm 20mm 20mm 20mm;
+            padding: 15mm 20mm;
             background: #fff;
             margin: 0 auto;
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
             display: block;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         /* KOP SURAT SUPAYA LEBARNYA FIX MASUK KERTAS */
@@ -112,8 +116,9 @@
             .paper {
                 box-shadow: none;
                 width: 100%;
+                min-height: auto;
+                padding: 0;
                 margin: 0;
-                padding: 15mm 20mm 20mm 20mm;
             }
             .btn-print {
                 display: none;

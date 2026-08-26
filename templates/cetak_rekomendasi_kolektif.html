@@ -104,7 +104,7 @@
         <p style="margin-top: 20px;">Demikian surat rekomendasi ini dibuat untuk dipergunakan sebagaimana mestinya.</p>
 
         <div class="ttd-container">
-            <p>Surabaya, {{ surat['tgl_surat'] if surat['tgl_surat'] else '18 Agustus 2026' }}<br>Kepala Sekolah,</p>
+           <p style="margin: 0;">Surabaya, {{ surat['tgl_surat_indo'] }}<br>Kepala Sekolah,</p>
 
             <div style="height: 75px; position: relative; display: flex; justify-content: center; align-items: center;">
                 {% if surat.is_approved == 1 %}

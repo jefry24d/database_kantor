@@ -26,20 +26,20 @@
           { "value": "P", "text": "P - Pegawai / Guru" }
         ]
       },
-      { "id": "perihal", "label": "Perihal / Nama Kegiatan", "placeholder": "Contoh: Lomba Debat Bahasa Indonesia" },
-      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
-      { "id": "waktu", "label": "Waktu Pelaksanaan", "placeholder": "Pukul 08.00 WIB s.d selesai" }
-    ],
-    "kanan": [
-      { "id": "namaPenerima", "label": "Nama Siswa / Penerima", "placeholder": "Nama lengkap" },
+      { "id": "noIndukSiswa", "label": "NIS / NISN / NIP", "placeholder": "Contoh: 12345 / 005xxxxxx" },
+            { "id": "namaPenerima", "label": "Nama Siswa / Penerima", "placeholder": "Nama lengkap" },
       {
         "id": "kelas",
         "label": "Kelas Siswa / Unit Kerja Guru",
         "type": "select"
-      },
-      { "id": "noIndukSiswa", "label": "NIS / NISN / NIP", "placeholder": "Contoh: 12345 / 005xxxxxx" },
+      }    
+    ],
+    "kanan": [
       { "id": "hariTanggal", "label": "Hari / Tanggal Kegiatan", "placeholder": "Senin, 10 Agustus 2026" },
-      { "id": "tempat", "label": "Tempat / Lokasi Kegiatan", "placeholder": "Aula Utama" }
+      { "id": "tempat", "label": "Tempat / Lokasi Kegiatan", "placeholder": "Aula Utama" },
+      { "id": "perihal", "label": "Perihal / Nama Kegiatan", "placeholder": "Contoh: Lomba Debat Bahasa Indonesia" },
+      { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
+      { "id": "waktu", "label": "Waktu Pelaksanaan", "placeholder": "Pukul 08.00 WIB s.d selesai" }
     ]
   },
   "rekomendasi_kolektif": {
@@ -261,7 +261,7 @@
       "default": "Kami mengharap kehadiran Bapak/Ibu pada:"
     }
   },
-  "sarpras": {
+"sarpras": {
     "judul": "🏫 INPUT SURAT PEMBERITAHUAN / PINJAM SARPRAS",
     "jenis": "SARPRAS",
     "kiri": [
@@ -282,24 +282,31 @@
           { "value": "SR", "text": "SR - Sarpras" }
         ]
       },
-      { "id": "perihal", "label": "Perihal Surat", "defaultValue": "Pemberitahuan Pemakaian Sarana dan Prasarana Sekolah" },
       { "id": "tglSurat", "label": "📅 Tanggal Surat Dibuat", "type": "date", "isToday": true },
-      { "id": "namaPenerima", "label": "Yth. / Tujuan Surat", "defaultValue": "Ibu Ketua Pengurus YKB Daerah Jatim" },
-      { "id": "alamat", "label": "Alamat Tujuan", "defaultValue": "Jl. Ahmad Yani No. 116 Surabaya" }
+            { "id": "hariTanggal", "label": "Hari & Tanggal Pelaksanaan", "placeholder": "Contoh: Selasa, 18 Agustus 2026" },
+      { "id": "waktu", "label": "Waktu Pelaksanaan", "defaultValue": "Pukul 07.00 WIB s.d Selesai" }
     ],
     "kanan": [
-      { "id": "namaEvent", "label": "Nama Kegiatan / Acara", "placeholder": "Contoh: Orasi Kandidat Ketua dan Wakil Ketua OSIS" },
+      { "id": "perihal", "label": "Perihal Surat", "defaultValue": "Pemberitahuan Pemakaian Sarana dan Prasarana Sekolah" },
+      { "id": "namaPenerima", "label": "Yth. / Tujuan Surat", "defaultValue": "Ibu Ketua Pengurus YKB Daerah Jatim" },
+      { "id": "alamat", "label": "Alamat Tujuan", "defaultValue": "Jl. Ahmad Yani No. 116 Surabaya" },
       { "id": "tempat", "label": "Tempat / Sarpras yang Dipakai", "placeholder": "Contoh: Joglo Tengah dan Lapangan Tengah Sekolah" },
-      { "id": "hariTanggal", "label": "Hari & Tanggal Pelaksanaan", "placeholder": "Contoh: Selasa, 18 Agustus 2026" },
-      { "id": "waktu", "label": "Waktu Pelaksanaan", "defaultValue": "Pukul 07.00 WIB s.d Selesai" },
       { "id": "lampiran", "label": "Lampiran", "defaultValue": "-" }
     ],
-    "textarea": {
-      "id": "keteranganAcara",
-      "label": "Daftar Tembusan (Satu baris per tembusan - Opsional):",
-      "rows": 4,
-      "default": "1. Kepala TK Kemala Bhayangkari 1 Surabaya\n2. Kepala SD Kemala Bhayangkari 1 Surabaya\n3. Kepala SMP Kemala Bhayangkari 1 Surabaya\n4. Koordinator Satuan Pengamanan Sekolah Kemala Bhayangkari 1 Surabaya"
-    }
+    "textareas": [
+      {
+        "id": "namaEvent",
+        "label": "Nama Kegiatan / Acara (Bisa Paragraf Panjang):",
+        "rows": 3,
+        "placeholder": "Contoh: Orasi Kandidat Ketua dan Wakil Ketua OSIS serta Kegiatan Classmeeting..."
+      },
+      {
+        "id": "keteranganAcara",
+        "label": "Daftar Tembusan (Satu baris per tembusan):",
+        "rows": 4,
+        "default": "1. Kepala TK Kemala Bhayangkari 1 Surabaya\n2. Kepala SD Kemala Bhayangkari 1 Surabaya\n3. Kepala SMP Kemala Bhayangkari 1 Surabaya\n4. Koordinator Satuan Pengamanan Sekolah Kemala Bhayangkari 1 Surabaya"
+      }
+    ]
   },
   "custom": {
     "judul": "📤 UPLOAD SURAT CUSTOM / ARSIP LUAR",
