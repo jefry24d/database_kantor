@@ -362,10 +362,13 @@ export async function simpanDanCetak() {
         nama_bank: getValue('namaBank'),
         no_rekening: getValue('noRekening'),
         virtual_account: getValue('virtualAccount'),
-        kelas: getValue('kelas'),
-        no_induk_siswa: getValue('noIndukSiswa'),
+        
+        // 🟢 FIX DISINI: Kosongkan field lawan jika tipe-nya Pegawai / Siswa!
+        kelas: (tipe === 'S') ? getValue('kelas') : '-',
+        no_induk_siswa: (tipe === 'S') ? getValue('noIndukSiswa') : '-',
         unit: (tipe === 'P' || tipe === 'M') ? getValue('kelas') : '-',
         no_pegawai: (tipe === 'P' || tipe === 'M') ? getValue('noIndukSiswa') : '-',
+        
         ttl: getValue('ttl'),
         alamat: getValue('alamat'),
         isi_keterangan: getValue('isiKeterangan'),

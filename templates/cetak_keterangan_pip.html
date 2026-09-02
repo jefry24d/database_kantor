@@ -135,8 +135,8 @@
         <table class="form-table">
             <tr><td width="140">nama</td><td width="15">:</td><td><b>{{ surat['nama_penerima'] or '-' }}</b></td></tr>
             <tr><td>kelas</td><td>:</td><td>{{ surat['kelas'] or '-' }}</td></tr>
-            <tr><td>nisn</td><td>:</td><td>{{ surat['no_induk_siswa'] or '-' }}</td></tr>
-            <tr><td>tempat, tanggal lahir</td><td>:</td><td>{{ surat['ttl'] or '-' }}</td></tr>
+            <tr><td>NISN</td><td>:</td><td>{{ surat['no_induk_siswa'] or '-' }}</td></tr>
+            <tr><td>TTL</td><td>:</td><td>{{ surat['ttl'] or '-' }}</td></tr>
             <tr><td>alamat</td><td>:</td><td>{{ surat['alamat'] or '-' }}</td></tr>
         </table>
 
@@ -168,14 +168,14 @@
 
         <!-- TANDA TANGAN MEWAH PAS POSISI -->
         <div style="display: flex; justify-content: flex-end; margin-top: 60px;">
-            <div style="width: 45%; text-align: left;">
+            <div style="width: 35%; text-align: left;">
                 <p style="margin: 0;">Surabaya, {{ surat['tgl_surat_indo'] }}<br>Kepala Sekolah,</p>
 
                 <div style="height: 75px; position: relative; display: flex; justify-content: center; align-items: center;">
                     {% if surat.is_approved == 1 %}
                     <!-- Stempel & TTD nempel pas di tengah -->
                         <img src="{{ url_for('static', filename='img/ttd_stamp.png') }}" 
-                        style="position: absolute; width: 280px; height: auto; top: -55px; left: 35%; transform: translateX(-50%); z-index: 10; pointer-events: none;">
+                        style="position: absolute; width: 280px; height: auto; top: -65px; left: 25%; transform: translateX(-50%); z-index: 10; pointer-events: none;">
                     {% endif %}
                 </div>
 

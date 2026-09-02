@@ -23,7 +23,7 @@ Surat Pemberitahuan Pemakaian Sarana dan Prasarana Sekolah (Kode 422/021.SMABHY.
     .surat-container { page-break-inside: avoid; }
   }
 
-  ==================================================
+==================================================
 BUG REPORT - SURAT KETERANGAN AKTIVASI REKENING PIP
 ==================================================
 

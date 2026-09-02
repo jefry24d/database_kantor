@@ -147,16 +147,19 @@
             <tr><td>alamat</td><td>:</td><td>Jalan Jend A. Yani 30-32, Surabaya</td></tr>
         </table>
 
-        <!-- KALIMAT KHUSUS: MEMBERIKAN TUGAS KEPADA -->
         <p>Memberikan tugas kepada :</p>
         <table class="form-table">
             <tr><td width="150">nama</td><td width="15">:</td><td><b>{{ surat['nama_penerima'] if surat['nama_penerima'] else '-' }}</b></td></tr>
-            {% if surat['kelas'] and surat['kelas'] != '-' %}
-                <tr><td>kelas</td><td>:</td><td>{{ surat['kelas'] }}</td></tr>
-                <tr><td>NIS / NISN</td><td>:</td><td>{{ surat['no_induk_siswa'] if surat['no_induk_siswa'] else '-' }}</td></tr>
-            {% else %}
+            
+            {# 🟢 Cek apakah ada unit / no_pegawai (Pegawai / Guru / Mahasiswa) #}
+            {% if (surat['unit'] and surat['unit'] != '-') or (surat['no_pegawai'] and surat['no_pegawai'] != '-') %}
                 <tr><td>jabatan / Unit</td><td>:</td><td>{{ surat['unit'] if surat['unit'] else '-' }}</td></tr>
                 <tr><td>NIP / NTY</td><td>:</td><td>{{ surat['no_pegawai'] if surat['no_pegawai'] else '-' }}</td></tr>
+            
+            {# 🔵 Jika tidak, berarti Siswa #}
+            {% else %}
+                <tr><td>kelas</td><td>:</td><td>{{ surat['kelas'] if surat['kelas'] else '-' }}</td></tr>
+                <tr><td>NIS / NISN</td><td>:</td><td>{{ surat['no_induk_siswa'] if surat['no_induk_siswa'] else '-' }}</td></tr>
             {% endif %}
         </table>
 

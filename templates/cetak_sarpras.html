@@ -96,17 +96,17 @@
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td style="width: 75px; vertical-align: top; padding: 2px 0;">Nomor</td>
-                        <td style="width: 15px; vertical-align: top; padding: 2px 0; text-align: center;">:</td>
+                        <td style="width: 15px; vertical-align: top; padding: 2px 0; text-align: center;">: </td>
                         <td style="vertical-align: top; padding: 2px 0;">{{ surat['nomor_surat'] }}</td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top; padding: 2px 0;">Lampiran</td>
-                        <td style="vertical-align: top; padding: 2px 0; text-align: center;">:</td>
+                        <td style="vertical-align: top; padding: 2px 0; text-align: center;">: </td>
                         <td style="vertical-align: top; padding: 2px 0;">{{ surat['lampiran'] if surat['lampiran'] else '-' }}</td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top; padding: 2px 0;">Perihal</td>
-                        <td style="vertical-align: top; padding: 2px 0; text-align: center;">:</td>
+                        <td style="vertical-align: top; padding: 2px 0; text-align: center;">: </td>
                         <td style="vertical-align: top; padding: 2px 0;"><b>{{ surat['perihal'] }}</b></td>
                     </tr>
                 </table>
@@ -172,7 +172,7 @@
                     {% if surat.is_approved == 1 %}
                     <!-- Stempel & TTD nempel pas di tengah -->
                     <img src="{{ url_for('static', filename='img/ttd_stamp.png') }}" 
-                        style="position: absolute; width: 280px; height: auto; top: -55px; left: 35%; transform: translateX(-50%); z-index: 10; pointer-events: none;">
+                        style="position: absolute; width: 280px; height: auto; top: -65px; left: 35%; transform: translateX(-50%); z-index: 10; pointer-events: none;">
                     {% endif %}
                 </div>
 
